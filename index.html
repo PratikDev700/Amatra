@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Amatra — Daily check-in calls for your parents</title>
-<meta name="description" content="Every day, Amatra calls your parent, asks how they're doing, and tells you how it went. In English or Hindi. Wherever they live." />
+<meta name="description" content="Every day, Amatra calls your parent, asks how they're doing, and tells you what they said. In English or Hindi. Wherever they live." />
 <meta property="og:title" content="Amatra — Daily check-in calls for your parents" />
 <meta property="og:description" content="You can't call every day. Amatra does — and tells you how it went." />
 <meta property="og:type" content="website" />
@@ -63,33 +63,27 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit}
 
-/* ---------- shared type ---------- */
 .eyebrow{
   font-family:var(--body);
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--bark);
-  margin:0 0 18px;
+  font-size:13px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bark);margin:0 0 18px;
 }
 .eyebrow-light{color:var(--sage-light)}
 
 h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0}
-h1{font-size:clamp(2.6rem,6.2vw,4.3rem);line-height:1.03;font-weight:600}
+h1{font-size:clamp(2.6rem,6.2vw,4.3rem);line-height:1.03}
 h2{font-size:clamp(2rem,4vw,2.9rem);line-height:1.1;margin-bottom:18px}
-h3{font-size:1.24rem;line-height:1.3;font-weight:600;margin-bottom:8px}
+h3{font-size:1.24rem;line-height:1.3;margin-bottom:8px}
 p{margin:0 0 1.05em}
 .lede{font-size:clamp(1.06rem,1.7vw,1.22rem);line-height:1.62;color:var(--bark);max-width:46ch}
 
 .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
 .narrow{max-width:760px}
 
-/* ---------- section rhythm: cream sheets rise into the forest ---------- */
 .band-dark{
   background:linear-gradient(160deg,var(--forest-deep) 0%,var(--forest-mid) 55%,var(--forest) 100%);
-  color:var(--cream);
-  position:relative;
+  color:var(--cream);position:relative;
 }
 .band-dark h2,.band-dark h3{color:var(--cream)}
 .band-dark .lede{color:var(--sage-light)}
@@ -98,8 +92,7 @@ p{margin:0 0 1.05em}
   background:var(--stone);
   border-radius:var(--sheet-radius) var(--sheet-radius) 0 0;
   margin-top:calc(var(--sheet-radius) * -1);
-  position:relative;
-  z-index:2;
+  position:relative;z-index:2;
   padding:88px 0 92px;
 }
 .sheet-cream{background:var(--cream)}
@@ -107,21 +100,15 @@ p{margin:0 0 1.05em}
   background:linear-gradient(160deg,var(--forest-deep) 0%,var(--forest-mid) 100%);
 }
 
-/* ============================================================
-   NAV
-   ============================================================ */
-.nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:26px 0 8px;
-}
+/* ============================================================ NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0 8px}
 .mark{
   display:flex;align-items:center;gap:10px;
   font-family:var(--display);font-size:1.5rem;font-weight:600;
   color:var(--cream);text-decoration:none;letter-spacing:-.01em;
 }
 .mark-dot{
-  width:11px;height:11px;border-radius:50%;
-  background:var(--sage);flex:none;
+  width:11px;height:11px;border-radius:50%;background:var(--sage);flex:none;
   box-shadow:0 0 0 5px rgba(127,166,140,.2);
 }
 .nav-link{
@@ -131,142 +118,95 @@ p{margin:0 0 1.05em}
 }
 .nav-link:hover{background:rgba(169,198,180,.14);color:var(--cream)}
 
-/* ============================================================
-   HERO
-   ============================================================ */
+/* ============================================================ HERO */
 .hero{padding:34px 0 108px;overflow:hidden}
-.hero-grid{
-  display:grid;grid-template-columns:1.08fr .92fr;
-  gap:56px;align-items:center;
-}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
 .hero h1{color:var(--cream)}
-.hero h1 .soft{
-  display:block;color:var(--sage-light);
-  font-style:italic;font-weight:300;
-}
+.hero h1 .soft{display:block;color:var(--sage-light);font-style:italic;font-weight:300}
 .hero-sub{
   color:var(--sage-light);font-size:clamp(1.05rem,1.6vw,1.19rem);
-  line-height:1.6;max-width:44ch;margin:26px 0 32px;
+  line-height:1.65;max-width:46ch;margin:26px 0 32px;
 }
 
-/* ---------- email capture ---------- */
+/* cycling words */
+.cyc{
+  color:var(--cream);font-weight:600;
+  border-bottom:2px dotted rgba(169,198,180,.55);
+  cursor:pointer;background:none;border-top:0;border-left:0;border-right:0;
+  font-family:inherit;font-size:inherit;line-height:inherit;
+  padding:0 1px;transition:opacity .3s ease,color .18s;
+}
+.cyc:hover{color:#fff;border-bottom-color:var(--sage)}
+.cyc.fading{opacity:0}
+
 .capture{max-width:470px}
 .capture-row{display:flex;gap:10px}
 .capture input{
-  flex:1;min-width:0;
-  font-family:var(--body);font-size:16px;color:var(--cream);
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(169,198,180,.34);
-  border-radius:999px;padding:15px 22px;
-  transition:.18s;
+  flex:1;min-width:0;font-family:var(--body);font-size:16px;color:var(--cream);
+  background:rgba(255,255,255,.07);border:1px solid rgba(169,198,180,.34);
+  border-radius:999px;padding:15px 22px;transition:.18s;
 }
 .capture input::placeholder{color:rgba(220,235,225,.5)}
-.capture input:focus{
-  outline:none;border-color:var(--sage);
-  background:rgba(255,255,255,.12);
-}
+.capture input:focus{outline:none;border-color:var(--sage);background:rgba(255,255,255,.12)}
 .btn{
   font-family:var(--body);font-size:16px;font-weight:700;
   border:none;cursor:pointer;white-space:nowrap;
   background:var(--cream);color:var(--forest-deep);
-  border-radius:999px;padding:15px 27px;
-  transition:.18s;
+  border-radius:999px;padding:15px 27px;transition:.18s;
 }
 .btn:hover{background:#fff;transform:translateY(-1px)}
 .btn:active{transform:none}
-.btn-forest{background:var(--forest);color:var(--cream)}
-.btn-forest:hover{background:var(--forest-mid)}
 .capture-note{
   font-size:13.5px;line-height:1.55;color:rgba(169,198,180,.85);
   margin:15px 0 0;max-width:42ch;
 }
-.capture-msg{
-  font-size:14.5px;font-weight:600;color:var(--mint);
-  margin:14px 0 0;min-height:1px;
-}
+.capture-msg{font-size:14.5px;font-weight:600;color:var(--mint);margin:14px 0 0;min-height:1px}
 
-/* ============================================================
-   THE PHONE — animated promo
-   ============================================================ */
+/* ============================================================ PHONE */
 .promo{display:flex;justify-content:center;perspective:1400px}
 .phone{
-  position:relative;
-  width:300px;height:612px;flex:none;
-  background:#0D1A13;
-  border-radius:44px;
-  padding:11px;
-  box-shadow:
-    0 2px 0 rgba(255,255,255,.09) inset,
-    0 40px 80px -20px rgba(0,0,0,.6),
-    0 0 0 1px rgba(169,198,180,.14);
+  position:relative;width:300px;height:612px;flex:none;
+  background:#0D1A13;border-radius:44px;padding:11px;
+  box-shadow:0 2px 0 rgba(255,255,255,.09) inset,
+             0 40px 80px -20px rgba(0,0,0,.6),
+             0 0 0 1px rgba(169,198,180,.14);
   transform:rotate(-1.4deg);
 }
-.screen{
-  position:relative;width:100%;height:100%;
-  border-radius:34px;overflow:hidden;background:var(--forest-deep);
-}
-.notch{
-  position:absolute;top:9px;left:50%;transform:translateX(-50%);
-  width:88px;height:20px;border-radius:999px;background:#0D1A13;z-index:20;
-}
-.view{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  opacity:0;
-}
+.screen{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:var(--forest-deep)}
+.notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:88px;height:20px;border-radius:999px;background:#0D1A13;z-index:20}
+.view{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0}
 
-/* --- view 1: incoming call --- */
 .v-call{
   background:linear-gradient(170deg,var(--forest-deep),var(--forest-mid));
   align-items:center;justify-content:center;text-align:center;padding:0 26px;
   animation:view1 15s infinite;
 }
 .ring{
-  position:relative;width:88px;height:88px;border-radius:50%;
-  background:var(--sage);display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-size:2.1rem;color:var(--forest-deep);font-weight:600;
-  margin-bottom:26px;
+  position:relative;width:88px;height:88px;border-radius:50%;background:var(--sage);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:2.1rem;color:var(--forest-deep);font-weight:600;margin-bottom:26px;
 }
 .ring::after,.ring::before{
   content:"";position:absolute;inset:0;border-radius:50%;
-  border:2px solid var(--sage);
-  animation:pulse 2.1s ease-out infinite;
+  border:2px solid var(--sage);animation:pulse 2.1s ease-out infinite;
 }
 .ring::after{animation-delay:1.05s}
-.v-call .who{
-  font-family:var(--display);font-size:1.55rem;color:var(--cream);
-  font-weight:600;margin-bottom:5px;
-}
+.v-call .who{font-family:var(--display);font-size:1.55rem;color:var(--cream);font-weight:600;margin-bottom:5px}
 .v-call .status{font-size:13.5px;color:var(--sage-light);letter-spacing:.03em}
 .call-actions{display:flex;gap:20px;margin-top:38px}
-.pill-btn{
-  width:56px;height:56px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;
-}
+.pill-btn{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
 .pill-accept{background:var(--well)}
 .pill-decline{background:rgba(180,84,74,.65)}
 
-/* --- view 2: in call --- */
 .v-live{
   background:linear-gradient(170deg,var(--forest-deep),var(--forest-mid));
-  padding:74px 22px 26px;
-  animation:view2 15s infinite;
+  padding:74px 22px 26px;animation:view2 15s infinite;
 }
 .live-head{display:flex;align-items:center;gap:11px;margin-bottom:6px}
-.live-dot{
-  width:8px;height:8px;border-radius:50%;background:var(--alert);
-  animation:blink 1.6s infinite;
-}
-.live-label{
-  font-size:11.5px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--sage-light);
-}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--alert);animation:blink 1.6s infinite}
+.live-label{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-light)}
 .wave{display:flex;align-items:flex-end;gap:4px;height:36px;margin:20px 0 26px}
-.wave i{
-  flex:1;background:var(--sage);border-radius:2px;height:20%;
-  animation:bar .9s ease-in-out infinite;
-}
+.wave i{flex:1;background:var(--sage);border-radius:2px;height:20%;animation:bar .9s ease-in-out infinite}
 .wave i:nth-child(2){animation-delay:.1s}
 .wave i:nth-child(3){animation-delay:.22s}
 .wave i:nth-child(4){animation-delay:.05s}
@@ -279,241 +219,169 @@ p{margin:0 0 1.05em}
 .wave i:nth-child(11){animation-delay:.28s}
 .wave i:nth-child(12){animation-delay:.03s}
 
-.line{
-  font-size:14.5px;line-height:1.5;border-radius:15px;
-  padding:11px 14px;margin-bottom:9px;max-width:88%;opacity:0;
-}
-.line-sam{
-  background:rgba(169,198,180,.16);color:var(--cream);
-  border-bottom-left-radius:5px;
-}
-.line-her{
-  background:var(--mint);color:var(--forest-deep);
-  margin-left:auto;border-bottom-right-radius:5px;font-weight:500;
-}
+.line{font-size:14.5px;line-height:1.5;border-radius:15px;padding:11px 14px;margin-bottom:9px;max-width:88%;opacity:0}
+.line-sam{background:rgba(169,198,180,.16);color:var(--cream);border-bottom-left-radius:5px}
+.line-her{background:var(--mint);color:var(--forest-deep);margin-left:auto;border-bottom-right-radius:5px;font-weight:500}
 .l1{animation:lineA 15s infinite}
 .l2{animation:lineB 15s infinite}
 .l3{animation:lineC 15s infinite}
 .l4{animation:lineD 15s infinite}
 
-/* --- view 3: what you see --- */
 .v-dash{background:var(--stone);animation:view3 15s infinite}
-.dash-head{
-  background:linear-gradient(160deg,var(--forest-deep),var(--forest));
-  padding:52px 20px 30px;color:var(--cream);
-}
+.dash-head{background:linear-gradient(160deg,var(--forest-deep),var(--forest));padding:52px 20px 30px;color:var(--cream)}
 .dash-hi{font-family:var(--display);font-size:1.42rem;font-weight:600;letter-spacing:-.02em}
 .dash-date{font-size:12.5px;color:var(--sage-light);margin-top:3px}
-.dash-body{
-  background:var(--stone);border-radius:22px 22px 0 0;
-  margin-top:-20px;padding:20px 16px;position:relative;flex:1;
-}
-.card{
-  background:#fff;border-radius:16px;padding:14px 15px;margin-bottom:11px;
-  box-shadow:0 2px 10px rgba(45,90,61,.07);opacity:0;
-}
+.dash-body{background:var(--stone);border-radius:22px 22px 0 0;margin-top:-20px;padding:20px 16px;position:relative;flex:1}
+.card{background:#fff;border-radius:16px;padding:14px 15px;margin-bottom:11px;box-shadow:0 2px 10px rgba(45,90,61,.07);opacity:0}
 .c1{animation:cardA 15s infinite}
 .c2{animation:cardB 15s infinite}
 .c3{animation:cardC 15s infinite}
-.card-label{
-  font-size:10.5px;font-weight:700;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--bark);margin-bottom:7px;
-}
+.card-label{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--bark);margin-bottom:7px}
 .card-text{font-size:14px;line-height:1.5;color:var(--charcoal);margin:0}
 .chip-row{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}
-.chip{
-  font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;
-  background:var(--mint);color:var(--forest);
-}
+.chip{font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--mint);color:var(--forest)}
 .chip-amber{background:#FBF0D8;color:#8A6413}
 .task{display:flex;align-items:center;gap:10px}
-.task-ico{
-  width:30px;height:30px;border-radius:50%;flex:none;
-  background:var(--mint);display:flex;align-items:center;
-  justify-content:center;font-size:14px;
-}
+.task-ico{width:30px;height:30px;border-radius:50%;flex:none;background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:14px}
 
-@keyframes pulse{
-  0%{transform:scale(1);opacity:.7}
-  100%{transform:scale(1.85);opacity:0}
-}
+@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.85);opacity:0}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-@keyframes bar{
-  0%,100%{height:18%}
-  50%{height:88%}
-}
-@keyframes view1{
-  0%{opacity:0}3%{opacity:1}20%{opacity:1}23%{opacity:0}100%{opacity:0}
-}
-@keyframes view2{
-  0%,22%{opacity:0}26%{opacity:1}58%{opacity:1}61%,100%{opacity:0}
-}
-@keyframes view3{
-  0%,60%{opacity:0}64%{opacity:1}96%{opacity:1}99%,100%{opacity:0}
-}
-@keyframes lineA{
-  0%,27%{opacity:0;transform:translateY(7px)}
-  31%,57%{opacity:1;transform:none}
-  60%,100%{opacity:0;transform:none}
-}
-@keyframes lineB{
-  0%,34%{opacity:0;transform:translateY(7px)}
-  38%,57%{opacity:1;transform:none}
-  60%,100%{opacity:0;transform:none}
-}
-@keyframes lineC{
-  0%,41%{opacity:0;transform:translateY(7px)}
-  45%,57%{opacity:1;transform:none}
-  60%,100%{opacity:0;transform:none}
-}
-@keyframes lineD{
-  0%,48%{opacity:0;transform:translateY(7px)}
-  52%,57%{opacity:1;transform:none}
-  60%,100%{opacity:0;transform:none}
-}
-@keyframes cardA{
-  0%,65%{opacity:0;transform:translateY(9px)}
-  69%,95%{opacity:1;transform:none}
-  98%,100%{opacity:0}
-}
-@keyframes cardB{
-  0%,71%{opacity:0;transform:translateY(9px)}
-  75%,95%{opacity:1;transform:none}
-  98%,100%{opacity:0}
-}
-@keyframes cardC{
-  0%,77%{opacity:0;transform:translateY(9px)}
-  81%,95%{opacity:1;transform:none}
-  98%,100%{opacity:0}
-}
+@keyframes bar{0%,100%{height:18%}50%{height:88%}}
+@keyframes view1{0%{opacity:0}3%{opacity:1}20%{opacity:1}23%{opacity:0}100%{opacity:0}}
+@keyframes view2{0%,22%{opacity:0}26%{opacity:1}58%{opacity:1}61%,100%{opacity:0}}
+@keyframes view3{0%,60%{opacity:0}64%{opacity:1}96%{opacity:1}99%,100%{opacity:0}}
+@keyframes lineA{0%,27%{opacity:0;transform:translateY(7px)}31%,57%{opacity:1;transform:none}60%,100%{opacity:0}}
+@keyframes lineB{0%,34%{opacity:0;transform:translateY(7px)}38%,57%{opacity:1;transform:none}60%,100%{opacity:0}}
+@keyframes lineC{0%,41%{opacity:0;transform:translateY(7px)}45%,57%{opacity:1;transform:none}60%,100%{opacity:0}}
+@keyframes lineD{0%,48%{opacity:0;transform:translateY(7px)}52%,57%{opacity:1;transform:none}60%,100%{opacity:0}}
+@keyframes cardA{0%,65%{opacity:0;transform:translateY(9px)}69%,95%{opacity:1;transform:none}98%,100%{opacity:0}}
+@keyframes cardB{0%,71%{opacity:0;transform:translateY(9px)}75%,95%{opacity:1;transform:none}98%,100%{opacity:0}}
+@keyframes cardC{0%,77%{opacity:0;transform:translateY(9px)}81%,95%{opacity:1;transform:none}98%,100%{opacity:0}}
 
-/* ============================================================
-   STEPS
-   ============================================================ */
-.steps{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:30px;margin-top:52px;
-}
+/* ============================================================ STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:52px}
 .step{border-top:2px solid var(--sand);padding-top:20px}
-.step-n{
-  font-family:var(--display);font-size:2.5rem;font-weight:300;
-  color:var(--sage);line-height:1;margin-bottom:12px;display:block;
-}
+.step-n{font-family:var(--display);font-size:2.5rem;font-weight:300;color:var(--sage);line-height:1;margin-bottom:12px;display:block}
 .step p{color:var(--bark);font-size:15.5px;margin:0}
 
-/* ============================================================
-   THE SCRIPT
-   ============================================================ */
-.script{
-  background:var(--forest-deep);border-radius:24px;
-  padding:44px 40px;margin-top:44px;
-  color:var(--cream);
+/* ============================================================ FLIP CARDS */
+.flip-hint{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:13.5px;font-weight:600;letter-spacing:.02em;
+  color:var(--bark);margin:20px 0 28px;
 }
-.script ol{
-  list-style:none;counter-reset:q;margin:0;padding:0;
-  column-count:2;column-gap:46px;
+.flip-hint::before{
+  content:"";width:26px;height:26px;border-radius:50%;
+  background:var(--mint);flex:none;
+  background-image:radial-gradient(circle at 50% 50%,var(--forest) 3.5px,transparent 4px);
 }
-.script li{
-  counter-increment:q;position:relative;
-  padding-left:34px;margin-bottom:17px;
-  font-size:16px;line-height:1.5;
-  break-inside:avoid;
+.deck{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;margin-top:6px;
 }
-.script li::before{
-  content:counter(q);position:absolute;left:0;top:1px;
-  width:22px;height:22px;border-radius:50%;
-  background:rgba(169,198,180,.18);color:var(--sage-light);
-  font-family:var(--body);font-size:11.5px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
+.qcard{
+  perspective:1200px;background:none;border:0;padding:0;
+  font-family:inherit;text-align:left;cursor:pointer;
+  min-height:186px;
 }
-.script-foot{
-  margin:30px 0 0;padding-top:24px;
-  border-top:1px solid rgba(169,198,180,.2);
-  color:var(--sage-light);font-size:15.5px;line-height:1.6;max-width:62ch;
+.qcard:nth-child(7){grid-column:1 / -1;min-height:150px}
+.qinner{
+  position:relative;width:100%;height:100%;min-height:inherit;
+  transition:transform .62s cubic-bezier(.4,.15,.2,1);
+  transform-style:preserve-3d;
+}
+.qcard.flipped .qinner{transform:rotateY(180deg)}
+.qface{
+  position:absolute;inset:0;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  border-radius:20px;padding:22px 22px 20px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.qfront{
+  background:var(--forest-deep);color:var(--cream);
+  box-shadow:0 3px 16px rgba(22,47,34,.16);
+}
+.qcard:hover .qfront{box-shadow:0 8px 26px rgba(22,47,34,.26)}
+.qback{
+  background:var(--mint);color:var(--forest-deep);
+  transform:rotateY(180deg);
+  box-shadow:0 3px 16px rgba(45,90,61,.14);
+}
+.qnum{
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sage);margin-bottom:14px;
+}
+.qback .qnum{color:var(--forest);opacity:.65}
+.qtext{
+  font-family:var(--display);font-size:1.09rem;line-height:1.34;
+  font-weight:600;letter-spacing:-.01em;margin:0;
+}
+.qback .qtext{font-style:italic;font-weight:400}
+.qfoot{
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(169,198,180,.6);margin-top:16px;
+}
+.qback .qfoot{color:rgba(45,90,61,.5)}
+.script-note{
+  margin:40px 0 0;padding-top:28px;border-top:1px solid var(--sand);
+  color:var(--bark);font-size:16px;line-height:1.65;max-width:64ch;
 }
 
-/* ============================================================
-   FEATURE GRID
-   ============================================================ */
+/* ============================================================ FEATURES */
 .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:48px}
-.feat{
-  background:rgba(255,255,255,.055);
-  border:1px solid rgba(169,198,180,.17);
-  border-radius:20px;padding:28px 26px;
-}
+.feat{background:rgba(255,255,255,.055);border:1px solid rgba(169,198,180,.17);border-radius:20px;padding:28px 26px}
 .feat h3{color:var(--cream);margin-bottom:9px}
 .feat p{color:var(--sage-light);font-size:15.5px;margin:0}
 .feat-wide{grid-column:1 / -1;background:rgba(169,198,180,.11)}
-.disclaim{
-  margin-top:30px;font-size:14.5px;line-height:1.6;
-  color:rgba(169,198,180,.8);max-width:70ch;
-}
+.disclaim{margin-top:30px;font-size:14.5px;line-height:1.6;color:rgba(169,198,180,.8);max-width:70ch}
 
-/* ============================================================
-   VOICES
-   ============================================================ */
+/* ============================================================ VOICES */
 .voices{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px}
-.voice{
-  background:#fff;border-radius:22px;padding:30px 28px;
-  box-shadow:0 3px 18px rgba(45,90,61,.07);
-}
+.voice{background:#fff;border-radius:22px;padding:30px 28px;box-shadow:0 3px 18px rgba(45,90,61,.07)}
 .voice-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.avatar{
-  width:48px;height:48px;border-radius:50%;flex:none;
-  background:var(--mint);color:var(--forest);
-  font-family:var(--display);font-size:1.35rem;font-weight:600;
-  display:flex;align-items:center;justify-content:center;
-}
+.avatar{width:48px;height:48px;border-radius:50%;flex:none;background:var(--mint);color:var(--forest);font-family:var(--display);font-size:1.35rem;font-weight:600;display:flex;align-items:center;justify-content:center}
 .voice-name{font-family:var(--display);font-size:1.24rem;font-weight:600}
 .voice-lang{font-size:13px;color:var(--bark);letter-spacing:.02em}
 .voice p{color:var(--bark);font-size:15.5px;margin:0}
-.reach{
-  margin-top:36px;padding-top:26px;border-top:1px solid var(--sand);
-  color:var(--bark);font-size:15.5px;max-width:64ch;
-}
+.reach{margin-top:36px;padding-top:26px;border-top:1px solid var(--sand);color:var(--bark);font-size:15.5px;max-width:64ch}
 
-/* ============================================================
-   STORY
-   ============================================================ */
+/* ============================================================ NEXT */
+.next{
+  margin-top:48px;background:var(--forest-deep);border-radius:24px;
+  padding:38px 36px;color:var(--cream);
+}
+.next h3{color:var(--cream);font-size:1.35rem;margin-bottom:12px}
+.next p{color:var(--sage-light);font-size:16px;line-height:1.65;margin:0;max-width:62ch}
+
+/* ============================================================ STORY */
 .story p{
   font-family:var(--display);font-weight:300;
   font-size:clamp(1.25rem,2.4vw,1.62rem);
-  line-height:1.5;color:var(--cream);letter-spacing:-.01em;
-  max-width:34ch;
+  line-height:1.5;color:var(--cream);letter-spacing:-.01em;max-width:34ch;
 }
 .story p + p{margin-top:1em}
 .story .sign{
   font-family:var(--body);font-size:14.5px;font-weight:600;
-  letter-spacing:.06em;text-transform:uppercase;
-  color:var(--sage);margin-top:34px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--sage);margin-top:34px;
 }
 
-/* ============================================================
-   FAQ
-   ============================================================ */
+/* ============================================================ FAQ */
 .faq{margin-top:44px;border-top:1px solid var(--sand)}
 .faq details{border-bottom:1px solid var(--sand)}
 .faq summary{
   cursor:pointer;list-style:none;padding:22px 40px 22px 0;
-  font-family:var(--display);font-size:1.14rem;font-weight:600;
-  position:relative;
+  font-family:var(--display);font-size:1.14rem;font-weight:600;position:relative;
 }
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{
   content:"+";position:absolute;right:6px;top:19px;
-  font-family:var(--body);font-size:1.5rem;font-weight:400;
-  color:var(--sage);transition:.2s;
+  font-family:var(--body);font-size:1.5rem;font-weight:400;color:var(--sage);transition:.2s;
 }
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq summary:focus-visible{outline:2px solid var(--forest);outline-offset:3px}
-.faq p{
-  margin:0 0 22px;color:var(--bark);font-size:15.5px;
-  line-height:1.65;max-width:66ch;
-}
+.faq p{margin:0 0 22px;color:var(--bark);font-size:15.5px;line-height:1.65;max-width:66ch}
 
-/* ============================================================
-   CLOSER + FOOTER
-   ============================================================ */
+/* ============================================================ CLOSER + FOOTER */
 .closer{text-align:center;padding:92px 0 84px}
 .closer h2{max-width:16ch;margin-inline:auto}
 .closer .capture{margin:34px auto 0}
@@ -522,28 +390,23 @@ p{margin:0 0 1.05em}
 .foot{
   border-top:1px solid rgba(169,198,180,.16);
   padding:34px 0 44px;
-  display:flex;flex-wrap:wrap;gap:18px;
-  align-items:center;justify-content:space-between;
+  display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
 }
-.foot-links{display:flex;flex-wrap:wrap;gap:22px}
-.foot a{
-  color:var(--sage-light);font-size:14.5px;text-decoration:none;
+.foot-links{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+.foot-links a{
+  color:rgba(169,198,180,.72);font-size:13.5px;
+  text-decoration:none;font-weight:500;
 }
-.foot a:hover{color:var(--cream);text-decoration:underline}
-.foot-note{
-  color:rgba(169,198,180,.6);font-size:13px;
-  width:100%;line-height:1.6;margin:0;
-}
+.foot-links a:hover{color:var(--cream)}
+.foot-note{color:rgba(169,198,180,.55);font-size:12.5px;width:100%;line-height:1.6;margin:0}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* ============================================================ RESPONSIVE */
 @media (max-width:960px){
   .hero-grid{grid-template-columns:1fr;gap:52px}
   .promo{order:-1}
   .hero{padding-bottom:74px}
   .steps{grid-template-columns:1fr;gap:26px}
-  .script ol{column-count:1}
+  .deck{grid-template-columns:repeat(2,1fr)}
   .feats,.voices{grid-template-columns:1fr}
   .capture,.lede,.hero-sub,.story p{max-width:none}
 }
@@ -553,7 +416,10 @@ p{margin:0 0 1.05em}
   .sheet{padding:64px 0 68px}
   .capture-row{flex-direction:column}
   .capture input,.btn{width:100%}
-  .script{padding:32px 24px}
+  .deck{grid-template-columns:1fr;gap:13px}
+  .qcard{min-height:158px}
+  .qcard:nth-child(7){min-height:158px}
+  .next{padding:30px 24px}
   .phone{width:268px;height:548px}
   .foot{flex-direction:column;align-items:flex-start}
 }
@@ -568,9 +434,11 @@ p{margin:0 0 1.05em}
   .v-call,.v-live{display:none}
   .v-dash{opacity:1}
   .card,.line{opacity:1}
+  .qinner{transition:none}
 }
 
 :focus-visible{outline:2px solid var(--sage);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
 <body>
@@ -588,32 +456,29 @@ p{margin:0 0 1.05em}
         <div>
           <h1>You can't call<br>every day.<span class="soft">Amatra does.</span></h1>
           <p class="hero-sub">
-            Every morning, someone calls your mother. Asks how she slept,
-            whether she got out, whether she's taken her tablets. Then tells
-            you how it went — in her words, not a score out of ten.
+            Every <button class="cyc" id="cyc-when" type="button" aria-label="Change time of day">morning</button>,
+            Amatra calls your <button class="cyc" id="cyc-who" type="button" aria-label="Change who">mother</button>.
+            Asks how they slept, whether anything's aching, whether they've eaten,
+            whether they've taken their medications. Then tells you what they said —
+            so "I'm fine" isn't all you have to go on.
           </p>
 
           <form class="capture" id="join" novalidate>
             <div class="capture-row">
-              <label class="sr-only" for="email-top" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your email address</label>
+              <label class="sr" for="email-top">Your email address</label>
               <input id="email-top" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
               <button class="btn" type="submit">Join the early group</button>
             </div>
-            <p class="capture-note">
-              Free while we're testing. We only ever call a number you've
-              set up yourself — nothing happens to your parent's phone until you say so.
-            </p>
+            <p class="capture-note">Join our early testers — free while we're testing.</p>
             <p class="capture-msg" role="status" aria-live="polite"></p>
           </form>
         </div>
 
-        <!-- ---------- animated promo ---------- -->
         <div class="promo">
           <div class="phone" role="img" aria-label="Animation of an Amatra call: the phone rings, a short conversation takes place, and the family sees a written summary afterwards.">
             <div class="screen">
               <div class="notch" aria-hidden="true"></div>
 
-              <!-- 1. ringing -->
               <div class="view v-call">
                 <div class="ring">A</div>
                 <div class="who">Amatra</div>
@@ -624,7 +489,6 @@ p{margin:0 0 1.05em}
                 </div>
               </div>
 
-              <!-- 2. the call -->
               <div class="view v-live">
                 <div class="live-head">
                   <span class="live-dot"></span>
@@ -640,7 +504,6 @@ p{margin:0 0 1.05em}
                 <div class="line line-her l4">Three days now. And I'm nearly out of my tablets.</div>
               </div>
 
-              <!-- 3. what you see -->
               <div class="view v-dash">
                 <div class="dash-head">
                   <div class="dash-hi">Good afternoon</div>
@@ -714,7 +577,7 @@ p{margin:0 0 1.05em}
         <span class="step-n">3</span>
         <h3>You get the update</h3>
         <p>
-          What she said, what she needs, and what's changed since last week.
+          What they said, what they need, and what's changed since last week.
           Waiting for you when you finish work — or on your sister's phone
           in another city.
         </p>
@@ -723,31 +586,149 @@ p{margin:0 0 1.05em}
   </div>
 </section>
 
-<!-- ============================ THE SCRIPT ============================ -->
+<!-- ============================ THE SEVEN QUESTIONS ============================ -->
 <section style="background:var(--stone);padding:0 0 92px">
   <div class="wrap">
     <p class="eyebrow">The call itself</p>
-    <h2>Here is every question she's asked.</h2>
-    <p class="lede">
-      There's no hidden script and nothing clever going on. It's the same
-      seven questions, in the same order, every day.
-    </p>
+    <h2>What Amatra asks.</h2>
 
-    <div class="script">
-      <ol>
-        <li>Did you sleep alright? Did you get out at all? Any aches and pains today?</li>
-        <li>What did you get up to today?</li>
-        <li>Have you eaten?</li>
-        <li>Have you taken your medications?</li>
-        <li>Are you running low on any medicines?</li>
-        <li>Anything you need from the shops?</li>
-        <li>Anything else you'd like your family to know?</li>
-      </ol>
-      <p class="script-foot">
-        She is never asked whether she's forgetting things, never told what
-        to do about her health, and never made to repeat something she
-        already said. She's asked, she's listened to, and it's written down.
-      </p>
+    <p class="flip-hint">Tap any of them to hear how it goes</p>
+
+    <div class="deck">
+
+      <button class="qcard" type="button">
+        <div class="qinner">
+          <div class="qface qfront">
+            <div>
+              <div class="qnum">One</div>
+              <p class="qtext">Did you sleep alright? Did you get out at all? Any aches and pains today?</p>
+            </div>
+            <div class="qfoot">Tap</div>
+          </div>
+          <div class="qface qback">
+            <div>
+              <div class="qnum">She said</div>
+              <p class="qtext">"Slept alright. Didn't go out — the hip's been at it since Tuesday."</p>
+            </div>
+            <div class="qfoot">Tap to close</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="qcard" type="button">
+        <div class="qinner">
+          <div class="qface qfront">
+            <div>
+              <div class="qnum">Two</div>
+              <p class="qtext">What did you get up to today?</p>
+            </div>
+            <div class="qfoot">Tap</div>
+          </div>
+          <div class="qface qback">
+            <div>
+              <div class="qnum">She said</div>
+              <p class="qtext">"Meera rang. We watched the cricket together over the phone, silly as that sounds."</p>
+            </div>
+            <div class="qfoot">Tap to close</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="qcard" type="button">
+        <div class="qinner">
+          <div class="qface qfront">
+            <div>
+              <div class="qnum">Three</div>
+              <p class="qtext">Have you eaten?</p>
+            </div>
+            <div class="qfoot">Tap</div>
+          </div>
+          <div class="qface qback">
+            <div>
+              <div class="qnum">She said</div>
+              <p class="qtext">"Had some toast this morning. Didn't fancy lunch."</p>
+            </div>
+            <div class="qfoot">Tap to close</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="qcard" type="button">
+        <div class="qinner">
+          <div class="qface qfront">
+            <div>
+              <div class="qnum">Four</div>
+              <p class="qtext">Have you taken your medications?</p>
+            </div>
+            <div class="qfoot">Tap</div>
+          </div>
+          <div class="qface qback">
+            <div>
+              <div class="qnum">She said</div>
+              <p class="qtext">"Took the morning ones. The evening lot I forget more often than not."</p>
+            </div>
+            <div class="qfoot">Tap to close</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="qcard" type="button">
+        <div class="qinner">
+          <div class="qface qfront">
+            <div>
+              <div class="qnum">Five</div>
+              <p class="qtext">Are you running low on any medicines?</p>
+            </div>
+            <div class="qfoot">Tap</div>
+          </div>
+          <div class="qface qback">
+            <div>
+              <div class="qnum">She said</div>
+              <p class="qtext">"Down to about four of the blood pressure tablets."</p>
+            </div>
+            <div class="qfoot">Tap to close</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="qcard" type="button">
+        <div class="qinner">
+          <div class="qface qfront">
+            <div>
+              <div class="qnum">Six</div>
+              <p class="qtext">Anything you need from the shops?</p>
+            </div>
+            <div class="qfoot">Tap</div>
+          </div>
+          <div class="qface qback">
+            <div>
+              <div class="qnum">She said</div>
+              <p class="qtext">"Milk. And those biscuits, if anyone's passing."</p>
+            </div>
+            <div class="qfoot">Tap to close</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="qcard" type="button">
+        <div class="qinner">
+          <div class="qface qfront">
+            <div>
+              <div class="qnum">Seven</div>
+              <p class="qtext">Anything else you'd like your family to know?</p>
+            </div>
+            <div class="qfoot">Tap</div>
+          </div>
+          <div class="qface qback">
+            <div>
+              <div class="qnum">She said</div>
+              <p class="qtext">"Tell them not to worry. And ask when Meera's next coming."</p>
+            </div>
+            <div class="qfoot">Tap to close</div>
+          </div>
+        </div>
+      </button>
+
     </div>
   </div>
 </section>
@@ -757,40 +738,37 @@ p{margin:0 0 1.05em}
   <div class="wrap">
     <p class="eyebrow eyebrow-light">What your family sees</p>
     <h2>One place, and everyone's in it.</h2>
-    <p class="lede">
-      Most of the weight of looking after a parent falls on whoever lives
-      closest, or whoever answers first. Amatra puts the same picture in
-      front of everybody.
-    </p>
+    <p class="lede">Amatra puts the same picture in front of everybody.</p>
 
     <div class="feats">
       <div class="feat">
-        <h3>Today, in her words</h3>
+        <h3>Today, in their words</h3>
         <p>
-          A short written account of the call — what she did, who she saw,
-          how she sounded. Not a dashboard of numbers.
+          A short written account of the call — what they did, who they saw,
+          how they sounded. Not a dashboard of numbers.
         </p>
       </div>
       <div class="feat">
-        <h3>What she needs</h3>
+        <h3>What they need</h3>
         <p>
           Running low on something, a prescription to reorder, groceries to
-          send. Tap to call her pharmacy, or share the list to Instacart,
+          send. Tap to call their pharmacy, or share the list to Instacart,
           Walmart or Amazon.
         </p>
       </div>
       <div class="feat">
         <h3>Refills before they run out</h3>
         <p>
-          Her medications, when each was last filled, and which one is due —
+          Their medications, when each was last filled, and which one is due —
           so the pharmacy call happens before the last tablet, not after.
         </p>
       </div>
       <div class="feat">
-        <h3>Weeks, not just today</h3>
+        <h3>The record nobody else has</h3>
         <p>
-          One call tells you about a day. Thirty tell you what's changed —
-          which is the part nobody has when the doctor finally asks.
+          When something does happen, a doctor gets fifteen minutes and
+          whatever your parent can remember. Amatra keeps a dated account of
+          ordinary days, so the conversation starts from something real.
         </p>
       </div>
       <div class="feat feat-wide">
@@ -853,11 +831,20 @@ p{margin:0 0 1.05em}
     </div>
 
     <p class="reach">
-      <strong>She doesn't have to live where you do.</strong> Amatra calls
+      <strong>They don't have to live where you do.</strong> Amatra calls
       parents in the United States, Canada, India, the United Kingdom,
       Germany and more. Built by three people whose own parents are eight
       thousand miles away.
     </p>
+
+    <div class="next">
+      <h3>What happens after you sign up</h3>
+      <p>
+        We set it up with you — your parent's number, a time that suits them,
+        and the number Amatra will be calling from, so they know exactly who
+        it is when the phone rings. Then we handle the rest.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -900,6 +887,15 @@ p{margin:0 0 1.05em}
         </p>
       </details>
       <details>
+        <summary>Won't they just refuse to talk to it?</summary>
+        <p>
+          Some do at first. What we've found is that people are often more
+          open with someone who isn't family — there's no one to worry, and
+          nothing to admit. A parent who insists they're fine to their
+          daughter will happily tell Sam the hip's been bad since Tuesday.
+        </p>
+      </details>
+      <details>
         <summary>What if they don't answer?</summary>
         <p>
           Amatra doesn't ring and ring, and it doesn't leave a message and
@@ -909,7 +905,7 @@ p{margin:0 0 1.05em}
         </p>
       </details>
       <details>
-        <summary>Isn't this just outsourcing the phone call I should be making?</summary>
+        <summary>Isn't this just outsourcing the call I should be making?</summary>
         <p>
           It's the call on the days you can't. Most people we've spoken to
           aren't trying to call less — they're trying to stop the six-week
@@ -969,13 +965,11 @@ p{margin:0 0 1.05em}
 
     <form class="capture" novalidate>
       <div class="capture-row">
-        <label for="email-bottom" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your email address</label>
+        <label class="sr" for="email-bottom">Your email address</label>
         <input id="email-bottom" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
         <button class="btn" type="submit">Join the early group</button>
       </div>
-      <p class="capture-note">
-        One email from a founder, not a mailing list. Free while we're testing.
-      </p>
+      <p class="capture-note">Join our early testers — free while we're testing.</p>
       <p class="capture-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -984,9 +978,9 @@ p{margin:0 0 1.05em}
     <div class="foot">
       <a class="mark" href="/"><span class="mark-dot" aria-hidden="true"></span>amatra</a>
       <div class="foot-links">
-        <a href="mailto:support@amatra.app">support@amatra.app</a>
         <a href="/privacy-policy.html">Privacy</a>
         <a href="/delete-account.html">Delete account</a>
+        <a href="mailto:support@amatra.app">support@amatra.app</a>
       </div>
       <p class="foot-note">
         Amatra is not a medical device, a health service, or an emergency
@@ -1000,13 +994,7 @@ p{margin:0 0 1.05em}
 <script>
 /* ============================================================
    WAITLIST CAPTURE
-   ------------------------------------------------------------
-   Fill these two in to store signups in Supabase.
-   Both live in: Supabase dashboard -> Project Settings -> API
-     SUPABASE_URL      = "Project URL"
-     SUPABASE_ANON_KEY = "anon public" key  (safe to expose)
-   Until they're filled, the form falls back to opening an email
-   to support@amatra.app so the page still works on day one.
+   Keys live in: Supabase -> Project Settings -> API
    ============================================================ */
 var SUPABASE_URL = "https://hodmhfavcttltzovarzk.supabase.co";
 var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvZG1oZmF2Y3R0bHR6b3ZhcnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNTA5ODEsImV4cCI6MjA5NzkyNjk4MX0.nJCyKOjx6u8GyTzXS2rJvGT7TKapEwDd1v88o7mJMjI";
@@ -1052,17 +1040,13 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
           Authorization: "Bearer " + SUPABASE_ANON_KEY,
           Prefer: "return=minimal"
         },
-        body: JSON.stringify({
-          email: email,
-          source: window.location.pathname
-        })
+        body: JSON.stringify({ email: email, source: window.location.pathname })
       })
         .then(function (res) {
           if (!res.ok && res.status !== 409) throw new Error(res.status);
           form.querySelector(".capture-row").style.display = "none";
           msg.style.color = "";
-          msg.textContent =
-            "You're on the list. We'll email you from a founder's address, not a robot.";
+          msg.textContent = "You're on the list. We'll be in touch shortly.";
         })
         .catch(function () {
           button.disabled = false;
@@ -1071,6 +1055,58 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
           msg.textContent =
             "That didn't save. Email us at support@amatra.app and we'll add you by hand.";
         });
+    });
+  });
+})();
+
+/* ============================================================
+   CYCLING HERO WORDS — auto-rotate, tap to take over
+   ============================================================ */
+(function () {
+  var reduce = window.matchMedia &&
+               window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function cycler(el, words, period, offset) {
+    if (!el) return;
+    var i = 0, timer = null;
+
+    function show(n) {
+      el.classList.add("fading");
+      setTimeout(function () {
+        i = (n + words.length) % words.length;
+        el.textContent = words[i];
+        el.classList.remove("fading");
+      }, 300);
+    }
+
+    function start() {
+      if (reduce) return;
+      timer = setInterval(function () { show(i + 1); }, period);
+    }
+
+    el.addEventListener("click", function () {
+      if (timer) { clearInterval(timer); timer = null; }
+      show(i + 1);
+    });
+
+    setTimeout(start, offset);
+  }
+
+  cycler(document.getElementById("cyc-when"),
+         ["morning", "afternoon", "evening"], 3600, 2200);
+
+  cycler(document.getElementById("cyc-who"),
+         ["mother", "father", "grandmother", "grandfather"], 3600, 4000);
+})();
+
+/* ============================================================
+   QUESTION CARDS — flip on tap
+   ============================================================ */
+(function () {
+  var cards = document.querySelectorAll(".qcard");
+  Array.prototype.forEach.call(cards, function (card) {
+    card.addEventListener("click", function () {
+      card.classList.toggle("flipped");
     });
   });
 })();
