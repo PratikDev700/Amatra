@@ -300,13 +300,21 @@ p{margin:0 0 1.05em}
 .qinner{
   display:block;position:relative;width:100%;height:100%;
   transition:transform .66s cubic-bezier(.4,.15,.2,1);
-  transform-style:preserve-3d;
+  -webkit-transform-style:preserve-3d;transform-style:preserve-3d;
 }
+/* iOS Safari ignores backface-visibility on nested spans, so hide the
+   off-face outright, swapped halfway through the rotation */
+.qfront{opacity:1}
+.qback{opacity:0}
+.qcard.flipped .qfront{opacity:0}
+.qcard.flipped .qback{opacity:1}
 .qcard.flipped .qinner{transform:rotateY(180deg)}
 
 .qface{
   display:flex;position:absolute;inset:0;border-radius:20px;overflow:hidden;
   -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  -webkit-transform:translateZ(0);
+  transition:opacity .01s linear .33s;
   padding:28px 26px 24px;
   display:flex;flex-direction:column;justify-content:space-between;
   box-shadow:0 18px 40px -18px rgba(22,47,34,.5),
@@ -455,13 +463,14 @@ p{margin:0 0 1.05em}
   .sheet{padding:64px 0 68px}
   .capture-row{flex-direction:column}
   .capture input,.btn{width:100%}
-  .deckzone{height:512px}
-  .qcard{width:226px;height:318px;margin-left:-113px;transform-origin:50% 600px}
-  .qtext{font-size:1.1rem}
-  .qback .qtext{font-size:1.04rem}
-  .ghost{font-size:150px}
-  .deckctrl{margin-top:-86px}
-  .deckzone::after{bottom:-420px}
+  .deckzone{height:498px}
+  .qcard{width:214px;height:300px;margin-left:-107px;transform-origin:50% 470px}
+  .qface{padding:22px 20px 18px;border-radius:18px}
+  .qtext{font-size:1.04rem}
+  .qback .qtext{font-size:1rem}
+  .ghost{font-size:112px;right:-8px;bottom:-28px}
+  .deckctrl{margin-top:-74px}
+  .deckzone::after{bottom:-470px}
   .next{padding:30px 24px}
   .phone{width:268px;height:548px}
   .foot{flex-direction:column;align-items:flex-start}
@@ -1043,7 +1052,7 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
   var nextB = document.getElementById("qnext");
   if (!fan) return;
 
-  var SPREAD = window.innerWidth < 760 ? 11 : 13;
+  var SPREAD = window.innerWidth < 760 ? 19 : 13;
   var current = 3, cards = [], dragged = false;
 
   Q.forEach(function (item, i) {
