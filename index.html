@@ -160,6 +160,11 @@ p{margin:0 0 1.05em}
 .btn:hover{background:#fff;transform:translateY(-1px)}
 .btn:active{transform:none}
 .btn-lg{font-size:17px;padding:17px 34px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+a.btn-ghost{
+  display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;
+}
 .form-lead{font-size:14px;line-height:1.5;color:var(--bark);margin:0 0 16px}
 .app-sheet .capture-row{display:flex;flex-direction:column;gap:10px}
 .app-sheet .capture-row input{
@@ -192,6 +197,7 @@ p{margin:0 0 1.05em}
   color:rgba(169,198,180,.55);
 }
 .or::before,.or::after{content:"";flex:1;height:1px;background:rgba(169,198,180,.2)}
+.or-center{margin:40px auto 24px;max-width:470px}
 
 .sheet-back{
   position:fixed;inset:0;z-index:60;
@@ -549,6 +555,8 @@ p{margin:0 0 1.05em}
   body{font-size:16px}
   .wrap{padding:0 20px}
   .sheet{padding:64px 0 68px}
+  .cta-row{flex-direction:column;align-items:stretch}
+  .cta-row .btn,.cta-row .btn-ghost{width:100%;text-align:center}
   .capture-row{flex-direction:column}
   .capture input,.btn{width:100%}
   .deckzone{height:498px}
@@ -603,7 +611,10 @@ p{margin:0 0 1.05em}
             so "I'm fine" isn't all you have to go on.
           </p>
 
-          <button class="btn btn-lg" type="button" data-getapp>Get the app</button>
+          <div class="cta-row">
+            <button class="btn btn-lg" type="button" data-getapp>Get the app</button>
+            <a class="btn-ghost btn-lg" href="#how">See how it works</a>
+          </div>
           <p class="capture-note">Free while we're testing. Takes about a minute to set up.</p>
         </div>
 
@@ -678,7 +689,7 @@ p{margin:0 0 1.05em}
 </header>
 
 <!-- ============================ HOW IT WORKS ============================ -->
-<section class="sheet">
+<section class="sheet" id="how">
   <div class="wrap">
     <p class="eyebrow">How it works</p>
     <h2>Set it up once. It runs every day.</h2>
@@ -972,6 +983,17 @@ p{margin:0 0 1.05em}
 
     <button class="btn btn-lg" type="button" data-getapp style="margin-top:34px">Get the app</button>
     <p class="capture-note" style="margin-inline:auto;text-align:center">Free while we're testing.</p>
+
+    <p class="or or-center">Not ready yet?</p>
+
+    <form class="capture" novalidate data-done="Thanks — we'll let you know when there's something worth telling you.">
+      <div class="capture-row">
+        <label class="sr" for="email-later">Your email address</label>
+        <input id="email-later" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+        <button class="btn" type="submit">Keep me posted</button>
+      </div>
+      <p class="capture-msg" role="status" aria-live="polite"></p>
+    </form>
   </div>
 
   <div class="wrap">
@@ -1013,10 +1035,18 @@ p{margin:0 0 1.05em}
           <span class="opt-s">We'll email you the link.</span>
         </span>
       </button>
+
+      <button class="opt" type="button" id="laterOpt">
+        <span class="opt-ico" aria-hidden="true">&#9993;</span>
+        <span>
+          <span class="opt-t">Not on my phone right now</span>
+          <span class="opt-s">Send me the link and I'll set it up later.</span>
+        </span>
+      </button>
     </div>
 
     <form class="capture sheet-form" id="androidForm" novalidate hidden>
-      <p class="form-lead">
+      <p class="form-lead" id="formLead">
         Google needs your email on our tester list before you can install.
         Leave it here and we'll send the link today.
       </p>
@@ -1087,8 +1117,11 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
         .then(function (res) {
           if (!res.ok && res.status !== 409) throw new Error(res.status);
           form.querySelector(".capture-row").style.display = "none";
+          var note = form.querySelector(".capture-note");
+          if (note) note.style.display = "none";
           msg.style.color = "";
-          msg.textContent = "Got it — we'll email you the install link today.";
+          msg.textContent = form.getAttribute("data-done") ||
+            "Got it — we'll email you the install link today.";
         })
         .catch(function () {
           button.disabled = false;
@@ -1120,10 +1153,26 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
   var optList = document.getElementById("optList");
   var androidForm = document.getElementById("androidForm");
 
-  document.getElementById("androidOpt").addEventListener("click", function () {
+  var lead = document.getElementById("formLead");
+  var LEAD_ANDROID =
+    "Google needs your email on our tester list before you can install. " +
+    "Leave it here and we'll send the link today.";
+  var LEAD_LATER =
+    "Leave your email and we'll send you the install link, so it's " +
+    "waiting whenever you've got a minute.";
+
+  function showForm(text) {
+    lead.textContent = text;
     optList.hidden = true;
     androidForm.hidden = false;
     setTimeout(function () { document.getElementById("email-app").focus(); }, 60);
+  }
+
+  document.getElementById("androidOpt").addEventListener("click", function () {
+    showForm(LEAD_ANDROID);
+  });
+  document.getElementById("laterOpt").addEventListener("click", function () {
+    showForm(LEAD_LATER);
   });
   document.getElementById("backOpts").addEventListener("click", function () {
     androidForm.hidden = true;
