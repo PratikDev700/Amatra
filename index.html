@@ -613,7 +613,7 @@ a.btn-ghost{
 
           <div class="cta-row">
             <button class="btn btn-lg" type="button" data-getapp>Get the app</button>
-            <a class="btn-ghost btn-lg" href="#how">See how it works</a>
+            <button class="btn-ghost btn-lg" type="button" id="toKeep">Keep me posted</button>
           </div>
           <p class="capture-note">Free while we're testing. Takes about a minute to set up.</p>
         </div>
@@ -689,7 +689,7 @@ a.btn-ghost{
 </header>
 
 <!-- ============================ HOW IT WORKS ============================ -->
-<section class="sheet" id="how">
+<section class="sheet">
   <div class="wrap">
     <p class="eyebrow">How it works</p>
     <h2>Set it up once. It runs every day.</h2>
@@ -984,7 +984,7 @@ a.btn-ghost{
     <button class="btn btn-lg" type="button" data-getapp style="margin-top:34px">Get the app</button>
     <p class="capture-note" style="margin-inline:auto;text-align:center">Free while we're testing.</p>
 
-    <p class="or or-center">Not ready yet?</p>
+    <p class="or or-center" id="keep">Not ready yet?</p>
 
     <form class="capture" novalidate data-done="Thanks — we'll let you know when there's something worth telling you.">
       <div class="capture-row">
@@ -1131,6 +1131,20 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
             "That didn't save. Email us at support@amatra.app and we'll add you by hand.";
         });
     });
+  });
+})();
+
+/* ============================================================
+   HERO -> KEEP ME POSTED
+   ============================================================ */
+(function () {
+  var btn = document.getElementById("toKeep");
+  var anchor = document.getElementById("keep");
+  var field = document.getElementById("email-later");
+  if (!btn || !anchor) return;
+  btn.addEventListener("click", function () {
+    anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (field) setTimeout(function () { field.focus({ preventScroll: true }); }, 700);
   });
 })();
 
