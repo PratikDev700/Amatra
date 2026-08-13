@@ -19,6 +19,9 @@
 <meta name="twitter:description" content="You can't call every day. Amatra does — and tells you how it went." />
 <meta name="twitter:image" content="https://amatra.app/og-image.png" />
 <meta name="theme-color" content="#162F22" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -434,6 +437,15 @@ p{margin:0 0 1.05em}
 .closer h2{max-width:16ch;margin-inline:auto}
 .closer .capture{margin:34px auto 0}
 .closer .capture-note{margin-inline:auto;text-align:center}
+
+.tf{
+  margin:30px 0 0;font-size:15px;color:var(--sage-light);text-align:center;
+}
+.tf a{
+  color:var(--cream);font-weight:600;text-decoration:none;
+  border-bottom:1px solid rgba(169,198,180,.45);padding-bottom:1px;
+}
+.tf a:hover{border-bottom-color:var(--cream)}
 
 .foot{
   border-top:1px solid rgba(169,198,180,.16);
@@ -897,6 +909,11 @@ p{margin:0 0 1.05em}
       <p class="capture-note">Join our early testers — free while we're testing.</p>
       <p class="capture-msg" role="status" aria-live="polite"></p>
     </form>
+
+    <p class="tf">
+      On an iPhone and don't want to wait?
+      <a href="https://testflight.apple.com/join/ppvDngRM" rel="noopener">Install the beta now</a>
+    </p>
   </div>
 
   <div class="wrap">
@@ -1147,6 +1164,12 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
   render();
 })();
 </script>
+
+<!-- Cloudflare Web Analytics — paste your token between the quotes below.
+     Cloudflare dashboard -> Analytics -> Web Analytics -> Add a site -> amatra.app
+     Until it's filled in this script does nothing and costs nothing. -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "PASTE_TOKEN_HERE"}'></script>
 
 </body>
 </html>
