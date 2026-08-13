@@ -159,6 +159,76 @@ p{margin:0 0 1.05em}
 }
 .btn:hover{background:#fff;transform:translateY(-1px)}
 .btn:active{transform:none}
+.btn-lg{font-size:17px;padding:17px 34px}
+.form-lead{font-size:14px;line-height:1.5;color:var(--bark);margin:0 0 16px}
+.app-sheet .capture-row{display:flex;flex-direction:column;gap:10px}
+.app-sheet .capture-row input{
+  width:100%;font-family:var(--body);font-size:16px;color:#1C1B18;
+  background:#fff;border:1px solid var(--sand);border-radius:14px;padding:15px 18px;
+}
+.app-sheet .capture-row input::placeholder{color:#A79A88}
+.app-sheet .capture-row input:focus{outline:none;border-color:var(--sage);background:#fff}
+.app-sheet .capture-row .btn{
+  width:100%;background:var(--forest);color:var(--cream);border-radius:14px;
+}
+.app-sheet .capture-row .btn:hover{background:var(--forest-mid);transform:none}
+.app-sheet .capture-msg{color:var(--forest);margin-top:12px}
+.sheet-back-btn{
+  display:block;margin:16px auto 0;background:none;border:0;cursor:pointer;
+  font-family:var(--body);font-size:13.5px;font-weight:600;color:var(--bark);
+}
+.sheet-back-btn:hover{color:#1C1B18}
+
+.btn-ghost{
+  font-family:var(--body);font-size:16px;font-weight:700;
+  background:transparent;color:var(--cream);cursor:pointer;
+  border:1px solid rgba(169,198,180,.45);border-radius:999px;
+  padding:14px 27px;transition:.18s;white-space:nowrap;
+}
+.btn-ghost:hover{background:rgba(169,198,180,.14);border-color:var(--sage)}
+.or{
+  display:flex;align-items:center;gap:14px;margin:22px 0 18px;max-width:470px;
+  font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(169,198,180,.55);
+}
+.or::before,.or::after{content:"";flex:1;height:1px;background:rgba(169,198,180,.2)}
+
+.sheet-back{
+  position:fixed;inset:0;z-index:60;
+  background:rgba(11,22,16,.72);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  opacity:0;visibility:hidden;transition:opacity .25s ease;
+}
+.sheet-back.on{opacity:1;visibility:visible}
+.app-sheet{
+  width:100%;max-width:430px;background:var(--stone);
+  border-radius:24px;padding:32px 30px 26px;
+  transform:translateY(14px);transition:transform .3s cubic-bezier(.2,.8,.3,1);
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.6);
+}
+.sheet-back.on .app-sheet{transform:none}
+.app-sheet h3{font-size:1.5rem;margin-bottom:6px;color:#1C1B18}
+.app-sheet .sub{font-size:14.5px;color:var(--bark);margin:0 0 22px;line-height:1.5}
+.opt{
+  display:flex;align-items:center;gap:15px;width:100%;text-align:left;
+  background:#fff;border:1px solid var(--sand);border-radius:16px;
+  padding:17px 18px;margin-bottom:11px;cursor:pointer;
+  font-family:var(--body);transition:.16s;text-decoration:none;color:inherit;
+}
+.opt:hover{border-color:var(--sage);transform:translateY(-1px)}
+.opt-ico{
+  width:42px;height:42px;border-radius:12px;flex:none;background:var(--mint);
+  display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--forest);
+}
+.opt-t{display:block;font-family:var(--display);font-size:1.08rem;font-weight:600;line-height:1.2}
+.opt-s{display:block;font-size:13px;color:var(--bark);margin-top:3px;line-height:1.4}
+.sheet-close{
+  display:block;width:100%;margin-top:8px;padding:11px;
+  background:none;border:0;cursor:pointer;font-family:var(--body);
+  font-size:14px;font-weight:600;color:var(--bark);
+}
+.sheet-close:hover{color:#1C1B18}
+
 .capture-note{
   font-size:13.5px;line-height:1.55;color:rgba(169,198,180,.85);
   margin:15px 0 0;max-width:42ch;
@@ -441,6 +511,12 @@ p{margin:0 0 1.05em}
 .tf{
   margin:30px 0 0;font-size:15px;color:var(--sage-light);text-align:center;
 }
+.tf-btn{
+  background:none;border:0;padding:0;font:inherit;cursor:pointer;
+  color:var(--cream);font-weight:600;
+  border-bottom:1px solid rgba(169,198,180,.45);
+}
+.tf-btn:hover{border-bottom-color:var(--cream)}
 .tf a{
   color:var(--cream);font-weight:600;text-decoration:none;
   border-bottom:1px solid rgba(169,198,180,.45);padding-bottom:1px;
@@ -512,7 +588,7 @@ p{margin:0 0 1.05em}
   <div class="wrap">
     <nav class="nav">
       <a class="mark" href="/"><span class="mark-dot" aria-hidden="true"></span>amatra</a>
-      <a class="nav-link" href="#join">Join the early group</a>
+      <button class="nav-link" type="button" data-getapp style="font-family:var(--body);background:none;cursor:pointer">Get the app</button>
     </nav>
 
     <div class="hero">
@@ -527,15 +603,8 @@ p{margin:0 0 1.05em}
             so "I'm fine" isn't all you have to go on.
           </p>
 
-          <form class="capture" id="join" novalidate>
-            <div class="capture-row">
-              <label class="sr" for="email-top">Your email address</label>
-              <input id="email-top" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
-              <button class="btn" type="submit">Join the early group</button>
-            </div>
-            <p class="capture-note">Join our early testers — free while we're testing.</p>
-            <p class="capture-msg" role="status" aria-live="polite"></p>
-          </form>
+          <button class="btn btn-lg" type="button" data-getapp>Get the app</button>
+          <p class="capture-note">Free while we're testing. Takes about a minute to set up.</p>
         </div>
 
         <div class="promo">
@@ -775,11 +844,12 @@ p{margin:0 0 1.05em}
     </p>
 
     <div class="next">
-      <h3>What happens after you sign up</h3>
+      <h3>What happens after you install</h3>
       <p>
-        We set it up with you — your parent's number, a time that suits them,
-        and the number Amatra will be calling from, so they know exactly who
-        it is when the phone rings. Then we handle the rest.
+        You add your parent — their name, their number, and a time of day that
+        suits them. Tell them Amatra will be calling so they know who it is
+        when the phone rings. That's the whole setup. The first call goes out
+        at the time you picked, and every day after that.
       </p>
     </div>
   </div>
@@ -896,24 +966,12 @@ p{margin:0 0 1.05em}
     <p class="eyebrow eyebrow-light">Early access</p>
     <h2>Someone should ask her today.</h2>
     <p class="lede" style="margin-inline:auto;text-align:center">
-      We're letting in a small group of families first. Leave your email and
-      we'll get you set up ourselves.
+      We're letting in a small group of families first. Install it, add your
+      parent, and the first call goes out at the time you choose.
     </p>
 
-    <form class="capture" novalidate>
-      <div class="capture-row">
-        <label class="sr" for="email-bottom">Your email address</label>
-        <input id="email-bottom" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
-        <button class="btn" type="submit">Join the early group</button>
-      </div>
-      <p class="capture-note">Join our early testers — free while we're testing.</p>
-      <p class="capture-msg" role="status" aria-live="polite"></p>
-    </form>
-
-    <p class="tf">
-      On an iPhone and don't want to wait?
-      <a href="https://testflight.apple.com/join/ppvDngRM" rel="noopener">Install the beta now</a>
-    </p>
+    <button class="btn btn-lg" type="button" data-getapp style="margin-top:34px">Get the app</button>
+    <p class="capture-note" style="margin-inline:auto;text-align:center">Free while we're testing.</p>
   </div>
 
   <div class="wrap">
@@ -988,7 +1046,7 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
           if (!res.ok && res.status !== 409) throw new Error(res.status);
           form.querySelector(".capture-row").style.display = "none";
           msg.style.color = "";
-          msg.textContent = "You're on the list. We'll be in touch shortly.";
+          msg.textContent = "Got it — we'll email you the install link today.";
         })
         .catch(function () {
           button.disabled = false;
@@ -998,6 +1056,36 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
             "That didn't save. Email us at support@amatra.app and we'll add you by hand.";
         });
     });
+  });
+})();
+
+/* ============================================================
+   GET THE APP SHEET
+   ============================================================ */
+(function () {
+  var back = document.getElementById("appSheet");
+  if (!back) return;
+  function open() { back.classList.add("on"); }
+  function close() { back.classList.remove("on"); }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-getapp]"), function (b) {
+    b.addEventListener("click", open);
+  });
+  document.getElementById("sheetClose").addEventListener("click", close);
+  back.addEventListener("click", function (e) { if (e.target === back) close(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+
+  var optList = document.getElementById("optList");
+  var androidForm = document.getElementById("androidForm");
+
+  document.getElementById("androidOpt").addEventListener("click", function () {
+    optList.hidden = true;
+    androidForm.hidden = false;
+    setTimeout(function () { document.getElementById("email-app").focus(); }, 60);
+  });
+  document.getElementById("backOpts").addEventListener("click", function () {
+    androidForm.hidden = true;
+    optList.hidden = false;
   });
 })();
 
@@ -1164,6 +1252,48 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
   render();
 })();
 </script>
+
+<!-- ============================ GET THE APP ============================ -->
+<div class="sheet-back" id="appSheet" role="dialog" aria-modal="true" aria-labelledby="appSheetTitle">
+  <div class="app-sheet">
+    <h3 id="appSheetTitle">Get Amatra</h3>
+    <p class="sub">Free while we're testing. Which phone are you on?</p>
+
+    <div id="optList">
+      <a class="opt" href="https://testflight.apple.com/join/ppvDngRM" rel="noopener" target="_blank">
+        <span class="opt-ico" aria-hidden="true">&#63743;</span>
+        <span>
+          <span class="opt-t">iPhone or iPad</span>
+          <span class="opt-s">Install now through TestFlight.</span>
+        </span>
+      </a>
+
+      <button class="opt" type="button" id="androidOpt">
+        <span class="opt-ico" aria-hidden="true">&#9654;</span>
+        <span>
+          <span class="opt-t">Android</span>
+          <span class="opt-s">We'll email you the link.</span>
+        </span>
+      </button>
+    </div>
+
+    <form class="capture sheet-form" id="androidForm" novalidate hidden>
+      <p class="form-lead">
+        Google needs your email on our tester list before you can install.
+        Leave it here and we'll send the link today.
+      </p>
+      <div class="capture-row">
+        <label class="sr" for="email-app">Your email address</label>
+        <input id="email-app" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+        <button class="btn" type="submit">Send me the link</button>
+      </div>
+      <p class="capture-msg" role="status" aria-live="polite"></p>
+      <button class="sheet-back-btn" type="button" id="backOpts">&larr; Back</button>
+    </form>
+
+    <button class="sheet-close" type="button" id="sheetClose">Close</button>
+  </div>
+</div>
 
 <!-- Cloudflare Web Analytics (manual JS snippet install) -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
