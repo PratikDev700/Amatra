@@ -253,7 +253,11 @@ a.btn-ghost{
 }
 .screen{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:var(--forest-deep)}
 .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:88px;height:20px;border-radius:999px;background:#0D1A13;z-index:20}
-.view{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0}
+.view{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transition:opacity .75s ease;animation:none !important;
+}
+.view.on{opacity:1;visibility:visible}
 
 .v-call{
   background:linear-gradient(170deg,var(--forest-deep),var(--forest-mid));
@@ -357,13 +361,6 @@ a.btn-ghost{
   user-select:none;-webkit-user-select:none;
 }
 .deckzone.dragging{cursor:grabbing}
-.deckzone::after{
-  content:"";position:absolute;left:50%;bottom:-370px;
-  width:1500px;height:700px;margin-left:-750px;border-radius:50%;
-  background:linear-gradient(180deg,#E6E1D6,#F1EDE4);
-  box-shadow:0 -30px 60px -30px rgba(45,90,61,.16);
-  z-index:6;pointer-events:none;
-}
 .fan{position:absolute;left:50%;top:58px;width:0;height:0}
 
 .qcard{
@@ -455,6 +452,127 @@ a.btn-ghost{
 .dot.on{background:var(--forest);width:22px;border-radius:99px}
 
 /* ============================================================ FEATURES */
+.showcase{
+  display:grid;grid-template-columns:1fr 340px;gap:56px;
+  align-items:center;margin-top:52px;
+}
+.feat-list{display:flex;flex-direction:column;gap:8px}
+.feat-item{
+  display:block;width:100%;text-align:left;cursor:pointer;
+  font-family:var(--body);background:none;border:0;
+  border-left:2px solid var(--sand);
+  padding:16px 20px;border-radius:0 14px 14px 0;transition:.2s;
+}
+.feat-item:hover{background:rgba(45,90,61,.05)}
+.feat-item.is-on{
+  border-left-color:var(--forest);
+  background:rgba(45,90,61,.07);
+}
+.feat-t{
+  display:block;font-family:var(--display);font-size:1.22rem;
+  font-weight:600;letter-spacing:-.015em;color:var(--charcoal);
+}
+.feat-s{display:block;font-size:14.5px;color:var(--bark);margin-top:3px}
+.feat-item.is-on .feat-s{color:var(--forest)}
+
+.showcase-phone{display:flex;justify-content:center}
+.showcase-phone .phone{
+  width:322px;height:600px;transform:rotate(1.2deg);
+}
+.showcase-phone .screen{background:var(--forest-deep)}
+.pane{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .38s ease,transform .38s cubic-bezier(.2,.8,.3,1);
+}
+.pane.is-on{opacity:1;visibility:visible;transform:none}
+.pane-head{
+  background:linear-gradient(160deg,var(--forest-deep),var(--forest-mid) 55%,var(--forest));
+  padding:52px 20px 30px;
+}
+.app-hi{
+  font-family:var(--body);font-size:1.42rem;font-weight:800;
+  letter-spacing:-.03em;color:#fff;
+}
+.app-date{font-size:12.5px;color:rgba(220,235,225,.72);margin-top:3px}
+.pillrow{display:flex;gap:7px;margin-top:14px}
+.ppill{
+  font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:999px;
+  color:rgba(220,235,225,.7);display:flex;align-items:center;gap:6px;
+}
+.ppill.on{background:#fff;color:var(--charcoal);font-weight:700}
+.ppill.on i{width:6px;height:6px;border-radius:50%;background:var(--well)}
+.pcard-lab{
+  font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bark);margin-bottom:8px;
+}
+.pcard-lab.out{margin:4px 0 9px 3px}
+.chev{margin-left:auto;color:var(--bark);opacity:.5;font-size:17px}
+.prow-ico.sm{width:34px;height:34px}
+.trow .prow-ico{background:#DFEBE1;color:var(--forest)}
+.trow .prow-ico svg{width:17px;height:17px}
+.prow-ico{background:rgba(127,166,140,.18);color:var(--forest)}
+.prow-ico.amber{background:rgba(217,164,65,.2);color:#8A6413}
+.prow-ico svg{width:15px;height:15px}
+.medtop{display:flex;align-items:center;justify-content:space-between;font-size:14px;margin-bottom:9px}
+.dose{color:var(--sage);font-weight:600}
+.badge{
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--sand);border-radius:999px;padding:3px 9px;color:var(--bark);
+}
+.medrow{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--bark);margin-top:6px}
+.trends{padding:2px 15px}
+.trow{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid #EFEAE0}
+.trow:last-child{border-bottom:0}
+.tlab{font-size:13.5px;font-weight:600;color:var(--charcoal);letter-spacing:-.01em;white-space:nowrap}
+.tval{
+  margin-left:auto;font-size:11.5px;font-weight:700;color:var(--charcoal);
+  white-space:nowrap;letter-spacing:-.01em;
+}
+.tval.well{color:#2E7D4F}
+.tval.gold{color:#B98B27}
+.tval.red{color:#C0554A}
+.trow .chev{font-size:16px;opacity:.5;margin-left:7px}
+.chip svg{width:14px;height:14px;margin-right:5px;vertical-align:-2px}
+.chip{display:inline-flex;align-items:center}
+.chip-red{background:#FBE7E4;color:#B0483D}
+.dot{width:8px;height:8px;border-radius:50%;margin-left:auto;background:var(--well)}
+.dot.amberdot{background:var(--notice)}
+.pane-body{
+  background:var(--stone);border-radius:22px 22px 0 0;
+  margin-top:-18px;padding:20px 16px;flex:1;
+}
+.pcard{
+  background:#fff;border-radius:16px;padding:15px 16px;margin-bottom:11px;
+  box-shadow:0 2px 10px rgba(45,90,61,.07);
+}
+.pcard-text{font-size:14px;line-height:1.5;color:var(--charcoal);margin:0}
+.prow{display:flex;align-items:center;gap:12px;font-size:13.5px;line-height:1.45}
+.prow-ico{
+  width:34px;height:34px;border-radius:50%;flex:none;background:var(--mint);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:var(--forest);
+}
+.prow-ico.amber{background:#FBF0D8;color:#8A6413}
+.dim{color:var(--bark);font-size:12.5px}
+.mini{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.mini span{aspect-ratio:1;border-radius:3px;background:rgba(45,90,61,.13)}
+.mini span.hit{background:var(--notice)}
+.waiting{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 26px}
+.wait-ico{
+  width:64px;height:64px;border-radius:50%;background:rgba(127,166,140,.22);
+  color:var(--forest);display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+}
+.wait-ico svg{width:28px;height:28px;animation:spin 12s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wait-t{font-size:15px;font-weight:700;color:var(--charcoal);margin:0}
+.wait-s{font-size:13px;color:var(--bark);margin:6px 0 0;line-height:1.45}
+
+.disclaim-light{
+  margin-top:44px;font-size:14.5px;line-height:1.6;
+  color:var(--bark);max-width:70ch;
+}
+
 .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:48px}
 .feat{background:rgba(255,255,255,.055);border:1px solid rgba(169,198,180,.17);border-radius:20px;padding:28px 26px}
 .feat h3{color:var(--cream);margin-bottom:9px}
@@ -490,6 +608,96 @@ a.btn-ghost{
 .story .sign{
   font-family:var(--body);font-size:14.5px;font-weight:600;
   letter-spacing:.06em;text-transform:uppercase;color:var(--sage);margin-top:34px;
+}
+
+/* ============================================================ GENERATIONS */
+.gens{text-align:center}
+.gens-h2{
+  font-size:clamp(1.9rem,3.4vw,2.6rem);max-width:20ch;
+  margin:0 auto 52px;color:var(--cream);
+}
+.gen-track{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  max-width:520px;margin:0 auto 46px;position:relative;
+}
+.gen-track::before{
+  content:"";position:absolute;left:12%;right:12%;top:9px;height:1px;
+  background:rgba(169,198,180,.24);
+}
+.gen-node{
+  flex:1;background:none;border:0;cursor:pointer;font-family:var(--body);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  position:relative;z-index:2;padding:0;
+}
+.gd{
+  width:19px;height:19px;border-radius:50%;
+  background:var(--forest-deep);border:2px solid rgba(169,198,180,.4);
+  transition:.25s;
+}
+.gen-node:hover .gd{border-color:var(--sage)}
+.gen-node.is-on .gd{background:var(--sage);border-color:var(--sage);transform:scale(1.14)}
+.gy{
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(169,198,180,.6);transition:.25s;
+}
+.gen-node.is-on .gy{color:var(--cream)}
+
+.gen-stage{position:relative;min-height:220px;max-width:660px;margin:0 auto}
+.gen-panel{
+  position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .42s ease,transform .42s cubic-bezier(.2,.8,.3,1);
+}
+.gen-panel.is-on{opacity:1;visibility:visible;transform:none}
+.route{
+  display:flex;align-items:center;gap:18px;justify-content:center;
+  max-width:520px;margin:0 auto;
+}
+.city{
+  font-family:var(--display);font-size:1.32rem;font-weight:600;
+  color:var(--cream);white-space:nowrap;
+}
+.wire{
+  flex:1;height:1px;background:rgba(169,198,180,.2);
+  position:relative;min-width:60px;
+}
+.wire-fill{
+  position:absolute;left:0;top:0;height:1px;width:var(--len);
+  background:linear-gradient(90deg,var(--sage),var(--mint));
+}
+.wire-fill::after{
+  content:"";position:absolute;right:-3px;top:-3px;
+  width:7px;height:7px;border-radius:50%;background:var(--mint);
+}
+.city-cyc{
+  font-family:var(--display);font-size:1.32rem;font-weight:600;
+  color:var(--cream);background:none;cursor:pointer;
+  border:0;border-bottom:2px dotted rgba(169,198,180,.5);
+  padding:0 1px;transition:opacity .3s ease,border-color .18s;
+}
+.city-cyc:hover{border-bottom-color:var(--sage)}
+.city-cyc.fading,.miles.fading{opacity:0}
+.miles{transition:opacity .3s ease}
+.miles{
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sage);margin:14px 0 26px;
+}
+.gen-copy{
+  font-family:var(--body);font-size:clamp(1.02rem,1.6vw,1.16rem);
+  line-height:1.62;color:var(--sage-light);max-width:46ch;margin:0 auto;
+}
+.gen-close{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(1.35rem,2.6vw,1.85rem);line-height:1.4;
+  color:var(--cream);margin:22px auto 0;max-width:26ch;letter-spacing:-.01em;
+}
+.gen-close em{font-style:italic;color:var(--sage-light)}
+.gens .sign{margin-top:36px}
+
+@media (max-width:640px){
+  .gen-stage{min-height:280px}
+  .route{gap:12px}
+  .city{font-size:1.1rem}
+  .gens-h2{margin-bottom:40px}
 }
 
 /* ============================================================ FAQ */
@@ -549,6 +757,8 @@ a.btn-ghost{
   .hero{padding-bottom:74px}
   .steps{grid-template-columns:1fr;gap:26px}
   .feats,.voices{grid-template-columns:1fr}
+  .showcase{grid-template-columns:1fr;gap:40px}
+  .showcase-phone{order:-1}
   .capture,.lede,.hero-sub,.story p{max-width:none}
 }
 @media (max-width:560px){
@@ -566,7 +776,6 @@ a.btn-ghost{
   .qback .qtext{font-size:1rem}
   .ghost{font-size:112px;right:-8px;bottom:-28px}
   .deckctrl{margin-top:-74px}
-  .deckzone::after{bottom:-470px}
   .next{padding:30px 24px}
   .phone{width:268px;height:548px}
   .foot{flex-direction:column;align-items:flex-start}
@@ -590,6 +799,21 @@ a.btn-ghost{
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h3l2.5-6 4 12 2.5-6h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-medkit" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M9.5 13.5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-meal" viewBox="0 0 24 24"><path d="M7 3v8M5 3v4a2 2 0 0 0 4 0V3M7 11v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M17 3c-1.7 0-3 2.2-3 5s1.3 4 3 4v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4.5 21 19.5H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1.1" fill="currentColor"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2.5 4.8 13.4h6.2L10.5 21.5l8.7-10.9h-6.2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-concern" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.4v5.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.3" r="1.1" fill="currentColor"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.4l3.1 3.1 6-6.4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8.6 8.6l6.8 6.8M15.4 8.6l-6.8 6.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.4 12H2.2M21.8 12h-2.2M6.6 6.6 5 5M19 19l-1.6-1.6M6.6 17.4 5 19M19 5l-1.6 1.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-rx" viewBox="0 0 24 24"><path d="M6 20V6h4.5a3.2 3.2 0 0 1 0 6.4H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 12.4 19 20M19 12.4 10.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M2.5 4h2.2l2.3 10.6h9.6L19 7.5H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="19" r="1.5" fill="currentColor"/><circle cx="16.5" cy="19" r="1.5" fill="currentColor"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5.3l3.3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 4v4.6h-4.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
 
 <!-- ============================ HERO ============================ -->
 <header class="band-dark">
@@ -619,63 +843,60 @@ a.btn-ghost{
         </div>
 
         <div class="promo">
-          <div class="phone" role="img" aria-label="Animation of an Amatra call: the phone rings, a short conversation takes place, and the family sees a written summary afterwards.">
+          <div class="phone" id="heroPhone" role="img" aria-label="Animation of the Amatra app: the phone rings, a short conversation takes place, and the family sees a written summary afterwards.">
             <div class="screen">
               <div class="notch" aria-hidden="true"></div>
 
-              <div class="view v-call">
-                <div class="ring">A</div>
-                <div class="who">Amatra</div>
-                <div class="status">mobile · calling…</div>
-                <div class="call-actions" aria-hidden="true">
-                  <div class="pill-btn pill-decline">✕</div>
-                  <div class="pill-btn pill-accept">✆</div>
+              <div class="view v-wait on" data-v>
+                <div class="pane-head">
+                  <div class="app-hi">Good morning</div>
+                  <div class="app-date">Friday, August 14 &#9662;</div>
+                  <div class="pillrow"><span class="ppill on"><i></i>Mom</span><span class="ppill">Dad</span></div>
+                </div>
+                <div class="pane-body waiting">
+                  <span class="wait-ico"><svg><use href="#i-sun"/></svg></span>
+                  <p class="wait-t">Waiting for today's check-in</p>
+                  <p class="wait-s">Sam will call Mom at 9:00 AM.</p>
                 </div>
               </div>
 
-              <div class="view v-live">
-                <div class="live-head">
-                  <span class="live-dot"></span>
-                  <span class="live-label">On a call · Sam</span>
+              <div class="view v-today" data-v>
+                <div class="pane-head">
+                  <div class="app-hi">Good morning</div>
+                  <div class="app-date">Friday, August 14 &#9662;</div>
+                  <div class="pillrow"><span class="ppill on"><i></i>Mom</span><span class="ppill">Dad</span></div>
                 </div>
-                <div class="wave" aria-hidden="true">
-                  <i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i>
-                </div>
-                <div class="line line-sam l1">Good morning. Did you sleep alright?</div>
-                <div class="line line-her l2">Not too badly. The knee was at it again.</div>
-                <div class="line line-sam l3">This weather has everyone aching. How long's it been going on?</div>
-                <div class="line line-her l4">Three days now. And I'm nearly out of my tablets.</div>
-              </div>
-
-              <div class="view v-dash">
-                <div class="dash-head">
-                  <div class="dash-hi">Good afternoon</div>
-                  <div class="dash-date">Today's check-in · 9:04 AM</div>
-                </div>
-                <div class="dash-body">
-                  <div class="card c1">
-                    <div class="card-label">How it went</div>
-                    <p class="card-text">
-                      Slept alright. Mentioned her knee has been sore for
-                      three days. Watched the cricket, spoke to Meera.
-                    </p>
+                <div class="pane-body">
+                  <div class="pcard">
+                    <div class="pcard-lab">Today's check-in &middot; 9:04 AM</div>
+                    <p class="pcard-text">Slept alright. Stayed in &mdash; her knee has been sore since Tuesday. Watched the game, talked to Sarah.</p>
                     <div class="chip-row">
-                      <span class="chip">Ate lunch</span>
-                      <span class="chip">Meds taken</span>
-                      <span class="chip chip-amber">Knee · 3 days</span>
+                      <span class="chip"><svg><use href="#i-check"/></svg>Ate today</span>
+                      <span class="chip"><svg><use href="#i-check"/></svg>Meds taken</span>
+                      <span class="chip chip-amber">Knee &middot; 3 days</span>
                     </div>
                   </div>
-                  <div class="card c2">
-                    <div class="card-label">She needs something</div>
-                    <div class="task">
-                      <div class="task-ico" aria-hidden="true">℞</div>
-                      <p class="card-text">Nearly out of blood pressure tablets</p>
-                    </div>
+                  <div class="pcard prow">
+                    <span class="prow-ico amber"><svg><use href="#i-rx"/></svg></span>
+                    <span><b>Blood pressure tablets</b><br><span class="dim">Four left &middot; call the pharmacy</span></span>
+                    <span class="chev">&#8250;</span>
                   </div>
-                  <div class="card c3">
-                    <div class="card-label">Your family</div>
-                    <p class="card-text">Shared with 3 people in the care circle</p>
+                </div>
+              </div>
+
+              <div class="view v-trends" data-v>
+                <div class="pane-head">
+                  <div class="app-hi">Good morning</div>
+                  <div class="app-date">Friday, August 14 &#9662;</div>
+                </div>
+                <div class="pane-body">
+                  <div class="pcard-lab out">Trends &middot; Jul 15 &ndash; Aug 14</div>
+                  <div class="pcard trends">
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-pulse"/></svg></span><span class="tlab">Mood</span><span class="tval gold">Avg 4.2 &mdash;</span><span class="chev">&#8250;</span></div>
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-medkit"/></svg></span><span class="tlab">Medications</span><span class="tval well">93% (28/30)</span><span class="chev">&#8250;</span></div>
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-meal"/></svg></span><span class="tlab">Meals</span><span class="tval well">87% (26/30)</span><span class="chev">&#8250;</span></div>
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-concern"/></svg></span><span class="tlab">Concerns</span><span class="tval red">Knee (4x)</span><span class="chev">&#8250;</span></div>
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-bolt"/></svg></span><span class="tlab">Call Streak</span><span class="tval gold">30 days</span><span class="chev">&#8250;</span></div>
                   </div>
                 </div>
               </div>
@@ -704,7 +925,7 @@ a.btn-ghost{
         <h3>You add your parent</h3>
         <p>
           Their name, their number, a time of day that suits them, and
-          anything worth asking about — the neighbour who visits, the knee
+          anything worth asking about — the neighbor who visits, the knee
           that plays up, the grandchild they ask after.
         </p>
       </div>
@@ -751,57 +972,152 @@ a.btn-ghost{
 </section>
 
 <!-- ============================ WHAT YOU SEE ============================ -->
-<section class="band-dark sheet">
+<section class="sheet sheet-cream">
   <div class="wrap">
-    <p class="eyebrow eyebrow-light">What your family sees</p>
+    <p class="eyebrow">What your family sees</p>
     <h2>One place, and everyone's in it.</h2>
-    <p class="lede">Amatra puts the same picture in front of everybody.</p>
+    <p class="lede">Tap through what lands on your phone after each call.</p>
 
-    <div class="feats">
-      <div class="feat">
-        <h3>Today, in their words</h3>
-        <p>
-          A short written account of the call — what they did, who they saw,
-          how they sounded. Not a dashboard of numbers.
-        </p>
+    <div class="showcase">
+      <div class="feat-list" role="tablist">
+        <button class="feat-item is-on" type="button" role="tab" data-screen="0">
+          <span class="feat-t">Today, in their words</span>
+          <span class="feat-s">What they said, not a score.</span>
+        </button>
+        <button class="feat-item" type="button" role="tab" data-screen="1">
+          <span class="feat-t">What they need</span>
+          <span class="feat-s">Refills, groceries, a call to make.</span>
+        </button>
+        <button class="feat-item" type="button" role="tab" data-screen="2">
+          <span class="feat-t">Medications</span>
+          <span class="feat-s">Filled when, due when.</span>
+        </button>
+        <button class="feat-item" type="button" role="tab" data-screen="3">
+          <span class="feat-t">What's changed</span>
+          <span class="feat-s">The record a doctor never gets.</span>
+        </button>
+        <button class="feat-item" type="button" role="tab" data-screen="4">
+          <span class="feat-t">The whole care circle</span>
+          <span class="feat-s">Nobody relaying news down a chain.</span>
+        </button>
       </div>
-      <div class="feat">
-        <h3>What they need</h3>
-        <p>
-          Running low on something, a prescription to reorder, groceries to
-          send. Tap to call their pharmacy, or share the list to Instacart,
-          Walmart or Amazon.
-        </p>
-      </div>
-      <div class="feat">
-        <h3>Refills before they run out</h3>
-        <p>
-          Their medications, when each was last filled, and which one is due —
-          so the pharmacy call happens before the last tablet, not after.
-        </p>
-      </div>
-      <div class="feat">
-        <h3>The record nobody else has</h3>
-        <p>
-          When something does happen, a doctor gets fifteen minutes and
-          whatever your parent can remember. Amatra keeps a dated account of
-          ordinary days, so the conversation starts from something real.
-        </p>
-      </div>
-      <div class="feat feat-wide">
-        <h3>The whole care circle</h3>
-        <p>
-          Invite your brother, your cousin, the aunt who lives nearby.
-          Everyone sees the same updates, so nobody's relaying news down a
-          chain of phone calls — and the person doing the most stops doing it alone.
-        </p>
+
+      <div class="showcase-phone">
+        <div class="phone">
+          <div class="screen">
+            <div class="notch" aria-hidden="true"></div>
+
+            <div class="pane is-on" data-pane="0">
+              <div class="pane-head">
+                <div class="app-hi">Good afternoon</div>
+                <div class="app-date">Friday, August 14 &#9662;</div>
+                <div class="pillrow">
+                  <span class="ppill on"><i></i>Mom</span>
+                  <span class="ppill">Dad</span>
+                </div>
+              </div>
+              <div class="pane-body">
+                <div class="pcard">
+                  <div class="pcard-lab">Today's check-in &middot; 9:04 AM</div>
+                  <p class="pcard-text">Slept alright. Stayed in &mdash; her knee has been sore since Tuesday. Watched the game, talked to Sarah.</p>
+                  <div class="chip-row">
+                      <span class="chip"><svg><use href="#i-check"/></svg>Ate today</span>
+                      <span class="chip"><svg><use href="#i-check"/></svg>Meds taken</span>
+                      <span class="chip chip-amber">Knee &middot; 3 days</span>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pane" data-pane="1">
+              <div class="pane-head">
+                <div class="app-hi">Good afternoon</div>
+                <div class="app-date">Friday, August 14 &#9662;</div>
+              </div>
+              <div class="pane-body">
+                <div class="pcard-lab out">She needs something</div>
+                <div class="pcard prow">
+                  <span class="prow-ico amber"><svg><use href="#i-rx"/></svg></span>
+                  <span><b>Blood pressure tablets</b><br><span class="dim">Four left &middot; call the pharmacy</span></span>
+                  <span class="chev">&#8250;</span>
+                </div>
+                <div class="pcard prow">
+                  <span class="prow-ico"><svg><use href="#i-cart"/></svg></span>
+                  <span><b>Milk, cookies</b><br><span class="dim">Share to Instacart</span></span>
+                  <span class="chev">&#8250;</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pane" data-pane="2">
+              <div class="pane-head">
+                <div class="app-hi">Medications</div>
+                <div class="app-date">Prescriptions &amp; refills</div>
+              </div>
+              <div class="pane-body">
+                <div class="pcard">
+                  <div class="medtop">
+                    <span><b>Amlodipine</b> <span class="dose">5mg</span></span>
+                    <span class="badge">Filled</span>
+                  </div>
+                  <div class="medrow"><span class="prow-ico sm"><svg><use href="#i-clock"/></svg></span>Once daily, morning</div>
+                  <div class="medrow"><span class="prow-ico sm amber"><svg><use href="#i-refresh"/></svg></span>Refill due in 3 days</div>
+                </div>
+                <div class="pcard">
+                  <div class="medtop">
+                    <span><b>Metformin</b> <span class="dose">500mg</span></span>
+                    <span class="badge">Filled</span>
+                  </div>
+                  <div class="medrow"><span class="prow-ico sm"><svg><use href="#i-clock"/></svg></span>Twice daily</div>
+                  <div class="medrow"><span class="prow-ico sm"><svg><use href="#i-refresh"/></svg></span>26 days left</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pane" data-pane="3">
+              <div class="pane-head">
+                <div class="app-hi">Good afternoon</div>
+                <div class="app-date">Friday, August 14 &#9662;</div>
+              </div>
+              <div class="pane-body">
+                <div class="pcard-lab out">Trends &middot; Jul 15 &ndash; Aug 14</div>
+                <div class="pcard trends">
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-pulse"/></svg></span><span class="tlab">Mood</span><span class="tval gold">Avg 4.2 &mdash;</span><span class="chev">&#8250;</span></div>
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-medkit"/></svg></span><span class="tlab">Medications</span><span class="tval well">93% (28/30)</span><span class="chev">&#8250;</span></div>
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-meal"/></svg></span><span class="tlab">Meals</span><span class="tval well">87% (26/30)</span><span class="chev">&#8250;</span></div>
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-concern"/></svg></span><span class="tlab">Concerns</span><span class="tval red">Knee (4x)</span><span class="chev">&#8250;</span></div>
+                    <div class="trow"><span class="prow-ico sm"><svg><use href="#i-bolt"/></svg></span><span class="tlab">Call Streak</span><span class="tval gold">30 days</span><span class="chev">&#8250;</span></div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="pane" data-pane="4">
+              <div class="pane-head">
+                <div class="app-hi">Family</div>
+                <div class="app-date">Manage your care circle</div>
+              </div>
+              <div class="pane-body">
+                <div class="pcard-lab out">Parents</div>
+                <div class="pcard prow">
+                  <span class="prow-ico">N</span>
+                  <span><b>Mom</b><br><span class="dim">Daily call at 10:30 AM &middot; IST</span></span>
+                  <span class="chev">&#8250;</span>
+                </div>
+                <div class="pcard-lab out">Care circle</div>
+                <div class="pcard prow"><span class="prow-ico">M</span><span><b>Sarah</b><br><span class="dim">Atlanta &middot; you</span></span><span class="dot well"></span></div>
+                <div class="pcard prow"><span class="prow-ico">R</span><span><b>David</b><br><span class="dim">Denver &middot; brother</span></span><span class="dot well"></span></div>
+                <div class="pcard prow"><span class="prow-ico">S</span><span><b>Carol</b><br><span class="dim">Tucson &middot; aunt</span></span><span class="dot amberdot"></span></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
 
-    <p class="disclaim">
-      Amatra is a record of what your parent said on the phone. It doesn't
-      diagnose anything, doesn't give medical advice, and isn't an emergency
-      service. If something's wrong, call a doctor.
+    <p class="disclaim-light">
+      Amatra is for companionship, not medical advice. It records what your
+      parent said on the phone. In an emergency, call your local emergency number.
     </p>
   </div>
 </section>
@@ -810,9 +1126,9 @@ a.btn-ghost{
 <section class="sheet sheet-cream">
   <div class="wrap">
     <p class="eyebrow">Who calls</p>
-    <h2>Your mother shouldn't have to do this in her second language.</h2>
+    <h2>Two voices. More on the way.</h2>
     <p class="lede">
-      Most people are warmest, and most honest, in the language they grew up
+      People are warmest, and most honest, in the language they grew up
       speaking. So we didn't translate one voice — we wrote two.
     </p>
 
@@ -841,7 +1157,7 @@ a.btn-ghost{
         </div>
         <p>
           Not Sam with subtitles. Priya asks in Hindi, switches to English
-          where your mother would, and writes it up in English for you —
+          where your parent would, and writes the summary in English —
           so you read it in yours.
         </p>
       </div>
@@ -849,9 +1165,8 @@ a.btn-ghost{
 
     <p class="reach">
       <strong>They don't have to live where you do.</strong> Amatra calls
-      parents in the United States, Canada, India, the United Kingdom,
-      Germany and more. Built by three people whose own parents are eight
-      thousand miles away.
+      parents across the United States and Canada, and abroad in India, the
+      United Kingdom, Germany and more.
     </p>
 
     <div class="next">
@@ -868,22 +1183,49 @@ a.btn-ghost{
 
 <!-- ============================ STORY ============================ -->
 <section class="band-dark sheet">
-  <div class="wrap narrow story">
-    <p class="eyebrow eyebrow-light">Why we built it</p>
-    <p>
-      The three of us grew up in Dubai. Every Sunday our parents called
-      their parents in India — the same questions, the same worry, the
-      same long-distance line.
-    </p>
-    <p>
-      Then we left for Indiana, and it was our parents doing the calling.
-      Checking we'd eaten. Checking we were alright.
-    </p>
-    <p>
-      Now they're the ones getting older, and we're the ones on the other
-      side of the world with a meeting at nine. Nobody in this story ever
-      stopped caring. There just stopped being time.
-    </p>
+  <div class="wrap gens">
+    <p class="eyebrow eyebrow-light" style="text-align:center">Why we built it</p>
+    <h2 class="gens-h2">Three generations of the same phone call.</h2>
+
+    <div class="gen-track" role="tablist">
+      <button class="gen-node is-on" type="button" data-gen="0"><span class="gd"></span><span class="gy">1995</span></button>
+      <button class="gen-node" type="button" data-gen="1"><span class="gd"></span><span class="gy">2015</span></button>
+      <button class="gen-node" type="button" data-gen="2"><span class="gd"></span><span class="gy">Today</span></button>
+    </div>
+
+    <div class="gen-stage">
+      <div class="gen-panel is-on" data-genp="0">
+        <div class="route">
+          <span class="city">Dubai</span>
+          <span class="wire"><span class="wire-fill" style="--len:14%"></span></span>
+          <span class="city">India</span>
+        </div>
+        <p class="miles">1,200 miles</p>
+        <p class="gen-copy">Every Sunday, our parents called their parents in India. The same questions, the same worry, the same crackling line.</p>
+      </div>
+
+      <div class="gen-panel" data-genp="1">
+        <div class="route">
+          <span class="city">United States</span>
+          <span class="wire"><span class="wire-fill" style="--len:90%"></span></span>
+          <span class="city">Dubai</span>
+        </div>
+        <p class="miles">7,600 miles</p>
+        <p class="gen-copy">Then we left for college, and our parents became the ones doing the calling. Had we eaten. Were we sleeping. Were we alright.</p>
+      </div>
+
+      <div class="gen-panel" data-genp="2">
+        <div class="route">
+          <span class="city">United States</span>
+          <span class="wire"><span class="wire-fill" id="wireNow" style="--len:100%"></span></span>
+          <button class="city city-cyc" type="button" id="cycWhere">India</button>
+        </div>
+        <p class="miles" id="milesNow">8,412 miles</p>
+        <p class="gen-copy">Now they're the ones getting older, and we're the ones on the other side of the world with a meeting at nine.</p>
+      </div>
+    </div>
+
+    <p class="gen-close">Nobody in this story stopped caring.<br><em>Time is what ran out.</em></p>
     <p class="sign">Prateek, Krishna &amp; Dylan</p>
   </div>
 </section>
@@ -1195,6 +1537,20 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 })();
 
 /* ============================================================
+   HERO PHONE — waiting -> today -> trends
+   ============================================================ */
+(function () {
+  var views = document.querySelectorAll("#heroPhone [data-v]");
+  if (!views.length) return;
+  var HOLD = [4200, 6400, 6400], i = 0;
+  function step() {
+    Array.prototype.forEach.call(views, function (v, k) { v.classList.toggle("on", k === i); });
+    setTimeout(function () { i = (i + 1) % views.length; step(); }, HOLD[i]);
+  }
+  step();
+})();
+
+/* ============================================================
    CYCLING HERO WORDS — auto-rotate, tap to take over
    ============================================================ */
 (function () {
@@ -1235,6 +1591,79 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 })();
 
 /* ============================================================
+   TODAY PANEL — the destination rotates
+   ============================================================ */
+(function () {
+  var el = document.getElementById("cycWhere");
+  var mi = document.getElementById("milesNow");
+  var wi = document.getElementById("wireNow");
+  if (!el) return;
+  var PLACES = [
+    ["India", "8,412 miles", "100%"],
+    ["the U.K.", "4,200 miles", "50%"],
+    ["another state", "900 miles", "12%"]
+  ];
+  var i = 0, timer = null;
+  function show(n) {
+    el.classList.add("fading"); mi.classList.add("fading");
+    setTimeout(function () {
+      i = (n + PLACES.length) % PLACES.length;
+      el.textContent = PLACES[i][0];
+      mi.textContent = PLACES[i][1];
+      wi.style.setProperty("--len", PLACES[i][2]);
+      el.classList.remove("fading"); mi.classList.remove("fading");
+    }, 300);
+  }
+  el.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (timer) { clearInterval(timer); timer = null; }
+    show(i + 1);
+  });
+  setTimeout(function () {
+    timer = setInterval(function () { show(i + 1); }, 3800);
+  }, 3000);
+})();
+
+/* ============================================================
+   THREE GENERATIONS
+   ============================================================ */
+(function () {
+  var nodes = document.querySelectorAll(".gen-node");
+  var panels = document.querySelectorAll(".gen-panel");
+  if (!nodes.length) return;
+  Array.prototype.forEach.call(nodes, function (n) {
+    n.addEventListener("click", function () {
+      var g = n.getAttribute("data-gen");
+      Array.prototype.forEach.call(nodes, function (x) { x.classList.remove("is-on"); });
+      Array.prototype.forEach.call(panels, function (p) {
+        p.classList.toggle("is-on", p.getAttribute("data-genp") === g);
+      });
+      n.classList.add("is-on");
+    });
+  });
+})();
+
+/* ============================================================
+   WHAT YOUR FAMILY SEES — tap a feature, the phone follows
+   ============================================================ */
+(function () {
+  var items = document.querySelectorAll(".feat-item");
+  var panes = document.querySelectorAll(".pane");
+  if (!items.length) return;
+
+  Array.prototype.forEach.call(items, function (item) {
+    item.addEventListener("click", function () {
+      var n = item.getAttribute("data-screen");
+      Array.prototype.forEach.call(items, function (b) { b.classList.remove("is-on"); });
+      Array.prototype.forEach.call(panes, function (p) {
+        p.classList.toggle("is-on", p.getAttribute("data-pane") === n);
+      });
+      item.classList.add("is-on");
+    });
+  });
+})();
+
+/* ============================================================
    QUESTION DECK — fanned, draggable, flip on the active card
    ============================================================ */
 (function () {
@@ -1242,7 +1671,7 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
     ["One","Did you sleep alright? Did you get out at all? Any aches and pains today?",
      "\u201CSlept alright. Didn\u2019t go out \u2014 the hip\u2019s been at it since Tuesday.\u201D"],
     ["Two","What did you get up to today?",
-     "\u201CMeera rang. We watched the cricket together over the phone, silly as that sounds.\u201D"],
+     "\u201CSarah called. We watched the game together over the phone, silly as that sounds.\u201D"],
     ["Three","Have you eaten?",
      "\u201CHad some toast this morning. Didn\u2019t fancy lunch.\u201D"],
     ["Four","Have you taken your medications?",
@@ -1250,9 +1679,9 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
     ["Five","Are you running low on any medicines?",
      "\u201CDown to about four of the blood pressure tablets.\u201D"],
     ["Six","Anything you need from the shops?",
-     "\u201CMilk. And those biscuits, if anyone\u2019s passing.\u201D"],
+     "\u201CMilk. And those cookies, if anyone\u2019s going.\u201D"],
     ["Seven","Anything else you\u2019d like your family to know?",
-     "\u201CTell them not to worry. And ask when Meera\u2019s next coming.\u201D"]
+     "\u201CTell them not to worry. And ask when Sarah is visiting next.\u201D"]
   ];
 
   var fan  = document.getElementById("fan");
@@ -1307,8 +1736,7 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
       var d = i - pos, a = Math.abs(d);
       c.style.transform = "rotate(" + (d * SPREAD) + "deg) translateY(" + (a * 9) + "px)";
       c.style.zIndex = String(100 - Math.round(a * 10));
-      c.style.opacity = a > 3.4 ? 0 : String(Math.max(.35, 1 - a * .17));
-      c.style.filter = "brightness(" + Math.max(.72, 1 - a * .07) + ")";
+      c.style.opacity = a > 3.4 ? 0 : String(Math.max(.5, 1 - a * .14));
     });
     Array.prototype.forEach.call(dots.children, function (d, i) {
       d.classList.toggle("on", i === Math.round(pos));
