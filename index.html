@@ -820,7 +820,7 @@ a.btn-ghost{
   <div class="wrap">
     <nav class="nav">
       <a class="mark" href="/"><span class="mark-dot" aria-hidden="true"></span>amatra</a>
-      <button class="nav-link" type="button" data-getapp style="font-family:var(--body);background:none;cursor:pointer">Get the app</button>
+      <a class="nav-link" href="#join">Join the waitlist</a>
     </nav>
 
     <div class="hero">
@@ -835,11 +835,16 @@ a.btn-ghost{
             so "I'm fine" isn't all you have to go on.
           </p>
 
-          <div class="cta-row">
-            <button class="btn btn-lg" type="button" data-getapp>Get the app</button>
-            <button class="btn-ghost btn-lg" type="button" id="toKeep">Keep me posted</button>
-          </div>
-          <p class="capture-note">Free while we're testing. Takes about a minute to set up.</p>
+          <form class="capture" id="join" novalidate data-source="hero"
+                data-done="You're on the list. We'll email you when a spot opens.">
+            <div class="capture-row">
+              <label class="sr" for="email-hero">Your email address</label>
+              <input id="email-hero" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+              <button class="btn btn-lg" type="submit">Join the waitlist</button>
+            </div>
+            <p class="capture-note">Free while we're testing. No phone numbers yet — just your email.</p>
+            <p class="capture-msg" role="status" aria-live="polite"></p>
+          </form>
         </div>
 
         <div class="promo">
@@ -1319,21 +1324,18 @@ a.btn-ghost{
     <p class="eyebrow eyebrow-light">Early access</p>
     <h2>Someone should ask her today.</h2>
     <p class="lede" style="margin-inline:auto;text-align:center">
-      We're letting in a small group of families first. Install it, add your
-      parent, and the first call goes out at the time you choose.
+      We're letting in a small group of families at a time. Leave your email
+      and we'll come to you when the next spots open.
     </p>
 
-    <button class="btn btn-lg" type="button" data-getapp style="margin-top:34px">Get the app</button>
-    <p class="capture-note" style="margin-inline:auto;text-align:center">Free while we're testing.</p>
-
-    <p class="or or-center" id="keep">Not ready yet?</p>
-
-    <form class="capture" novalidate data-done="Thanks — we'll let you know when there's something worth telling you.">
+    <form class="capture" novalidate data-source="closer"
+          data-done="You're on the list. We'll email you when a spot opens.">
       <div class="capture-row">
         <label class="sr" for="email-later">Your email address</label>
         <input id="email-later" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
-        <button class="btn" type="submit">Keep me posted</button>
+        <button class="btn" type="submit">Join the waitlist</button>
       </div>
+      <p class="capture-note">Free while we're testing.</p>
       <p class="capture-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -1354,56 +1356,6 @@ a.btn-ghost{
     </div>
   </div>
 </section>
-
-<!-- ============================ GET THE APP ============================ -->
-<div class="sheet-back" id="appSheet" role="dialog" aria-modal="true" aria-labelledby="appSheetTitle">
-  <div class="app-sheet">
-    <h3 id="appSheetTitle">Get Amatra</h3>
-    <p class="sub">Free while we're testing. Which phone are you on?</p>
-
-    <div id="optList">
-      <a class="opt" href="https://testflight.apple.com/join/ppvDngRM" rel="noopener" target="_blank">
-        <span class="opt-ico" aria-hidden="true">&#63743;</span>
-        <span>
-          <span class="opt-t">iPhone or iPad</span>
-          <span class="opt-s">Install now through TestFlight.</span>
-        </span>
-      </a>
-
-      <button class="opt" type="button" id="androidOpt">
-        <span class="opt-ico" aria-hidden="true">&#9654;</span>
-        <span>
-          <span class="opt-t">Android</span>
-          <span class="opt-s">We'll email you the link.</span>
-        </span>
-      </button>
-
-      <button class="opt" type="button" id="laterOpt">
-        <span class="opt-ico" aria-hidden="true">&#9993;</span>
-        <span>
-          <span class="opt-t">Not on my phone right now</span>
-          <span class="opt-s">Send me the link and I'll set it up later.</span>
-        </span>
-      </button>
-    </div>
-
-    <form class="capture sheet-form" id="androidForm" novalidate hidden>
-      <p class="form-lead" id="formLead">
-        Google needs your email on our tester list before you can install.
-        Leave it here and we'll send the link today.
-      </p>
-      <div class="capture-row">
-        <label class="sr" for="email-app">Your email address</label>
-        <input id="email-app" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
-        <button class="btn" type="submit">Send me the link</button>
-      </div>
-      <p class="capture-msg" role="status" aria-live="polite"></p>
-      <button class="sheet-back-btn" type="button" id="backOpts">&larr; Back</button>
-    </form>
-
-    <button class="sheet-close" type="button" id="sheetClose">Close</button>
-  </div>
-</div>
 
 <script>
 /* ============================================================
@@ -1437,7 +1389,7 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
           "mailto:support@amatra.app?subject=" +
           encodeURIComponent("Amatra early access") +
           "&body=" +
-          encodeURIComponent("I'd like to join the early group. My email: " + email);
+          encodeURIComponent("I'd like to join the waitlist. My email: " + email);
         return;
       }
 
@@ -1454,7 +1406,7 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
           Authorization: "Bearer " + SUPABASE_ANON_KEY,
           Prefer: "return=minimal"
         },
-        body: JSON.stringify({ email: email, source: window.location.pathname })
+        body: JSON.stringify({ email: email, source: form.getAttribute("data-source") || window.location.pathname })
       })
         .then(function (res) {
           if (!res.ok && res.status !== 409) throw new Error(res.status);
@@ -1463,7 +1415,7 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
           if (note) note.style.display = "none";
           msg.style.color = "";
           msg.textContent = form.getAttribute("data-done") ||
-            "Got it — we'll email you the install link today.";
+            "You're on the list. We'll email you when a spot opens.";
         })
         .catch(function () {
           button.disabled = false;
@@ -1473,66 +1425,6 @@ var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
             "That didn't save. Email us at support@amatra.app and we'll add you by hand.";
         });
     });
-  });
-})();
-
-/* ============================================================
-   HERO -> KEEP ME POSTED
-   ============================================================ */
-(function () {
-  var btn = document.getElementById("toKeep");
-  var anchor = document.getElementById("keep");
-  var field = document.getElementById("email-later");
-  if (!btn || !anchor) return;
-  btn.addEventListener("click", function () {
-    anchor.scrollIntoView({ behavior: "smooth", block: "center" });
-    if (field) setTimeout(function () { field.focus({ preventScroll: true }); }, 700);
-  });
-})();
-
-/* ============================================================
-   GET THE APP SHEET
-   ============================================================ */
-(function () {
-  var back = document.getElementById("appSheet");
-  if (!back) return;
-  function open() { back.classList.add("on"); }
-  function close() { back.classList.remove("on"); }
-
-  Array.prototype.forEach.call(document.querySelectorAll("[data-getapp]"), function (b) {
-    b.addEventListener("click", open);
-  });
-  document.getElementById("sheetClose").addEventListener("click", close);
-  back.addEventListener("click", function (e) { if (e.target === back) close(); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
-
-  var optList = document.getElementById("optList");
-  var androidForm = document.getElementById("androidForm");
-
-  var lead = document.getElementById("formLead");
-  var LEAD_ANDROID =
-    "Google needs your email on our tester list before you can install. " +
-    "Leave it here and we'll send the link today.";
-  var LEAD_LATER =
-    "Leave your email and we'll send you the install link, so it's " +
-    "waiting whenever you've got a minute.";
-
-  function showForm(text) {
-    lead.textContent = text;
-    optList.hidden = true;
-    androidForm.hidden = false;
-    setTimeout(function () { document.getElementById("email-app").focus(); }, 60);
-  }
-
-  document.getElementById("androidOpt").addEventListener("click", function () {
-    showForm(LEAD_ANDROID);
-  });
-  document.getElementById("laterOpt").addEventListener("click", function () {
-    showForm(LEAD_LATER);
-  });
-  document.getElementById("backOpts").addEventListener("click", function () {
-    androidForm.hidden = true;
-    optList.hidden = false;
   });
 })();
 
