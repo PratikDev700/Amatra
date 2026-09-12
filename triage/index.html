@@ -70,7 +70,6 @@
     margin:0 0 10px;
     max-width:15ch;
   }
-  .headline .count{color:#F0D9A8}
   .subhead{
     margin:0 0 26px;
     color:rgba(255,255,255,.72);
@@ -115,33 +114,6 @@
     color:var(--bark-soft);
   }
   .sec-note{margin:0 0 14px;font-size:14px;color:var(--bark);max-width:56ch}
-
-  /* ---------- emergency ---------- */
-  .emergency{
-    background:#2A1512;
-    color:#fff;
-    border-radius:18px;
-    padding:18px 20px;
-    margin-bottom:26px;
-  }
-  .emergency h3{
-    font-family:'Fraunces',Georgia,serif;
-    font-size:18px;
-    margin:0 0 6px;
-    font-weight:600;
-  }
-  .emergency p{margin:0 0 14px;font-size:14px;color:rgba(255,255,255,.75);max-width:54ch}
-  .emergency .row{display:flex;gap:10px;flex-wrap:wrap}
-  .emergency .row a,.emergency .row button{
-    background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.2);
-    color:#fff;
-    padding:8px 16px;
-    border-radius:999px;
-    font-size:14px;
-    font-weight:600;
-    text-decoration:none;
-  }
 
   /* ---------- card ---------- */
   .card{
@@ -274,10 +246,10 @@
 <header>
   <div class="wrap">
     <p class="practice">Elite Rehabilitation &amp; Care Management</p>
-    <h1 class="headline">Two calls need you now.</h1>
-    <p class="subhead" id="subhead">Saturday, 12 September. Nine calls came in since midnight. Everything below was answered, and nothing has been decided for you.</p>
+    <h1 class="headline">Three calls need you now.</h1>
+    <p class="subhead">Saturday, 12 September. Nine calls came in since midnight. Everything below was answered, and nothing has been decided for you.</p>
     <div class="jump">
-      <button data-jump="now"><b id="c-now">2</b> need you now</button>
+      <button data-jump="now"><b id="c-now">3</b> need you now</button>
       <button data-jump="wait"><b id="c-wait">4</b> can wait</button>
       <button data-jump="enquiry"><b id="c-enquiry">2</b> new enquiries</button>
       <button data-jump="done"><b id="c-done">1</b> handled</button>
@@ -288,18 +260,9 @@
 <main>
   <div class="wrap">
 
-    <div class="emergency" id="emergency">
-      <h3>Sylvia Grant was sent to 911 at 11:32 AM</h3>
-      <p>She described chest pain and shortness of breath. The call ended immediately with instructions to hang up and dial 911. Nothing further was asked and nothing was recorded beyond this.</p>
-      <div class="row">
-        <a href="tel:+18479629155">Call Sylvia</a>
-        <button data-dismiss="emergency">I have followed up</button>
-      </div>
-    </div>
-
     <section id="sec-now">
-      <div class="sec-head"><h2>Needs you now</h2><span class="n" id="n-now">2</span></div>
-      <p class="sec-note">A fall, a new symptom, a medication stopped, or anything the agent could not resolve into a clear picture.</p>
+      <div class="sec-head"><h2>Needs you now</h2><span class="n" id="n-now">3</span></div>
+      <p class="sec-note">A fall, a new symptom, a medication stopped, a call that ended at 911, or anything the agent could not resolve into a clear picture.</p>
       <div id="list-now"></div>
     </section>
 
@@ -332,6 +295,22 @@
 
 <script>
 const CALLS = [
+  {
+    id:'grant',
+    bucket:'now',
+    name:'Sylvia Grant',
+    who:'Client, 79, Skokie',
+    time:'11:32 AM',
+    rel:'3 hours ago',
+    phone:'+18479629155',
+    said:'She described chest pain and difficulty breathing. The call ended there with instructions to hang up and dial 911. Nothing else was asked and there is no record of what happened after.',
+    chips:[['Directed to 911','warn'],['No follow-up on file','']],
+    why:'<b>Ranked here</b> because the call ended at 911 and nobody has confirmed what happened since.',
+    asked:'Nothing beyond the opening. The call ends as soon as a caller describes an emergency.',
+    answered:'She said she would hang up and dial 911.',
+    told:'To hang up and dial 911.',
+    pattern:'<b>First call from Sylvia this month.</b>'
+  },
   {
     id:'feldman',
     bucket:'now',
@@ -555,11 +534,6 @@ document.addEventListener('click', e => {
   if (jump){
     document.getElementById('sec-' + jump.dataset.jump)
       .scrollIntoView({behavior:'smooth', block:'start'});
-    return;
-  }
-  const dismiss = e.target.closest('[data-dismiss]');
-  if (dismiss){
-    document.getElementById(dismiss.dataset.dismiss).remove();
   }
 });
 
