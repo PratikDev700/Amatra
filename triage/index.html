@@ -30,6 +30,7 @@
     --well:#4A7C59;
     --well-soft:#E7F0E8;
     --shadow:0 2px 3px rgba(33,30,27,.03), 0 8px 22px rgba(33,30,27,.05);
+    --shadow-lift:0 4px 8px rgba(33,30,27,.05), 0 20px 46px rgba(33,30,27,.10);
   }
 
   *{box-sizing:border-box}
@@ -53,13 +54,23 @@
   }
   .wrap{max-width:760px;margin:0 auto}
 
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
   .practice{
     font-size:13px;
     font-weight:600;
     letter-spacing:.06em;
     color:rgba(255,255,255,.62);
-    margin:0 0 22px;
+    margin:0;
   }
+  .viewtoggle{display:flex;background:rgba(255,255,255,.10);border-radius:999px;padding:3px;flex:none}
+  .viewtoggle button{
+    padding:5px 15px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    color:rgba(255,255,255,.7);
+  }
+  .viewtoggle button.on{background:rgba(255,255,255,.92);color:var(--grad-a)}
 
   .headline{
     font-family:'Fraunces',Georgia,serif;
@@ -89,6 +100,7 @@
   }
   .jump button:hover{background:rgba(255,255,255,.18)}
   .jump b{font-weight:700;color:#fff}
+  .jump.hide{display:none}
 
   /* ---------- sheet ---------- */
   main{
@@ -108,35 +120,10 @@
     letter-spacing:-.01em;
     margin:0;
   }
-  .sec-head .n{
-    font-size:14px;
-    font-weight:700;
-    color:var(--bark-soft);
-  }
+  .sec-head .n{font-size:14px;font-weight:700;color:var(--bark-soft)}
   .sec-note{margin:0 0 14px;font-size:14px;color:var(--bark);max-width:56ch}
 
-  /* ---------- card ---------- */
-  .card{
-    background:var(--white);
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    margin-bottom:12px;
-    overflow:hidden;
-    border-left:4px solid var(--sand);
-  }
-  .card.now{border-left-color:var(--alert)}
-  .card.wait{border-left-color:var(--notice)}
-  .card.enquiry{border-left-color:var(--sage)}
-  .card.done{opacity:.55}
-
-  .card-top{
-    width:100%;
-    text-align:left;
-    padding:16px 18px;
-    display:block;
-  }
-  .card-top:hover{background:var(--cream)}
-
+  /* ---------- shared card innards ---------- */
   .who{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
   .who h3{
     font-family:'Fraunces',Georgia,serif;
@@ -147,9 +134,7 @@
   }
   .time{font-size:13px;color:var(--bark-soft);white-space:nowrap;font-variant-numeric:tabular-nums}
   .rel{font-size:13px;color:var(--bark);margin:1px 0 8px}
-
   .said{margin:0 0 12px;font-size:15.5px;line-height:1.45;max-width:58ch}
-
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
   .chip{
     font-size:12.5px;
@@ -161,7 +146,6 @@
   }
   .chip.warn{background:var(--alert-soft);color:var(--alert)}
   .chip.hold{background:var(--notice-soft);color:var(--notice)}
-
   .why{
     font-size:13.5px;
     color:var(--bark);
@@ -172,23 +156,6 @@
   }
   .why b{color:var(--charcoal);font-weight:600}
 
-  /* expanded body */
-  .detail{
-    border-top:1px solid var(--sand);
-    padding:16px 18px 18px;
-    background:var(--cream);
-    display:none;
-  }
-  .card.open .detail{display:block}
-  .detail dl{margin:0 0 16px;display:grid;grid-template-columns:1fr;gap:12px}
-  .detail dt{
-    font-size:12.5px;
-    font-weight:700;
-    color:var(--bark-soft);
-    letter-spacing:.04em;
-    margin-bottom:2px;
-  }
-  .detail dd{margin:0;font-size:15px;line-height:1.5;max-width:60ch}
   .pattern{
     background:var(--white);
     border:1px solid var(--sand);
@@ -201,17 +168,45 @@
   }
   .pattern b{color:var(--charcoal);font-weight:600}
 
-  .actions{display:flex;gap:8px;flex-wrap:wrap}
-  .btn{
-    padding:9px 18px;
-    border-radius:999px;
-    font-size:14px;
-    font-weight:600;
+  dl.qa{margin:0 0 16px;display:grid;grid-template-columns:1fr;gap:12px}
+  dl.qa dt{
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--bark-soft);
+    letter-spacing:.04em;
+    margin-bottom:2px;
   }
+  dl.qa dd{margin:0;font-size:15px;line-height:1.5;max-width:60ch}
+
+  .btn{padding:9px 18px;border-radius:999px;font-size:14px;font-weight:600}
   .btn.primary{background:var(--forest);color:#fff;text-decoration:none;display:inline-block}
   .btn.primary:hover{background:#25492F}
   .btn.ghost{background:transparent;border:1px solid var(--sand);color:var(--bark)}
   .btn.ghost:hover{border-color:var(--bark-soft);color:var(--charcoal)}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+
+  /* ---------- list view ---------- */
+  .card{
+    background:var(--white);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    margin-bottom:12px;
+    overflow:hidden;
+    border-left:4px solid var(--sand);
+  }
+  .card.now{border-left-color:var(--alert)}
+  .card.wait{border-left-color:var(--notice)}
+  .card.enquiry{border-left-color:var(--sage)}
+  .card.done{opacity:.55}
+  .card-top{width:100%;text-align:left;padding:16px 18px;display:block}
+  .card-top:hover{background:var(--cream)}
+  .detail{
+    border-top:1px solid var(--sand);
+    padding:16px 18px 18px;
+    background:var(--cream);
+    display:none;
+  }
+  .card.open .detail{display:block}
 
   .empty{
     background:var(--white);
@@ -222,19 +217,82 @@
     color:var(--bark);
   }
 
-  footer{
-    padding:0 22px 60px;
-    font-size:13px;
-    color:var(--bark-soft);
-    line-height:1.6;
+  /* ---------- deck view ---------- */
+  .deck{position:relative;padding-top:6px}
+  .deck-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+    margin-bottom:14px;
   }
+  .deck-count{font-size:13.5px;font-weight:700;color:var(--bark);font-variant-numeric:tabular-nums}
+  .deck-bar{flex:1;height:4px;background:var(--sand);border-radius:999px;overflow:hidden}
+  .deck-bar span{display:block;height:100%;background:var(--forest);border-radius:999px}
+
+  .deck-stack{position:relative}
+  .deck-peek{
+    position:absolute;
+    left:0;right:0;
+    height:28px;
+    background:var(--white);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+  .deck-peek.p1{bottom:-10px;left:10px;right:10px;opacity:.8}
+  .deck-peek.p2{bottom:-19px;left:22px;right:22px;opacity:.5}
+
+  .deck-card{
+    position:relative;
+    background:var(--white);
+    border-radius:18px;
+    box-shadow:var(--shadow-lift);
+    overflow:hidden;
+  }
+  .band{height:5px;background:var(--sand)}
+  .band.now{background:var(--alert)}
+  .band.wait{background:var(--notice)}
+  .band.enquiry{background:var(--sage)}
+
+  .deck-body{padding:20px 22px 4px}
+  .deck-body .who h3{font-size:25px}
+  .deck-body .said{font-size:17px;margin-bottom:14px}
+  .deck-fold{padding:0 22px 18px}
+  .deck-foot{
+    border-top:1px solid var(--sand);
+    background:var(--cream);
+    padding:16px 22px 18px;
+  }
+  .deck-foot .actions{margin-bottom:10px}
+  .deck-foot .btn{padding:11px 20px}
+  .deck-alt{font-size:13px;color:var(--bark-soft)}
+  .deck-alt button{text-decoration:underline;color:var(--bark)}
+
+  .deck-clear{
+    background:var(--white);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:38px 26px;
+    text-align:center;
+  }
+  .deck-clear h2{
+    font-family:'Fraunces',Georgia,serif;
+    font-size:26px;
+    font-weight:600;
+    margin:0 0 8px;
+  }
+  .deck-clear p{margin:0 0 18px;color:var(--bark);font-size:15px}
+
+  footer{padding:0 22px 60px;font-size:13px;color:var(--bark-soft);line-height:1.6}
   footer p{max-width:62ch;margin:0 0 8px}
+
+  .hide{display:none}
 
   @media (min-width:620px){
     header{padding:34px 26px 70px}
     .headline{font-size:44px}
     main{padding:36px 26px 80px}
-    .detail dl{grid-template-columns:1fr 1fr;gap:14px 26px}
+    dl.qa{grid-template-columns:1fr 1fr;gap:14px 26px}
   }
   @media (prefers-reduced-motion:reduce){
     *{transition:none !important;animation:none !important}
@@ -245,10 +303,16 @@
 
 <header>
   <div class="wrap">
-    <p class="practice">Elite Rehabilitation &amp; Care Management</p>
+    <div class="topbar">
+      <p class="practice">Elite Rehabilitation &amp; Care Management</p>
+      <div class="viewtoggle">
+        <button data-view="list" class="on">List</button>
+        <button data-view="deck">One at a time</button>
+      </div>
+    </div>
     <h1 class="headline">Three calls need you now.</h1>
-    <p class="subhead">Saturday, 12 September. Nine calls came in since midnight. Everything below was answered, and nothing has been decided for you.</p>
-    <div class="jump">
+    <p class="subhead" id="subhead">Saturday, 12 September. Nine calls came in since midnight. Everything below was answered, and nothing has been decided for you.</p>
+    <div class="jump" id="jump">
       <button data-jump="now"><b id="c-now">3</b> need you now</button>
       <button data-jump="wait"><b id="c-wait">4</b> can wait</button>
       <button data-jump="enquiry"><b id="c-enquiry">2</b> new enquiries</button>
@@ -260,28 +324,32 @@
 <main>
   <div class="wrap">
 
-    <section id="sec-now">
-      <div class="sec-head"><h2>Needs you now</h2><span class="n" id="n-now">3</span></div>
-      <p class="sec-note">A fall, a new symptom, a medication stopped, a call that ended at 911, or anything the agent could not resolve into a clear picture.</p>
-      <div id="list-now"></div>
-    </section>
+    <div id="listview">
+      <section id="sec-now">
+        <div class="sec-head"><h2>Needs you now</h2><span class="n" id="n-now">3</span></div>
+        <p class="sec-note">A fall, a new symptom, a medication stopped, a call that ended at 911, or anything the agent could not resolve into a clear picture.</p>
+        <div id="list-now"></div>
+      </section>
 
-    <section id="sec-wait">
-      <div class="sec-head"><h2>Can wait</h2><span class="n" id="n-wait">4</span></div>
-      <p class="sec-note">Answered, written down, and nothing in them changes if you get to it in the morning.</p>
-      <div id="list-wait"></div>
-    </section>
+      <section id="sec-wait">
+        <div class="sec-head"><h2>Can wait</h2><span class="n" id="n-wait">4</span></div>
+        <p class="sec-note">Answered, written down, and nothing in them changes if you get to it in the morning.</p>
+        <div id="list-wait"></div>
+      </section>
 
-    <section id="sec-enquiry">
-      <div class="sec-head"><h2>New enquiries</h2><span class="n" id="n-enquiry">2</span></div>
-      <p class="sec-note">Families who have not worked with you before, calling the consultation line.</p>
-      <div id="list-enquiry"></div>
-    </section>
+      <section id="sec-enquiry">
+        <div class="sec-head"><h2>New enquiries</h2><span class="n" id="n-enquiry">2</span></div>
+        <p class="sec-note">Families who have not worked with you before, calling the consultation line.</p>
+        <div id="list-enquiry"></div>
+      </section>
 
-    <section id="sec-done">
-      <div class="sec-head"><h2>Handled</h2><span class="n" id="n-done">1</span></div>
-      <div id="list-done"></div>
-    </section>
+      <section id="sec-done">
+        <div class="sec-head"><h2>Handled</h2><span class="n" id="n-done">1</span></div>
+        <div id="list-done"></div>
+      </section>
+    </div>
+
+    <div id="deckview" class="hide"></div>
 
   </div>
 </main>
@@ -296,13 +364,9 @@
 <script>
 const CALLS = [
   {
-    id:'grant',
-    bucket:'now',
-    name:'Sylvia Grant',
-    who:'Client, 79, Skokie',
-    time:'11:32 AM',
-    rel:'3 hours ago',
-    phone:'+18479629155',
+    id:'grant', bucket:'now',
+    name:'Sylvia Grant', who:'Client, 79, Skokie',
+    time:'11:32 AM', rel:'3 hours ago', phone:'+18479629155',
     said:'She described chest pain and difficulty breathing. The call ended there with instructions to hang up and dial 911. Nothing else was asked and there is no record of what happened after.',
     chips:[['Directed to 911','warn'],['No follow-up on file','']],
     why:'<b>Ranked here</b> because the call ended at 911 and nobody has confirmed what happened since.',
@@ -312,13 +376,9 @@ const CALLS = [
     pattern:'<b>First call from Sylvia this month.</b>'
   },
   {
-    id:'feldman',
-    bucket:'now',
-    name:'Harold Feldman',
-    who:'Client, 84, Skokie',
-    time:'2:12 PM',
-    rel:'38 minutes ago',
-    phone:'+18479629155',
+    id:'feldman', bucket:'now',
+    name:'Harold Feldman', who:'Client, 84, Skokie',
+    time:'2:12 PM', rel:'38 minutes ago', phone:'+18479629155',
     said:'He fell in the bathroom this morning. He says he is not hurt, but he has not been able to get out of his armchair since and has not eaten.',
     chips:[['Fall','warn'],['New difficulty standing','warn'],['Lives alone','']],
     why:'<b>Ranked here</b> because he reported a fall and a change in what he can do on his own, and he lives alone.',
@@ -328,13 +388,9 @@ const CALLS = [
     pattern:'<b>First call from Harold this month.</b> He last spoke to the line in July, about a pharmacy delivery.'
   },
   {
-    id:'loeb',
-    bucket:'now',
-    name:'Marcia Loeb',
-    who:'Daughter of Ruth Loeb, client, 91',
-    time:'1:48 PM',
-    rel:'1 hour ago',
-    phone:'+18479629155',
+    id:'loeb', bucket:'now',
+    name:'Marcia Loeb', who:'Daughter of Ruth Loeb, client, 91',
+    time:'1:48 PM', rel:'1 hour ago', phone:'+18479629155',
     said:'Her mother has refused all her medication for two days and has eaten almost nothing. Marcia is flying in from Phoenix tomorrow and wants to know what to do tonight.',
     chips:[['Medication refused','warn'],['Not eating','warn'],['Family on the way','']],
     why:'<b>Ranked here</b> because prescribed medication has been refused for more than twenty-four hours.',
@@ -344,13 +400,9 @@ const CALLS = [
     pattern:'<b>Marcia has called four times this year.</b> The previous three were about scheduling.'
   },
   {
-    id:'kaplan',
-    bucket:'wait',
-    name:'Dorothy Kaplan',
-    who:'Client, 88, Evanston',
-    time:'3:04 PM',
-    rel:'12 minutes ago',
-    phone:'+18479629155',
+    id:'kaplan', bucket:'wait',
+    name:'Dorothy Kaplan', who:'Client, 88, Evanston',
+    time:'3:04 PM', rel:'12 minutes ago', phone:'+18479629155',
     said:'She opened by saying she is dying. Asked three times what she was feeling, she described no pain, no breathlessness and no dizziness, and moved on to talking about her nephew not visiting.',
     chips:[['No symptom described','hold'],['Frightened','hold'],['Alone since Tuesday','']],
     why:'<b>Ranked here</b> because the symptom questions were asked three times and came back clear. The words she used are still at the top of this card, unchanged.',
@@ -360,13 +412,9 @@ const CALLS = [
     pattern:'<b>This is the ninth call this month that opened the same way.</b> None of the previous eight turned out to need a visit. This is here so you can see the pattern, not so the system can decide anything from it.'
   },
   {
-    id:'sachs',
-    bucket:'wait',
-    name:'Bernard Sachs',
-    who:'Client, 81, Skokie',
-    time:'12:50 PM',
-    rel:'2 hours ago',
-    phone:'+18479629155',
+    id:'sachs', bucket:'wait',
+    name:'Bernard Sachs', who:'Client, 81, Skokie',
+    time:'12:50 PM', rel:'2 hours ago', phone:'+18479629155',
     said:'The pharmacy did not have his blood pressure refill ready when his neighbour went to collect it. He has four days of tablets left.',
     chips:[['Refill','hold'],['Four days left','']],
     why:'<b>Ranked here</b> because he has supply in hand and the pharmacy opens at nine.',
@@ -376,13 +424,9 @@ const CALLS = [
     pattern:'<b>Second refill problem at this pharmacy since June.</b>'
   },
   {
-    id:'rubin',
-    bucket:'wait',
-    name:'Estelle Rubin',
-    who:'Client, 86, Wilmette',
-    time:'10:15 AM',
-    rel:'5 hours ago',
-    phone:'+18479629155',
+    id:'rubin', bucket:'wait',
+    name:'Estelle Rubin', who:'Client, 86, Wilmette',
+    time:'10:15 AM', rel:'5 hours ago', phone:'+18479629155',
     said:'She would like to move her Thursday aide visit to Friday for the next two weeks because her sister is visiting.',
     chips:[['Scheduling','']],
     why:'<b>Ranked here</b> because nothing about her care changes while it waits.',
@@ -392,13 +436,9 @@ const CALLS = [
     pattern:'<b>Estelle calls about scheduling roughly monthly.</b>'
   },
   {
-    id:'merkel',
-    bucket:'wait',
-    name:'Joan Merkel',
-    who:'Daughter of Sidney Merkel, client, 79',
-    time:'9:40 AM',
-    rel:'5 hours ago',
-    phone:'+18479629155',
+    id:'merkel', bucket:'wait',
+    name:'Joan Merkel', who:'Daughter of Sidney Merkel, client, 79',
+    time:'9:40 AM', rel:'5 hours ago', phone:'+18479629155',
     said:'She wants to know whether you are coming to her father\u2019s neurology appointment on the 24th, and whether she needs to be there too.',
     chips:[['Appointment','']],
     why:'<b>Ranked here</b> because the appointment is twelve days away.',
@@ -408,13 +448,9 @@ const CALLS = [
     pattern:'<b>Joan usually calls the week before an appointment.</b>'
   },
   {
-    id:'dressler',
-    bucket:'enquiry',
-    name:'Karen Dressler',
-    who:'New caller, about her father in Northbrook',
-    time:'1:20 PM',
-    rel:'1 hour ago',
-    phone:'+18479629155',
+    id:'dressler', bucket:'enquiry',
+    name:'Karen Dressler', who:'New caller, about her father in Northbrook',
+    time:'1:20 PM', rel:'1 hour ago', phone:'+18479629155',
     said:'Her father is 87 and lives alone. She is in Denver and has been flying back every few weeks. She found you through the Aging Life Care directory and wants to know what you do and what it costs.',
     chips:[['Free consultation','']],
     why:'<b>Ranked here</b> because she has not worked with you before and asked for a call back this week.',
@@ -424,13 +460,9 @@ const CALLS = [
     pattern:'<b>No previous contact.</b>'
   },
   {
-    id:'wexler',
-    bucket:'enquiry',
-    name:'Paul Wexler',
-    who:'New caller, about his mother in Evanston',
-    time:'8:55 AM',
-    rel:'6 hours ago',
-    phone:'+18479629155',
+    id:'wexler', bucket:'enquiry',
+    name:'Paul Wexler', who:'New caller, about his mother in Evanston',
+    time:'8:55 AM', rel:'6 hours ago', phone:'+18479629155',
     said:'His mother was discharged from rehab on Wednesday after a hip fracture and the discharge plan has nobody managing it. He was given your name by the social worker at the hospital.',
     chips:[['Free consultation','']],
     why:'<b>Ranked here</b> because it is a new enquiry, though the referral source is worth noting.',
@@ -440,13 +472,9 @@ const CALLS = [
     pattern:'<b>No previous contact.</b> Referred by a hospital social worker.'
   },
   {
-    id:'glass',
-    bucket:'done',
-    name:'Irene Glass',
-    who:'Client, 83, Skokie',
-    time:'7:30 AM',
-    rel:'7 hours ago',
-    phone:'+18479629155',
+    id:'glass', bucket:'done',
+    name:'Irene Glass', who:'Client, 83, Skokie',
+    time:'7:30 AM', rel:'7 hours ago', phone:'+18479629155',
     said:'She could not find the letter about her Medicare supplement and wanted to know if you had a copy.',
     chips:[['Paperwork','']],
     why:'<b>Marked handled at 8:05 AM.</b>',
@@ -458,11 +486,27 @@ const CALLS = [
 ];
 
 const BUCKETS = ['now','wait','enquiry','done'];
-const HEADLINE_WORD = {0:'No calls',1:'One call',2:'Two calls',3:'Three calls',4:'Four calls',5:'Five calls',6:'Six calls',7:'Seven calls',8:'Eight calls',9:'Nine calls'};
+const RANK = {now:0, wait:1, enquiry:2};
+const WORDS = {0:'No calls',1:'One call',2:'Two calls',3:'Three calls',4:'Four calls',5:'Five calls',6:'Six calls',7:'Seven calls',8:'Eight calls',9:'Nine calls'};
 
+let VIEW = 'list';
+let deckIndex = 0;
+
+function chipsHTML(c){
+  return c.chips.map(([label,kind]) => `<span class="chip ${kind}">${label}</span>`).join('');
+}
+function qaHTML(c){
+  return `
+    <div class="pattern">${c.pattern}</div>
+    <dl class="qa">
+      <div><dt>What the agent asked</dt><dd>${c.asked}</dd></div>
+      <div><dt>What they said back</dt><dd>${c.answered}</dd></div>
+      <div><dt>What the caller was told</dt><dd>${c.told}</dd></div>
+    </dl>`;
+}
+
+/* ---------------- list ---------------- */
 function cardHTML(c){
-  const chips = c.chips.map(([label,kind]) =>
-    `<span class="chip ${kind}">${label}</span>`).join('');
   const escalate = c.bucket === 'now'
     ? `<button class="btn ghost" data-move="wait" data-id="${c.id}">Move to can wait</button>`
     : (c.bucket === 'done' ? '' : `<button class="btn ghost" data-move="now" data-id="${c.id}">Move to needs you now</button>`);
@@ -471,24 +515,16 @@ function cardHTML(c){
     : `<button class="btn ghost" data-move="done" data-id="${c.id}">Mark handled</button>`;
 
   return `
-  <article class="card ${c.bucket}" id="card-${c.id}">
+  <article class="card ${c.bucket}">
     <button class="card-top" data-toggle="${c.id}" aria-expanded="false">
-      <div class="who">
-        <h3>${c.name}</h3>
-        <span class="time">${c.time}</span>
-      </div>
+      <div class="who"><h3>${c.name}</h3><span class="time">${c.time}</span></div>
       <p class="rel">${c.who} &nbsp;&middot;&nbsp; ${c.rel}</p>
       <p class="said">${c.said}</p>
-      <div class="chips">${chips}</div>
+      <div class="chips">${chipsHTML(c)}</div>
       <p class="why">${c.why}</p>
     </button>
     <div class="detail">
-      <div class="pattern">${c.pattern}</div>
-      <dl>
-        <div><dt>What the agent asked</dt><dd>${c.asked}</dd></div>
-        <div><dt>What they said back</dt><dd>${c.answered}</dd></div>
-        <div><dt>What the caller was told</dt><dd>${c.told}</dd></div>
-      </dl>
+      ${qaHTML(c)}
       <div class="actions">
         <a class="btn primary" href="tel:${c.phone}">Call ${c.name.split(' ')[0]}</a>
         ${handle}
@@ -498,25 +534,129 @@ function cardHTML(c){
   </article>`;
 }
 
-function render(){
+function renderList(){
   BUCKETS.forEach(b => {
     const items = CALLS.filter(c => c.bucket === b);
-    const list = document.getElementById('list-' + b);
-    list.innerHTML = items.length
+    document.getElementById('list-' + b).innerHTML = items.length
       ? items.map(cardHTML).join('')
       : `<div class="empty">Nothing here right now.</div>`;
     document.getElementById('n-' + b).textContent = items.length;
-    document.getElementById('c-' + b).textContent = items.length;
+  });
+}
+
+/* ---------------- deck ---------------- */
+function queue(){
+  return CALLS.filter(c => c.bucket !== 'done')
+              .sort((a,b) => RANK[a.bucket] - RANK[b.bucket]);
+}
+
+function renderDeck(){
+  const q = queue();
+  const view = document.getElementById('deckview');
+
+  if (deckIndex >= q.length){
+    view.innerHTML = `
+      <div class="deck-clear">
+        <h2>${q.length ? 'That is the end of the deck.' : 'Every call is handled.'}</h2>
+        <p>${q.length
+            ? 'You have been through all of them. The ones you skipped are still in the list.'
+            : 'Nothing is waiting on you right now.'}</p>
+        <div class="actions" style="justify-content:center">
+          <button class="btn primary" data-deck="restart">Start again</button>
+          <button class="btn ghost" data-view="list">Back to the list</button>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const c = q[deckIndex];
+  const peek = q.length - deckIndex - 1;
+  const label = {now:'Needs you now', wait:'Can wait', enquiry:'New enquiry'}[c.bucket];
+  const alt = c.bucket === 'now'
+    ? `<button data-deck="move" data-to="wait" data-id="${c.id}">This one can wait</button>`
+    : `<button data-deck="move" data-to="now" data-id="${c.id}">This one needs me now</button>`;
+
+  view.innerHTML = `
+    <div class="deck">
+      <div class="deck-meta">
+        <span class="deck-count">${deckIndex + 1} of ${q.length}</span>
+        <span class="deck-bar"><span style="width:${Math.round(((deckIndex + 1) / q.length) * 100)}%"></span></span>
+        <span class="deck-count">${label}</span>
+      </div>
+      <div class="deck-stack">
+        <article class="deck-card">
+          <div class="band ${c.bucket}"></div>
+          <div class="deck-body">
+            <div class="who"><h3>${c.name}</h3><span class="time">${c.time}</span></div>
+            <p class="rel">${c.who} &nbsp;&middot;&nbsp; ${c.rel}</p>
+            <p class="said">${c.said}</p>
+            <div class="chips">${chipsHTML(c)}</div>
+            <p class="why">${c.why}</p>
+          </div>
+          <div class="deck-fold" style="padding-top:16px">${qaHTML(c)}</div>
+          <div class="deck-foot">
+            <div class="actions">
+              <a class="btn primary" href="tel:${c.phone}">Call ${c.name.split(' ')[0]}</a>
+              <button class="btn ghost" data-deck="handled" data-id="${c.id}">Handled</button>
+              <button class="btn ghost" data-deck="skip">Leave for later</button>
+            </div>
+            <p class="deck-alt">${alt}</p>
+          </div>
+        </article>
+        ${peek > 0 ? '<div class="deck-peek p1"></div>' : ''}
+        ${peek > 1 ? '<div class="deck-peek p2"></div>' : ''}
+      </div>
+    </div>`;
+}
+
+/* ---------------- shared ---------------- */
+function render(){
+  const n = CALLS.filter(c => c.bucket === 'now').length;
+  document.querySelector('.headline').textContent = n === 0
+    ? 'Nothing needs you right now.'
+    : `${WORDS[n] || n + ' calls'} need${n === 1 ? 's' : ''} you now.`;
+
+  BUCKETS.forEach(b => {
+    document.getElementById('c-' + b).textContent = CALLS.filter(c => c.bucket === b).length;
   });
 
-  const n = CALLS.filter(c => c.bucket === 'now').length;
-  const h = document.querySelector('.headline');
-  h.textContent = n === 0
-    ? 'Nothing needs you right now.'
-    : `${HEADLINE_WORD[n] || n + ' calls'} need${n === 1 ? 's' : ''} you now.`;
+  document.getElementById('listview').classList.toggle('hide', VIEW !== 'list');
+  document.getElementById('deckview').classList.toggle('hide', VIEW !== 'deck');
+  document.getElementById('jump').classList.toggle('hide', VIEW !== 'list');
+  document.querySelectorAll('.viewtoggle button').forEach(b =>
+    b.classList.toggle('on', b.dataset.view === VIEW));
+
+  if (VIEW === 'list') renderList(); else renderDeck();
 }
 
 document.addEventListener('click', e => {
+  const vt = e.target.closest('[data-view]');
+  if (vt){
+    VIEW = vt.dataset.view;
+    if (VIEW === 'deck') deckIndex = 0;
+    render();
+    window.scrollTo({top:0, behavior:'smooth'});
+    return;
+  }
+
+  const dk = e.target.closest('[data-deck]');
+  if (dk){
+    const what = dk.dataset.deck;
+    if (what === 'skip') deckIndex++;
+    if (what === 'restart') deckIndex = 0;
+    if (what === 'handled'){
+      const call = CALLS.find(c => c.id === dk.dataset.id);
+      if (call) call.bucket = 'done';
+    }
+    if (what === 'move'){
+      const call = CALLS.find(c => c.id === dk.dataset.id);
+      if (call) call.bucket = dk.dataset.to;
+      deckIndex = 0;
+    }
+    render();
+    return;
+  }
+
   const toggle = e.target.closest('[data-toggle]');
   if (toggle){
     const card = toggle.closest('.card');
@@ -524,17 +664,25 @@ document.addEventListener('click', e => {
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     return;
   }
+
   const move = e.target.closest('[data-move]');
   if (move){
     const call = CALLS.find(c => c.id === move.dataset.id);
     if (call){ call.bucket = move.dataset.move; render(); }
     return;
   }
+
   const jump = e.target.closest('[data-jump]');
   if (jump){
     document.getElementById('sec-' + jump.dataset.jump)
       .scrollIntoView({behavior:'smooth', block:'start'});
   }
+});
+
+document.addEventListener('keydown', e => {
+  if (VIEW !== 'deck') return;
+  if (e.key === 'ArrowRight'){ deckIndex++; render(); }
+  if (e.key === 'ArrowLeft' && deckIndex > 0){ deckIndex--; render(); }
 });
 
 render();
