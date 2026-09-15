@@ -26,11 +26,8 @@
     --alert:#A8453B;
     --alert-soft:#F6E9E7;
     --notice:#B5842F;
-    --notice-soft:#F8F0DF;
     --well:#4A7C59;
-    --well-soft:#E7F0E8;
     --shadow:0 2px 3px rgba(33,30,27,.03), 0 8px 22px rgba(33,30,27,.05);
-    --shadow-lift:0 4px 8px rgba(33,30,27,.05), 0 20px 46px rgba(33,30,27,.10);
   }
 
   *{box-sizing:border-box}
@@ -39,653 +36,341 @@
     background:var(--stone);
     color:var(--charcoal);
     font-family:'Karla',system-ui,-apple-system,'Segoe UI',sans-serif;
-    font-size:16px;
-    line-height:1.5;
+    font-size:16px;line-height:1.5;
     -webkit-font-smoothing:antialiased;
   }
   button{font-family:inherit;font-size:inherit;cursor:pointer;border:none;background:none;color:inherit}
   :focus-visible{outline:2px solid var(--forest);outline-offset:3px;border-radius:6px}
+  .hide{display:none !important}
+
+  /* ---------- passcode ---------- */
+  .gate{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+    background:linear-gradient(160deg,var(--grad-a) 0%,var(--grad-b) 52%,var(--grad-c) 100%);
+  }
+  .gate-card{
+    background:var(--white);border-radius:20px;padding:34px 30px;max-width:380px;width:100%;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+  }
+  .gate-card h1{
+    font-family:'Fraunces',Georgia,serif;font-size:24px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em;
+  }
+  .gate-card p{margin:0 0 20px;color:var(--bark);font-size:15px}
+  .gate-card input{
+    width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--sand);
+    background:var(--cream);font-family:inherit;font-size:16px;margin-bottom:12px;
+  }
+  .gate-card button{
+    width:100%;background:var(--forest);color:#fff;padding:13px;border-radius:999px;font-weight:600;
+  }
+  .gate-err{color:var(--alert);font-size:14px;margin-top:12px;min-height:20px}
 
   /* ---------- header ---------- */
   header{
     background:linear-gradient(160deg,var(--grad-a) 0%,var(--grad-b) 52%,var(--grad-c) 100%);
-    padding:26px 22px 64px;
-    color:#fff;
+    padding:26px 22px 64px;color:#fff;
   }
-  .wrap{max-width:760px;margin:0 auto}
-
+  .wrap{max-width:820px;margin:0 auto}
   .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
-  .practice{
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:.06em;
-    color:rgba(255,255,255,.62);
-    margin:0;
+  .practice{font-size:13px;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.62);margin:0}
+  .refresh{
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.9);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;
   }
-  .viewtoggle{display:flex;background:rgba(255,255,255,.10);border-radius:999px;padding:3px;flex:none}
-  .viewtoggle button{
-    padding:5px 15px;
-    border-radius:999px;
-    font-size:13px;
-    font-weight:600;
-    color:rgba(255,255,255,.7);
-  }
-  .viewtoggle button.on{background:rgba(255,255,255,.92);color:var(--grad-a)}
-
+  .refresh:hover{background:rgba(255,255,255,.18)}
   .headline{
-    font-family:'Fraunces',Georgia,serif;
-    font-size:34px;
-    line-height:1.15;
-    font-weight:600;
-    letter-spacing:-.015em;
-    margin:0 0 10px;
-    max-width:15ch;
+    font-family:'Fraunces',Georgia,serif;font-size:34px;line-height:1.15;font-weight:600;
+    letter-spacing:-.015em;margin:0 0 10px;max-width:16ch;
   }
-  .subhead{
-    margin:0 0 26px;
-    color:rgba(255,255,255,.72);
-    font-size:15px;
-    max-width:46ch;
+  .subhead{margin:0 0 26px;color:rgba(255,255,255,.72);font-size:15px;max-width:52ch}
+  .tally{display:flex;gap:8px;flex-wrap:wrap}
+  .tally span{
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.9);padding:7px 14px;border-radius:999px;font-size:13px;font-weight:600;
   }
-
-  .jump{display:flex;gap:8px;flex-wrap:wrap}
-  .jump button{
-    background:rgba(255,255,255,.10);
-    border:1px solid rgba(255,255,255,.16);
-    color:rgba(255,255,255,.9);
-    padding:7px 14px;
-    border-radius:999px;
-    font-size:13px;
-    font-weight:600;
-  }
-  .jump button:hover{background:rgba(255,255,255,.18)}
-  .jump b{font-weight:700;color:#fff}
-  .jump.hide{display:none}
+  .tally b{color:#fff}
 
   /* ---------- sheet ---------- */
   main{
-    background:var(--stone);
-    border-radius:28px 28px 0 0;
-    margin-top:-42px;
-    position:relative;
-    padding:30px 22px 80px;
+    background:var(--stone);border-radius:28px 28px 0 0;margin-top:-42px;
+    position:relative;padding:30px 22px 80px;min-height:50vh;
   }
+  .board-note{font-size:14.5px;color:var(--bark);margin:0 0 18px;max-width:62ch}
 
-  section{margin-bottom:34px}
-  .sec-head{display:flex;align-items:baseline;gap:10px;margin:0 0 4px}
-  .sec-head h2{
-    font-family:'Fraunces',Georgia,serif;
-    font-size:21px;
-    font-weight:600;
-    letter-spacing:-.01em;
-    margin:0;
+  .row{
+    background:var(--white);border-radius:14px;box-shadow:var(--shadow);
+    margin-bottom:8px;overflow:hidden;border-left:4px solid transparent;
   }
-  .sec-head .n{font-size:14px;font-weight:700;color:var(--bark-soft)}
-  .sec-note{margin:0 0 14px;font-size:14px;color:var(--bark);max-width:56ch}
+  .row.m-now{border-left-color:var(--alert)}
+  .row.m-later{border-left-color:var(--notice)}
+  .row.m-done{border-left-color:var(--well);opacity:.55}
 
-  /* ---------- shared card innards ---------- */
-  .who{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
-  .who h3{
-    font-family:'Fraunces',Georgia,serif;
-    font-size:19px;
-    font-weight:600;
-    margin:0;
-    letter-spacing:-.01em;
+  .row-line{display:flex;align-items:flex-start}
+  .row-main{flex:1;text-align:left;padding:13px 8px 13px 16px;display:flex;gap:14px;align-items:flex-start;min-width:0}
+  .row-main:hover{background:var(--cream)}
+  .row-time{font-size:13px;color:var(--bark-soft);font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:2px;width:78px;flex:none}
+  .row-body{min-width:0;flex:1}
+  .row-name{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600;display:block;margin-bottom:2px}
+  .row-name em{
+    font-family:'Karla',sans-serif;font-style:normal;font-size:11.5px;font-weight:700;
+    letter-spacing:.05em;color:var(--alert);margin-left:8px;vertical-align:1px;
   }
-  .time{font-size:13px;color:var(--bark-soft);white-space:nowrap;font-variant-numeric:tabular-nums}
-  .rel{font-size:13px;color:var(--bark);margin:1px 0 8px}
-  .said{margin:0 0 12px;font-size:15.5px;line-height:1.45;max-width:58ch}
-  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-  .chip{
-    font-size:12.5px;
-    font-weight:600;
-    padding:4px 10px;
-    border-radius:999px;
-    background:var(--mint);
-    color:var(--forest);
+  .row-said{
+    display:block;font-size:14.5px;color:var(--charcoal);margin-bottom:7px;
+    overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
   }
-  .chip.warn{background:var(--alert-soft);color:var(--alert)}
-  .chip.hold{background:var(--notice-soft);color:var(--notice)}
-  .why{
-    font-size:13.5px;
-    color:var(--bark);
-    border-left:2px solid var(--sand);
-    padding-left:12px;
-    margin:0;
-    max-width:58ch;
-  }
-  .why b{color:var(--charcoal);font-weight:600}
+  .row-facts{display:flex;gap:5px;flex-wrap:wrap}
+  .chip{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--sand);color:var(--bark)}
 
-  .pattern{
-    background:var(--white);
-    border:1px solid var(--sand);
-    border-radius:12px;
-    padding:12px 14px;
-    font-size:14px;
-    color:var(--bark);
-    margin-bottom:16px;
-    max-width:60ch;
+  .row-marks{display:flex;gap:4px;padding:13px 14px 13px 4px;flex:none}
+  .row-marks button{
+    font-size:12px;font-weight:700;padding:5px 10px;border-radius:8px;
+    border:1px solid var(--sand);color:var(--bark-soft);
   }
-  .pattern b{color:var(--charcoal);font-weight:600}
+  .row-marks button:hover{border-color:var(--bark-soft);color:var(--charcoal)}
+  .row-marks button.on[data-mark="now"]{background:var(--alert);border-color:var(--alert);color:#fff}
+  .row-marks button.on[data-mark="later"]{background:var(--notice);border-color:var(--notice);color:#fff}
+  .row-marks button.on[data-mark="done"]{background:var(--well);border-color:var(--well);color:#fff}
+  .row-marks button:disabled{opacity:.4;cursor:default}
 
-  dl.qa{margin:0 0 16px;display:grid;grid-template-columns:1fr;gap:12px}
-  dl.qa dt{
-    font-size:12.5px;
-    font-weight:700;
-    color:var(--bark-soft);
-    letter-spacing:.04em;
-    margin-bottom:2px;
-  }
-  dl.qa dd{margin:0;font-size:15px;line-height:1.5;max-width:60ch}
+  .detail{border-top:1px solid var(--sand);padding:16px 18px 18px;background:var(--cream);display:none}
+  .row.open .detail{display:block}
+  .detail dt{font-size:12.5px;font-weight:700;color:var(--bark-soft);letter-spacing:.04em;margin-bottom:3px}
+  .detail dd{margin:0 0 14px;font-size:15px;line-height:1.5;max-width:62ch}
+  .detail dd:last-child{margin-bottom:0}
 
-  .btn{padding:9px 18px;border-radius:999px;font-size:14px;font-weight:600}
-  .btn.primary{background:var(--forest);color:#fff;text-decoration:none;display:inline-block}
-  .btn.primary:hover{background:#25492F}
-  .btn.ghost{background:transparent;border:1px solid var(--sand);color:var(--bark)}
-  .btn.ghost:hover{border-color:var(--bark-soft);color:var(--charcoal)}
-  .actions{display:flex;gap:8px;flex-wrap:wrap}
-
-  /* ---------- list view ---------- */
-  .card{
-    background:var(--white);
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    margin-bottom:12px;
-    overflow:hidden;
-    border-left:4px solid var(--sand);
+  .empty, .loading{
+    background:var(--white);border-radius:16px;padding:26px 22px;box-shadow:var(--shadow);
+    font-size:15px;color:var(--bark);
   }
-  .card.now{border-left-color:var(--alert)}
-  .card.wait{border-left-color:var(--notice)}
-  .card.enquiry{border-left-color:var(--sage)}
-  .card.done{opacity:.55}
-  .card-top{width:100%;text-align:left;padding:16px 18px;display:block}
-  .card-top:hover{background:var(--cream)}
-  .detail{
-    border-top:1px solid var(--sand);
-    padding:16px 18px 18px;
-    background:var(--cream);
-    display:none;
-  }
-  .card.open .detail{display:block}
-
-  .empty{
-    background:var(--white);
-    border-radius:16px;
-    padding:22px 20px;
-    box-shadow:var(--shadow);
-    font-size:15px;
-    color:var(--bark);
-  }
-
-  /* ---------- deck view ---------- */
-  .deck{position:relative;padding-top:6px}
-  .deck-meta{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:14px;
-    margin-bottom:14px;
-  }
-  .deck-count{font-size:13.5px;font-weight:700;color:var(--bark);font-variant-numeric:tabular-nums}
-  .deck-bar{flex:1;height:4px;background:var(--sand);border-radius:999px;overflow:hidden}
-  .deck-bar span{display:block;height:100%;background:var(--forest);border-radius:999px}
-
-  .deck-stack{position:relative}
-  .deck-peek{
-    position:absolute;
-    left:0;right:0;
-    height:28px;
-    background:var(--white);
-    border-radius:18px;
-    box-shadow:var(--shadow);
-  }
-  .deck-peek.p1{bottom:-10px;left:10px;right:10px;opacity:.8}
-  .deck-peek.p2{bottom:-19px;left:22px;right:22px;opacity:.5}
-
-  .deck-card{
-    position:relative;
-    background:var(--white);
-    border-radius:18px;
-    box-shadow:var(--shadow-lift);
-    overflow:hidden;
-  }
-  .band{height:5px;background:var(--sand)}
-  .band.now{background:var(--alert)}
-  .band.wait{background:var(--notice)}
-  .band.enquiry{background:var(--sage)}
-
-  .deck-body{padding:20px 22px 4px}
-  .deck-body .who h3{font-size:25px}
-  .deck-body .said{font-size:17px;margin-bottom:14px}
-  .deck-fold{padding:0 22px 18px}
-  .deck-foot{
-    border-top:1px solid var(--sand);
-    background:var(--cream);
-    padding:16px 22px 18px;
-  }
-  .deck-foot .actions{margin-bottom:10px}
-  .deck-foot .btn{padding:11px 20px}
-  .deck-alt{font-size:13px;color:var(--bark-soft)}
-  .deck-alt button{text-decoration:underline;color:var(--bark)}
-
-  .deck-clear{
-    background:var(--white);
-    border-radius:18px;
-    box-shadow:var(--shadow);
-    padding:38px 26px;
-    text-align:center;
-  }
-  .deck-clear h2{
-    font-family:'Fraunces',Georgia,serif;
-    font-size:26px;
-    font-weight:600;
-    margin:0 0 8px;
-  }
-  .deck-clear p{margin:0 0 18px;color:var(--bark);font-size:15px}
 
   footer{padding:0 22px 60px;font-size:13px;color:var(--bark-soft);line-height:1.6}
-  footer p{max-width:62ch;margin:0 0 8px}
+  footer p{max-width:64ch;margin:0 0 8px}
 
-  .hide{display:none}
-
-  @media (min-width:620px){
+  @media (min-width:660px){
     header{padding:34px 26px 70px}
     .headline{font-size:44px}
     main{padding:36px 26px 80px}
-    dl.qa{grid-template-columns:1fr 1fr;gap:14px 26px}
   }
-  @media (prefers-reduced-motion:reduce){
-    *{transition:none !important;animation:none !important}
+  @media (max-width:560px){
+    .row-line{flex-direction:column}
+    .row-main{width:100%;padding-right:16px}
+    .row-marks{padding:0 16px 14px 16px}
+    .row-time{width:auto}
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="topbar">
-      <p class="practice">Elite Rehabilitation &amp; Care Management</p>
-      <div class="viewtoggle">
-        <button data-view="list" class="on">List</button>
-        <button data-view="deck">One at a time</button>
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <h1>Call triage</h1>
+    <p>Enter the code to see today's calls.</p>
+    <input type="password" id="code" autocomplete="off" placeholder="Code">
+    <button id="enter">Open</button>
+    <div class="gate-err" id="gate-err"></div>
+  </div>
+</div>
+
+<div id="app" class="hide">
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <p class="practice">Elite Rehabilitation &amp; Care Management</p>
+        <button class="refresh" id="refresh">Refresh</button>
       </div>
+      <h1 class="headline" id="headline">Loading.</h1>
+      <p class="subhead" id="subhead"></p>
+      <div class="tally" id="tally"></div>
     </div>
-    <h1 class="headline">Three calls need you now.</h1>
-    <p class="subhead" id="subhead">Saturday, 12 September. Nine calls came in since midnight. Everything below was answered, and nothing has been decided for you.</p>
-    <div class="jump" id="jump">
-      <button data-jump="now"><b id="c-now">3</b> need you now</button>
-      <button data-jump="wait"><b id="c-wait">4</b> can wait</button>
-      <button data-jump="enquiry"><b id="c-enquiry">2</b> new enquiries</button>
-      <button data-jump="done"><b id="c-done">1</b> handled</button>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <p class="board-note">Newest first. Nothing here has been ranked or reordered. Each line is what the caller said and the things they mentioned, so you can decide in a glance and mark it yourself.</p>
+      <div id="board"><div class="loading">Loading calls…</div></div>
     </div>
-  </div>
-</header>
+  </main>
 
-<main>
-  <div class="wrap">
-
-    <div id="listview">
-      <section id="sec-now">
-        <div class="sec-head"><h2>Needs you now</h2><span class="n" id="n-now">3</span></div>
-        <p class="sec-note">A fall, a new symptom, a medication stopped, a call that ended at 911, or anything the agent could not resolve into a clear picture.</p>
-        <div id="list-now"></div>
-      </section>
-
-      <section id="sec-wait">
-        <div class="sec-head"><h2>Can wait</h2><span class="n" id="n-wait">4</span></div>
-        <p class="sec-note">Answered, written down, and nothing in them changes if you get to it in the morning.</p>
-        <div id="list-wait"></div>
-      </section>
-
-      <section id="sec-enquiry">
-        <div class="sec-head"><h2>New enquiries</h2><span class="n" id="n-enquiry">2</span></div>
-        <p class="sec-note">Families who have not worked with you before, calling the consultation line.</p>
-        <div id="list-enquiry"></div>
-      </section>
-
-      <section id="sec-done">
-        <div class="sec-head"><h2>Handled</h2><span class="n" id="n-done">1</span></div>
-        <div id="list-done"></div>
-      </section>
+  <footer>
+    <div class="wrap">
+      <p>Every caller hears, before anything else, that if this is a medical emergency they should hang up and call 911. Calls are recorded and the caller is told so at the start.</p>
+      <p>This screen writes down calls. It does not assess anyone's health and it does not close anything on your behalf.</p>
     </div>
-
-    <div id="deckview" class="hide"></div>
-
-  </div>
-</main>
-
-<footer>
-  <div class="wrap">
-    <p>Every caller hears, before anything else, that if this is a medical emergency they should hang up and call 911. Calls are recorded and the caller is told so at the start.</p>
-    <p>This screen orders calls. It does not assess anyone's health and it does not close anything on your behalf.</p>
-  </div>
-</footer>
+  </footer>
+</div>
 
 <script>
-const CALLS = [
-  {
-    id:'grant', bucket:'now',
-    name:'Sylvia Grant', who:'Client, 79, Skokie',
-    time:'11:32 AM', rel:'3 hours ago', phone:'+18479629155',
-    said:'She described chest pain and difficulty breathing. The call ended there with instructions to hang up and dial 911. Nothing else was asked and there is no record of what happened after.',
-    chips:[['Directed to 911','warn'],['No follow-up on file','']],
-    why:'<b>Ranked here</b> because the call ended at 911 and nobody has confirmed what happened since.',
-    asked:'Nothing beyond the opening. The call ends as soon as a caller describes an emergency.',
-    answered:'She said she would hang up and dial 911.',
-    told:'To hang up and dial 911.',
-    pattern:'<b>First call from Sylvia this month.</b>'
-  },
-  {
-    id:'feldman', bucket:'now',
-    name:'Harold Feldman', who:'Client, 84, Skokie',
-    time:'2:12 PM', rel:'38 minutes ago', phone:'+18479629155',
-    said:'He fell in the bathroom this morning. He says he is not hurt, but he has not been able to get out of his armchair since and has not eaten.',
-    chips:[['Fall','warn'],['New difficulty standing','warn'],['Lives alone','']],
-    why:'<b>Ranked here</b> because he reported a fall and a change in what he can do on his own, and he lives alone.',
-    asked:'Whether he hit his head, whether he is in pain, whether anyone is with him, and whether he can stand.',
-    answered:'No head injury. Some pain in his left hip that he called "nothing much". Nobody is with him. He tried to stand twice and sat back down.',
-    told:'That you would be told straight away, and that he should call 911 if the pain gets worse or he cannot get up at all.',
-    pattern:'<b>First call from Harold this month.</b> He last spoke to the line in July, about a pharmacy delivery.'
-  },
-  {
-    id:'loeb', bucket:'now',
-    name:'Marcia Loeb', who:'Daughter of Ruth Loeb, client, 91',
-    time:'1:48 PM', rel:'1 hour ago', phone:'+18479629155',
-    said:'Her mother has refused all her medication for two days and has eaten almost nothing. Marcia is flying in from Phoenix tomorrow and wants to know what to do tonight.',
-    chips:[['Medication refused','warn'],['Not eating','warn'],['Family on the way','']],
-    why:'<b>Ranked here</b> because prescribed medication has been refused for more than twenty-four hours.',
-    asked:'Which medications, how long, whether Ruth has said why, and who is with her.',
-    answered:'All of them, including the heart medication. Two days. Ruth says she is "done with all of it". The aide is there until 6 PM.',
-    told:'That you would call back today, and that the aide should stay reachable.',
-    pattern:'<b>Marcia has called four times this year.</b> The previous three were about scheduling.'
-  },
-  {
-    id:'kaplan', bucket:'wait',
-    name:'Dorothy Kaplan', who:'Client, 88, Evanston',
-    time:'3:04 PM', rel:'12 minutes ago', phone:'+18479629155',
-    said:'She opened by saying she is dying. Asked three times what she was feeling, she described no pain, no breathlessness and no dizziness, and moved on to talking about her nephew not visiting.',
-    chips:[['No symptom described','hold'],['Frightened','hold'],['Alone since Tuesday','']],
-    why:'<b>Ranked here</b> because the symptom questions were asked three times and came back clear. The words she used are still at the top of this card, unchanged.',
-    asked:'Chest pain, breathing, dizziness, falls, whether she had taken her tablets, and whether she wanted an ambulance.',
-    answered:'No to each one. She confirmed she had taken her tablets this morning. She said no to an ambulance twice.',
-    told:'That you would be given the message, and that she should call back or dial 911 if anything changes.',
-    pattern:'<b>This is the ninth call this month that opened the same way.</b> None of the previous eight turned out to need a visit. This is here so you can see the pattern, not so the system can decide anything from it.'
-  },
-  {
-    id:'sachs', bucket:'wait',
-    name:'Bernard Sachs', who:'Client, 81, Skokie',
-    time:'12:50 PM', rel:'2 hours ago', phone:'+18479629155',
-    said:'The pharmacy did not have his blood pressure refill ready when his neighbour went to collect it. He has four days of tablets left.',
-    chips:[['Refill','hold'],['Four days left','']],
-    why:'<b>Ranked here</b> because he has supply in hand and the pharmacy opens at nine.',
-    asked:'Which medication, how many days he has left, and which pharmacy.',
-    answered:'Lisinopril. Four days. Walgreens on Dempster.',
-    told:'That someone would sort it out with the pharmacy and call him back.',
-    pattern:'<b>Second refill problem at this pharmacy since June.</b>'
-  },
-  {
-    id:'rubin', bucket:'wait',
-    name:'Estelle Rubin', who:'Client, 86, Wilmette',
-    time:'10:15 AM', rel:'5 hours ago', phone:'+18479629155',
-    said:'She would like to move her Thursday aide visit to Friday for the next two weeks because her sister is visiting.',
-    chips:[['Scheduling','']],
-    why:'<b>Ranked here</b> because nothing about her care changes while it waits.',
-    asked:'Which weeks, and whether Thursday should stay booked.',
-    answered:'The next two. Thursday can be released.',
-    told:'That you would confirm the change.',
-    pattern:'<b>Estelle calls about scheduling roughly monthly.</b>'
-  },
-  {
-    id:'merkel', bucket:'wait',
-    name:'Joan Merkel', who:'Daughter of Sidney Merkel, client, 79',
-    time:'9:40 AM', rel:'5 hours ago', phone:'+18479629155',
-    said:'She wants to know whether you are coming to her father\u2019s neurology appointment on the 24th, and whether she needs to be there too.',
-    chips:[['Appointment','']],
-    why:'<b>Ranked here</b> because the appointment is twelve days away.',
-    asked:'The date, the clinic, and what she has already been told.',
-    answered:'The 24th, Northshore Neurology in Glenview, 11 AM. She has not been told anything yet.',
-    told:'That you would come back to her with the plan.',
-    pattern:'<b>Joan usually calls the week before an appointment.</b>'
-  },
-  {
-    id:'dressler', bucket:'enquiry',
-    name:'Karen Dressler', who:'New caller, about her father in Northbrook',
-    time:'1:20 PM', rel:'1 hour ago', phone:'+18479629155',
-    said:'Her father is 87 and lives alone. She is in Denver and has been flying back every few weeks. She found you through the Aging Life Care directory and wants to know what you do and what it costs.',
-    chips:[['Free consultation','']],
-    why:'<b>Ranked here</b> because she has not worked with you before and asked for a call back this week.',
-    asked:'Where her father lives, who is nearby, what prompted the call, and when she is reachable.',
-    answered:'Northbrook. Nobody nearby. He left the stove on twice last month. Evenings after 6 PM Mountain time.',
-    told:'That the first consultation is free and that you would call her back.',
-    pattern:'<b>No previous contact.</b>'
-  },
-  {
-    id:'wexler', bucket:'enquiry',
-    name:'Paul Wexler', who:'New caller, about his mother in Evanston',
-    time:'8:55 AM', rel:'6 hours ago', phone:'+18479629155',
-    said:'His mother was discharged from rehab on Wednesday after a hip fracture and the discharge plan has nobody managing it. He was given your name by the social worker at the hospital.',
-    chips:[['Free consultation','']],
-    why:'<b>Ranked here</b> because it is a new enquiry, though the referral source is worth noting.',
-    asked:'Where she is now, who is helping, what the discharge plan says, and when he is reachable.',
-    answered:'Home in Evanston. A neighbour is looking in. He has the paperwork but has not read it. Reachable any time.',
-    told:'That the first consultation is free and that you would call him back.',
-    pattern:'<b>No previous contact.</b> Referred by a hospital social worker.'
-  },
-  {
-    id:'glass', bucket:'done',
-    name:'Irene Glass', who:'Client, 83, Skokie',
-    time:'7:30 AM', rel:'7 hours ago', phone:'+18479629155',
-    said:'She could not find the letter about her Medicare supplement and wanted to know if you had a copy.',
-    chips:[['Paperwork','']],
-    why:'<b>Marked handled at 8:05 AM.</b>',
-    asked:'Which letter, and when it arrived.',
-    answered:'The renewal notice, about two weeks ago.',
-    told:'That someone would look for it.',
-    pattern:'<b>Irene calls about paperwork every few weeks.</b>'
-  }
-];
+const ENDPOINT = "https://hodmhfavcttltzovarzk.supabase.co/functions/v1/triage-board";
+const WORDS = {0:"No calls",1:"One call",2:"Two calls",3:"Three calls",4:"Four calls",5:"Five calls",6:"Six calls",7:"Seven calls",8:"Eight calls",9:"Nine calls",10:"Ten calls"};
 
-const BUCKETS = ['now','wait','enquiry','done'];
-const RANK = {now:0, wait:1, enquiry:2};
-const WORDS = {0:'No calls',1:'One call',2:'Two calls',3:'Three calls',4:'Four calls',5:'Five calls',6:'Six calls',7:'Seven calls',8:'Eight calls',9:'Nine calls'};
+let CODE = sessionStorage.getItem("triage_code") || "";
+let CALLS = [];
 
-let VIEW = 'list';
-let deckIndex = 0;
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-function chipsHTML(c){
-  return c.chips.map(([label,kind]) => `<span class="chip ${kind}">${label}</span>`).join('');
+function clock(iso){
+  if (!iso) return "";
+  const d = new Date(iso);
+  return d.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
 }
-function qaHTML(c){
-  return `
-    <div class="pattern">${c.pattern}</div>
-    <dl class="qa">
-      <div><dt>What the agent asked</dt><dd>${c.asked}</dd></div>
-      <div><dt>What they said back</dt><dd>${c.answered}</dd></div>
-      <div><dt>What the caller was told</dt><dd>${c.told}</dd></div>
-    </dl>`;
+function dayLabel(iso){
+  if (!iso) return "";
+  const d = new Date(iso);
+  const today = new Date();
+  const same = d.toDateString() === today.toDateString();
+  return same ? "" : d.toLocaleDateString([], {day:"numeric", month:"short"});
+}
+function factChips(facts){
+  if (!facts) return "";
+  return facts.split(/[;,]/).map(f => f.trim()).filter(Boolean).slice(0,5)
+    .map(f => `<span class="chip">${esc(f)}</span>`).join("");
 }
 
-/* ---------------- list ---------------- */
-function cardHTML(c){
-  const escalate = c.bucket === 'now'
-    ? `<button class="btn ghost" data-move="wait" data-id="${c.id}">Move to can wait</button>`
-    : (c.bucket === 'done' ? '' : `<button class="btn ghost" data-move="now" data-id="${c.id}">Move to needs you now</button>`);
-  const handle = c.bucket === 'done'
-    ? `<button class="btn ghost" data-move="wait" data-id="${c.id}">Reopen</button>`
-    : `<button class="btn ghost" data-move="done" data-id="${c.id}">Mark handled</button>`;
-
+/* ---------------- render ---------------- */
+function rowHTML(c){
+  const m = k => `<button data-mark="${k}" data-id="${c.id}" class="${c.mark === k ? "on" : ""}">${k === "now" ? "Now" : k === "later" ? "Later" : "Done"}</button>`;
+  const day = dayLabel(c.started_at || c.created_at);
+  const who = c.about_person ? `about ${esc(c.about_person)}` : "";
   return `
-  <article class="card ${c.bucket}">
-    <button class="card-top" data-toggle="${c.id}" aria-expanded="false">
-      <div class="who"><h3>${c.name}</h3><span class="time">${c.time}</span></div>
-      <p class="rel">${c.who} &nbsp;&middot;&nbsp; ${c.rel}</p>
-      <p class="said">${c.said}</p>
-      <div class="chips">${chipsHTML(c)}</div>
-      <p class="why">${c.why}</p>
-    </button>
+  <article class="row ${c.mark ? "m-" + c.mark : ""}" id="row-${c.id}">
+    <div class="row-line">
+      <button class="row-main" data-toggle="${c.id}" aria-expanded="false">
+        <span class="row-time">${clock(c.started_at || c.created_at)}${day ? "<br>" + day : ""}</span>
+        <span class="row-body">
+          <span class="row-name">${esc(c.caller_name || "Unknown caller")}${c.directed_to_911 ? "<em>SENT TO 911</em>" : ""}</span>
+          <span class="row-said">${esc(c.summary || "No summary recorded.")}</span>
+          <span class="row-facts">${factChips(c.facts)}${who ? `<span class="chip">${who}</span>` : ""}</span>
+        </span>
+      </button>
+      <div class="row-marks">${m("now")}${m("later")}${m("done")}</div>
+    </div>
     <div class="detail">
-      ${qaHTML(c)}
-      <div class="actions">
-        <a class="btn primary" href="tel:${c.phone}">Call ${c.name.split(' ')[0]}</a>
-        ${handle}
-        ${escalate}
-      </div>
+      <dl>
+        <dt>WHAT THEY SAID</dt>
+        <dd>${esc(c.summary || "Nothing recorded.")}</dd>
+        <dt>MENTIONED</dt>
+        <dd>${esc(c.facts || "Nothing recorded.")}</dd>
+        <dt>CALL LENGTH</dt>
+        <dd>${c.duration_seconds ? c.duration_seconds + " seconds" : "Not recorded"}</dd>
+      </dl>
     </div>
   </article>`;
 }
 
-function renderList(){
-  BUCKETS.forEach(b => {
-    const items = CALLS.filter(c => c.bucket === b);
-    document.getElementById('list-' + b).innerHTML = items.length
-      ? items.map(cardHTML).join('')
-      : `<div class="empty">Nothing here right now.</div>`;
-    document.getElementById('n-' + b).textContent = items.length;
-  });
-}
-
-/* ---------------- deck ---------------- */
-function queue(){
-  return CALLS.filter(c => c.bucket !== 'done')
-              .sort((a,b) => RANK[a.bucket] - RANK[b.bucket]);
-}
-
-function renderDeck(){
-  const q = queue();
-  const view = document.getElementById('deckview');
-
-  if (deckIndex >= q.length){
-    view.innerHTML = `
-      <div class="deck-clear">
-        <h2>${q.length ? 'That is the end of the deck.' : 'Every call is handled.'}</h2>
-        <p>${q.length
-            ? 'You have been through all of them. The ones you skipped are still in the list.'
-            : 'Nothing is waiting on you right now.'}</p>
-        <div class="actions" style="justify-content:center">
-          <button class="btn primary" data-deck="restart">Start again</button>
-          <button class="btn ghost" data-view="list">Back to the list</button>
-        </div>
-      </div>`;
-    return;
-  }
-
-  const c = q[deckIndex];
-  const peek = q.length - deckIndex - 1;
-  const label = {now:'Needs you now', wait:'Can wait', enquiry:'New enquiry'}[c.bucket];
-  const alt = c.bucket === 'now'
-    ? `<button data-deck="move" data-to="wait" data-id="${c.id}">This one can wait</button>`
-    : `<button data-deck="move" data-to="now" data-id="${c.id}">This one needs me now</button>`;
-
-  view.innerHTML = `
-    <div class="deck">
-      <div class="deck-meta">
-        <span class="deck-count">${deckIndex + 1} of ${q.length}</span>
-        <span class="deck-bar"><span style="width:${Math.round(((deckIndex + 1) / q.length) * 100)}%"></span></span>
-        <span class="deck-count">${label}</span>
-      </div>
-      <div class="deck-stack">
-        <article class="deck-card">
-          <div class="band ${c.bucket}"></div>
-          <div class="deck-body">
-            <div class="who"><h3>${c.name}</h3><span class="time">${c.time}</span></div>
-            <p class="rel">${c.who} &nbsp;&middot;&nbsp; ${c.rel}</p>
-            <p class="said">${c.said}</p>
-            <div class="chips">${chipsHTML(c)}</div>
-            <p class="why">${c.why}</p>
-          </div>
-          <div class="deck-fold" style="padding-top:16px">${qaHTML(c)}</div>
-          <div class="deck-foot">
-            <div class="actions">
-              <a class="btn primary" href="tel:${c.phone}">Call ${c.name.split(' ')[0]}</a>
-              <button class="btn ghost" data-deck="handled" data-id="${c.id}">Handled</button>
-              <button class="btn ghost" data-deck="skip">Leave for later</button>
-            </div>
-            <p class="deck-alt">${alt}</p>
-          </div>
-        </article>
-        ${peek > 0 ? '<div class="deck-peek p1"></div>' : ''}
-        ${peek > 1 ? '<div class="deck-peek p2"></div>' : ''}
-      </div>
-    </div>`;
-}
-
-/* ---------------- shared ---------------- */
 function render(){
-  const n = CALLS.filter(c => c.bucket === 'now').length;
-  document.querySelector('.headline').textContent = n === 0
-    ? 'Nothing needs you right now.'
-    : `${WORDS[n] || n + ' calls'} need${n === 1 ? 's' : ''} you now.`;
+  const total = CALLS.length;
+  const n = k => CALLS.filter(c => c.mark === k).length;
+  const unmarked = CALLS.filter(c => !c.mark).length;
 
-  BUCKETS.forEach(b => {
-    document.getElementById('c-' + b).textContent = CALLS.filter(c => c.bucket === b).length;
-  });
+  $("headline").textContent = total === 0
+    ? "No calls yet."
+    : `${WORDS[total] || total + " calls"} so far.`;
 
-  document.getElementById('listview').classList.toggle('hide', VIEW !== 'list');
-  document.getElementById('deckview').classList.toggle('hide', VIEW !== 'deck');
-  document.getElementById('jump').classList.toggle('hide', VIEW !== 'list');
-  document.querySelectorAll('.viewtoggle button').forEach(b =>
-    b.classList.toggle('on', b.dataset.view === VIEW));
+  $("subhead").textContent = total === 0
+    ? "Nothing has come in. This page updates when a call finishes."
+    : "Every one was answered and written down. None of them have been sorted.";
 
-  if (VIEW === 'list') renderList(); else renderDeck();
+  $("tally").innerHTML = total === 0 ? "" : `
+    <span><b>${n("now")}</b> you marked now</span>
+    <span><b>${n("later")}</b> later</span>
+    <span><b>${n("done")}</b> done</span>
+    <span><b>${unmarked}</b> unmarked</span>`;
+
+  $("board").innerHTML = total === 0
+    ? `<div class="empty">No calls have come in yet.</div>`
+    : CALLS.map(rowHTML).join("");
 }
 
-document.addEventListener('click', e => {
-  const vt = e.target.closest('[data-view]');
-  if (vt){
-    VIEW = vt.dataset.view;
-    if (VIEW === 'deck') deckIndex = 0;
-    render();
-    window.scrollTo({top:0, behavior:'smooth'});
-    return;
-  }
-
-  const dk = e.target.closest('[data-deck]');
-  if (dk){
-    const what = dk.dataset.deck;
-    if (what === 'skip') deckIndex++;
-    if (what === 'restart') deckIndex = 0;
-    if (what === 'handled'){
-      const call = CALLS.find(c => c.id === dk.dataset.id);
-      if (call) call.bucket = 'done';
+/* ---------------- data ---------------- */
+async function load(){
+  try {
+    const res = await fetch(`${ENDPOINT}?code=${encodeURIComponent(CODE)}`);
+    if (res.status === 401){
+      sessionStorage.removeItem("triage_code");
+      CODE = "";
+      $("app").classList.add("hide");
+      $("gate").classList.remove("hide");
+      $("gate-err").textContent = "That code didn't work.";
+      return false;
     }
-    if (what === 'move'){
-      const call = CALLS.find(c => c.id === dk.dataset.id);
-      if (call) call.bucket = dk.dataset.to;
-      deckIndex = 0;
-    }
+    if (!res.ok) throw new Error("server " + res.status);
+    const data = await res.json();
+    CALLS = data.calls || [];
     render();
+    return true;
+  } catch (err) {
+    $("board").innerHTML = `<div class="empty">Couldn't load the calls just now. Try Refresh in a moment.</div>`;
+    console.error(err);
+    return false;
+  }
+}
+
+async function setMark(id, mark){
+  const call = CALLS.find(c => c.id === id);
+  if (!call) return;
+  const previous = call.mark ?? null;
+  call.mark = (previous === mark) ? null : mark;
+  render();
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ code: CODE, id, mark: call.mark })
+    });
+    if (!res.ok) throw new Error("server " + res.status);
+  } catch (err) {
+    call.mark = previous;
+    render();
+    console.error(err);
+  }
+}
+
+/* ---------------- events ---------------- */
+document.addEventListener("click", e => {
+  const mk = e.target.closest("[data-mark]");
+  if (mk){ setMark(mk.dataset.id, mk.dataset.mark); return; }
+
+  const tg = e.target.closest("[data-toggle]");
+  if (tg){
+    const row = tg.closest(".row");
+    const open = row.classList.toggle("open");
+    tg.setAttribute("aria-expanded", open ? "true" : "false");
     return;
   }
 
-  const toggle = e.target.closest('[data-toggle]');
-  if (toggle){
-    const card = toggle.closest('.card');
-    const open = card.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    return;
-  }
+  if (e.target.closest("#refresh")) load();
 
-  const move = e.target.closest('[data-move]');
-  if (move){
-    const call = CALLS.find(c => c.id === move.dataset.id);
-    if (call){ call.bucket = move.dataset.move; render(); }
-    return;
-  }
-
-  const jump = e.target.closest('[data-jump]');
-  if (jump){
-    document.getElementById('sec-' + jump.dataset.jump)
-      .scrollIntoView({behavior:'smooth', block:'start'});
+  if (e.target.closest("#enter")){
+    const v = $("code").value.trim();
+    if (!v) return;
+    CODE = v;
+    sessionStorage.setItem("triage_code", v);
+    $("gate-err").textContent = "";
+    load().then(ok => {
+      if (ok){
+        $("gate").classList.add("hide");
+        $("app").classList.remove("hide");
+      }
+    });
   }
 });
 
-document.addEventListener('keydown', e => {
-  if (VIEW !== 'deck') return;
-  if (e.key === 'ArrowRight'){ deckIndex++; render(); }
-  if (e.key === 'ArrowLeft' && deckIndex > 0){ deckIndex--; render(); }
+$("code").addEventListener("keydown", e => {
+  if (e.key === "Enter") $("enter").click();
 });
 
-render();
+/* ---------------- start ---------------- */
+if (CODE){
+  $("gate").classList.add("hide");
+  $("app").classList.remove("hide");
+  load();
+}
+
+// Pick up new calls without a manual refresh.
+setInterval(() => { if (CODE && !$("app").classList.contains("hide")) load(); }, 30000);
 </script>
 </body>
 </html>
