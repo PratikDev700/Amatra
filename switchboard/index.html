@@ -151,6 +151,25 @@ h2{font-size:34px;line-height:1.2;max-width:19em}
 .limits h2{font-size:26px}
 .limits p{margin-top:14px;font-size:17px;line-height:1.6;max-width:40em}
 
+/* FAQ */
+.faq{margin-top:40px;max-width:800px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:20px 40px 20px 0;position:relative;
+  font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600;line-height:1.35;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";position:absolute;right:8px;top:50%;width:11px;height:11px;
+  border-right:2px solid var(--sage);border-bottom:2px solid var(--sage);
+  transform:translateY(-70%) rotate(45deg);transition:transform .18s ease;
+}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
+.faq summary:focus-visible{outline:2px solid var(--forest);outline-offset:2px;border-radius:6px}
+.faq .ans{padding:0 8px 22px 0;max-width:40em}
+.faq .ans p{font-size:16.5px;line-height:1.6;color:#43413D}
+.faq .ans p + p{margin-top:12px}
+
 /* Closer */
 .closer{background:var(--forest-dark);color:#fff;text-align:center;padding:92px 0}
 .closer h2{font-size:34px;margin:0 auto;max-width:15em}
@@ -171,6 +190,7 @@ footer a{color:#C6D6C9}
   section{padding:64px 0}
   .top-num{display:none}
   .limits{padding:28px 24px}
+  .faq summary{font-size:18px}
   .closer h2{font-size:28px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -367,6 +387,79 @@ footer a{color:#C6D6C9}
       <h2>What it does not do</h2>
       <p>Switchboard does not replace your technicians, and it is not trying to. It does not diagnose equipment, it does not tell anybody what is wrong with their system, and it never advises a customer to open a panel or touch a breaker.</p>
       <p>It handles the first phone conversation and gets the information to the people who do the work.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet" style="margin-top:0;border-radius:28px 28px 0 0">
+  <div class="wrap">
+    <h2>Questions owners ask us</h2>
+    <div class="faq">
+
+      <details>
+        <summary>Do I have to change my phone number?</summary>
+        <div class="ans">
+          <p>No, and we would advise against it. The number on your trucks, your website and your yard signs stays exactly as it is. You forward it to us, which is a setting at your own phone carrier that you control and can switch off in seconds.</p>
+          <p>We never take ownership of your number, so there is nothing to unwind if you stop.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Can I still answer calls myself?</summary>
+        <div class="ans">
+          <p>Yes, and most companies start that way. Your phone rings first, and the call only reaches us if nobody picks up after a few rings. You are not handing anything over on day one.</p>
+          <p>Once you have seen it work, most owners move to sending us everything after hours and at weekends, because the point is not having to be the person who answers at eight in the evening.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Will my customers know they are talking to an AI?</summary>
+        <div class="ans">
+          <p>Some will and some will not. If anyone asks directly, it tells them the truth straight away and carries on with the call. It never claims to be a person.</p>
+          <p>The honest comparison is not a machine against one of your staff. It is a machine against voicemail, a busy signal, or a phone that rings out, and people hang up on all three far more often than they hang up on a voice that answers.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>What happens if somebody calls about a gas leak?</summary>
+        <div class="ans">
+          <p>It stops everything else immediately. It tells the caller to leave the building, to call 911 once they are outside, and to call the gas company from outside as well. It does not ask about their system and it does not try to work out what is happening.</p>
+          <p>It then takes their name and number, flags the call at the top of your board, and lets them go. It will never tell somebody a situation is safe.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Can it book appointments?</summary>
+        <div class="ans">
+          <p>No, and that is deliberate. It cannot see your schedule, and an answering service that books a slot which does not exist creates a worse problem than the one it solved.</p>
+          <p>It tells the caller that someone will ring them back to get them scheduled, and it takes down when they are available so that call is quick.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Does it know my prices?</summary>
+        <div class="ans">
+          <p>Not unless you want it to. By default it tells callers it does not have pricing in front of it and that your team will give them a number once they know what the system needs.</p>
+          <p>If you would rather it quoted a diagnostic fee or a service call charge, that is a change we make for you.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Are the calls recorded?</summary>
+        <div class="ans">
+          <p>Yes. Every lead comes with a recording, so if a detail looks wrong you can listen to the part of the call that matters instead of guessing.</p>
+          <p>Georgia law allows a call to be recorded with the consent of one party, which is us. If you would prefer callers to be told at the start of the call that it is recorded, we will add it.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>How long does it take to set up?</summary>
+        <div class="ans">
+          <p>About twenty minutes with us on the phone. We write the greeting in your company's name, set up the number your calls forward to, and point the leads at whichever inbox your team already watches.</p>
+          <p>After that the only step left is switching forwarding on with your carrier, and we walk you through that on the same call.</p>
+        </div>
+      </details>
+
     </div>
   </div>
 </section>
