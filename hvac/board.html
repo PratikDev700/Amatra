@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Switchboard — Leads</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#2D5A3D;
+  --forest-dark:#162F22;
+  --sage:#7E9B84;
+  --mint:#E6EFE7;
+  --bark:#6B6257;
+  --stone:#F7F4EE;
+  --cream:#FFFDF8;
+  --charcoal:#1C1C1C;
+  --line:#E6DFD2;
+  --alert:#8A3A3A;
+  --alert-bg:#F6EBEB;
+  --notice:#B07A28;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--stone);color:var(--charcoal);
+  font-family:Karla,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.55;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+/* Gate */
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.gate-box{background:var(--cream);border-radius:20px;padding:32px 28px;max-width:360px;width:100%;box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.gate-box h1{font-family:Fraunces,Georgia,serif;font-size:26px;margin:0 0 6px}
+.gate-box p{margin:0 0 20px;color:var(--bark);font-size:15px}
+input[type=password]{
+  width:100%;padding:13px 15px;font-size:17px;font-family:inherit;
+  border:1px solid var(--line);border-radius:12px;background:var(--stone);
+}
+input[type=password]:focus{outline:2px solid var(--forest);outline-offset:1px}
+button{font-family:inherit;cursor:pointer}
+.btn-main{
+  width:100%;margin-top:12px;padding:14px;border:none;border-radius:999px;
+  background:var(--forest);color:#fff;font-size:17px;font-weight:700;
+}
+.gate-err{margin-top:12px;color:var(--alert);font-size:15px;min-height:22px}
+
+/* Header */
+header{background:var(--forest-dark);color:#fff;padding:18px 0}
+header .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.brand{font-family:Fraunces,Georgia,serif;font-size:21px;font-weight:700}
+.stamp{font-size:13px;color:#A9BFAF}
+.refresh{background:none;border:1px solid #3C5A46;color:#C6D6C9;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:600}
+
+/* Filters */
+.filters{display:flex;gap:8px;padding:16px 0 4px;flex-wrap:wrap}
+.pill{
+  border:1px solid var(--line);background:var(--cream);color:var(--charcoal);
+  border-radius:999px;padding:7px 15px;font-size:14px;font-weight:600;
+}
+.pill.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.pill .n{opacity:.6;font-weight:500;margin-left:4px}
+.pill.on .n{opacity:.8}
+
+/* Cards */
+#list{padding:8px 0 60px}
+.card{
+  background:var(--cream);border-radius:16px;margin-bottom:12px;
+  border:1px solid var(--line);overflow:hidden;transition:opacity .2s ease;
+}
+.card.fade{opacity:0}
+.card.emg{border-color:var(--alert);border-width:2px}
+.card.done{opacity:.62}
+.head{padding:15px 17px;cursor:pointer;display:flex;gap:12px;align-items:flex-start}
+.head:focus-visible{outline:2px solid var(--forest);outline-offset:-2px}
+.head-main{flex:1;min-width:0}
+.name{font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:700;line-height:1.25}
+.meta{font-size:13.5px;color:var(--bark);margin-top:2px}
+.issue{margin-top:7px;font-size:15.5px;line-height:1.45}
+.tag{
+  flex:none;font-size:11.5px;font-weight:700;letter-spacing:.5px;
+  padding:4px 9px;border-radius:7px;background:var(--mint);color:var(--forest);
+}
+.tag.p{background:#FBF0DC;color:var(--notice)}
+.tag.e{background:var(--alert-bg);color:var(--alert)}
+.emg-line{
+  background:var(--alert-bg);color:var(--alert);font-size:14.5px;font-weight:600;
+  padding:10px 17px;border-top:1px solid #EBD9D9;
+}
+.body{padding:0 17px 15px;border-top:1px solid var(--line);margin-top:2px;padding-top:13px}
+.row{display:flex;gap:14px;padding:5px 0;font-size:15px;align-items:baseline}
+.row dt{color:var(--bark);width:92px;flex:none;font-size:13.5px}
+.row dd{margin:0;min-width:0}
+.sum{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:15px;line-height:1.55}
+.rec{margin-top:12px;display:inline-block;color:var(--forest);font-size:14.5px;font-weight:600}
+.call-btn{
+  display:inline-block;margin-top:14px;background:var(--forest);color:#fff;
+  text-decoration:none;font-weight:700;font-size:16px;padding:11px 22px;border-radius:999px;
+}
+.marks{display:flex;gap:7px;padding:0 17px 15px;flex-wrap:wrap}
+.mark{
+  border:1px solid var(--line);background:var(--stone);color:var(--charcoal);
+  border-radius:999px;padding:7px 14px;font-size:14px;font-weight:600;
+}
+.mark.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.empty{text-align:center;color:var(--bark);padding:60px 20px;font-size:16px}
+.err{background:var(--alert-bg);color:var(--alert);padding:11px 16px;border-radius:12px;margin:12px 0;font-size:14.5px}
+.hidden{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <h1>Switchboard</h1>
+    <p>Enter your passcode to see your leads.</p>
+    <input type="password" id="code" inputmode="numeric" autocomplete="off" placeholder="Passcode">
+    <button class="btn-main" id="enter">Open leads</button>
+    <div class="gate-err" id="gateErr"></div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <header>
+    <div class="wrap">
+      <div class="brand">Switchboard</div>
+      <div>
+        <span class="stamp" id="stamp"></span>
+        <button class="refresh" id="refresh">Refresh</button>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="filters" id="filters"></div>
+    <div id="err"></div>
+    <div id="list"></div>
+  </div>
+</div>
+
+<script>
+const API = "https://hodmhfavcttltzovarzk.supabase.co/functions/v1/hvac-board";
+
+let passcode = "";
+let leads = [];
+let filter = null;
+const open = new Set();
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => (
+  { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+));
+
+function phone(raw){
+  if(!raw) return "";
+  const d = String(raw).replace(/\D/g,"");
+  const n = d.length === 11 && d[0] === "1" ? d.slice(1) : d;
+  if(n.length !== 10) return raw;
+  return "(" + n.slice(0,3) + ") " + n.slice(3,6) + "-" + n.slice(6);
+}
+
+function when(iso){
+  const d = new Date(iso);
+  const now = new Date();
+  const mins = Math.round((now - d) / 60000);
+  if(mins < 1) return "just now";
+  if(mins < 60) return mins + " min ago";
+  const time = d.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+  const sameDay = d.toDateString() === now.toDateString();
+  if(sameDay) return time;
+  return d.toLocaleDateString([], {weekday:"short", month:"short", day:"numeric"}) + ", " + time;
+}
+
+// Emergencies first, then newest. Urgency here is computed from what the
+// caller stated, not a judgement the model made.
+function sortLeads(a, b){
+  const ea = a.urgency === "EMERGENCY" ? 0 : 1;
+  const eb = b.urgency === "EMERGENCY" ? 0 : 1;
+  if(ea !== eb) return ea - eb;
+  return new Date(b.created_at) - new Date(a.created_at);
+}
+
+async function load(){
+  try{
+    const r = await fetch(API, { headers: { "x-passcode": passcode } });
+    if(r.status === 401){ showGate("That passcode did not work."); return false; }
+    if(!r.ok) throw new Error("status " + r.status);
+    const data = await r.json();
+    leads = (data.leads || []).sort(sortLeads);
+    $("err").innerHTML = "";
+    $("stamp").textContent = "Updated " + new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+    render();
+    return true;
+  }catch(e){
+    $("err").innerHTML = '<div class="err">Could not reach the server. Showing the last leads loaded.</div>';
+    return false;
+  }
+}
+
+async function mark(id, status){
+  const lead = leads.find(l => l.id === id);
+  if(!lead) return;
+  const prev = lead.status;
+  lead.status = status;
+  render();
+  try{
+    const r = await fetch(API, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-passcode": passcode },
+      body: JSON.stringify({ id, status })
+    });
+    if(!r.ok) throw new Error();
+  }catch(e){
+    lead.status = prev;
+    $("err").innerHTML = '<div class="err">That change did not save. Try again.</div>';
+    render();
+  }
+}
+
+function counts(){
+  const c = { all: leads.length, new:0, called:0, booked:0, closed:0 };
+  leads.forEach(l => { if(c[l.status] !== undefined) c[l.status]++; });
+  return c;
+}
+
+function renderFilters(){
+  const c = counts();
+  const defs = [
+    ["new","New",c.new],
+    ["called","Called back",c.called],
+    ["booked","Booked",c.booked],
+    ["closed","Closed",c.closed]
+  ];
+  $("filters").innerHTML = defs.map(([k,label,n]) =>
+    '<button class="pill' + (filter === k ? " on" : "") + '" data-f="' + k + '">' +
+    esc(label) + '<span class="n">' + n + '</span></button>'
+  ).join("");
+}
+
+function card(l){
+  const isOpen = open.has(l.id);
+  const emg = l.urgency === "EMERGENCY";
+  const tagCls = emg ? "tag e" : l.urgency === "PRIORITY" ? "tag p" : "tag";
+  const done = l.status === "booked" || l.status === "closed";
+  const loc = l.address || l.zip_code || "";
+
+  const rows = [
+    ["Phone", phone(l.callback_phone)],
+    ["Location", loc],
+    ["System", l.system_type],
+    ["Started", l.when_started],
+    ["Available", l.preferred_availability],
+    ["Notes", l.notes]
+  ].filter(([,v]) => v).map(([k,v]) =>
+    '<div class="row"><dt>' + k + '</dt><dd>' + esc(v) + '</dd></div>'
+  ).join("");
+
+  const outLine = l.completely_out === true
+    ? '<div class="row"><dt>Status</dt><dd>Completely out, no heating or cooling</dd></div>'
+    : l.completely_out === false
+      ? '<div class="row"><dt>Status</dt><dd>Running but not keeping up</dd></div>'
+      : "";
+
+  const marks = [["new","New"],["called","Called back"],["booked","Booked"],["closed","Closed"]]
+    .map(([k,label]) =>
+      '<button class="mark' + (l.status === k ? " on" : "") + '" data-id="' + l.id + '" data-s="' + k + '">' +
+      label + '</button>'
+    ).join("");
+
+  return '<div class="card' + (emg ? " emg" : "") + (done ? " done" : "") + '" data-card="' + l.id + '">' +
+    '<div class="head" role="button" tabindex="0" data-open="' + l.id + '">' +
+      '<div class="head-main">' +
+        '<div class="name">' + esc(l.customer_name || "Name not given") + '</div>' +
+        '<div class="meta">' + esc(when(l.created_at)) + (loc ? " &middot; " + esc(loc) : "") + '</div>' +
+        '<div class="issue">' + esc(l.issue || "No issue stated") + '</div>' +
+      '</div>' +
+      '<span class="' + tagCls + '">' + esc(l.urgency || "NORMAL") + '</span>' +
+    '</div>' +
+    (emg ? '<div class="emg-line">' + esc(l.safety_detail || "Caller described a safety hazard") + '</div>' : "") +
+    (isOpen ?
+      '<div class="body"><dl style="margin:0">' + rows + outLine + '</dl>' +
+      (l.summary ? '<div class="sum">' + esc(l.summary) + '</div>' : "") +
+      (l.callback_phone ? '<a class="call-btn" href="tel:' + esc(String(l.callback_phone).replace(/\D/g,"")) + '">Call ' + esc(phone(l.callback_phone)) + '</a>' : "") +
+      (l.recording_url ? '<div><a class="rec" href="' + esc(l.recording_url) + '" target="_blank" rel="noopener">Listen to the call</a></div>' : "") +
+      '</div>'
+    : "") +
+    '<div class="marks">' + marks + '</div>' +
+  '</div>';
+}
+
+function render(){
+  renderFilters();
+  const shown = filter ? leads.filter(l => l.status === filter) : leads;
+  $("list").innerHTML = shown.length
+    ? shown.map(card).join("")
+    : '<div class="empty">' + (filter ? "Nothing in this list." : "No leads yet. Calls will show up here within seconds of ending.") + '</div>';
+}
+
+function showGate(msg){
+  $("app").classList.add("hidden");
+  $("gate").style.display = "flex";
+  $("gateErr").textContent = msg || "";
+}
+
+async function enter(){
+  passcode = $("code").value.trim();
+  if(!passcode){ $("gateErr").textContent = "Enter the passcode."; return; }
+  $("gateErr").textContent = "";
+  const ok = await load();
+  if(ok){
+    $("gate").style.display = "none";
+    $("app").classList.remove("hidden");
+  }
+}
+
+$("enter").addEventListener("click", enter);
+$("code").addEventListener("keydown", (e) => { if(e.key === "Enter") enter(); });
+$("refresh").addEventListener("click", load);
+
+$("filters").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-f]");
+  if(!b) return;
+  filter = filter === b.dataset.f ? null : b.dataset.f;
+  render();
+});
+
+$("list").addEventListener("click", (e) => {
+  const m = e.target.closest("[data-s]");
+  if(m){
+    const card = document.querySelector('[data-card="' + m.dataset.id + '"]');
+    if(filter && card){
+      card.classList.add("fade");
+      setTimeout(() => mark(m.dataset.id, m.dataset.s), 200);
+    } else {
+      mark(m.dataset.id, m.dataset.s);
+    }
+    return;
+  }
+  const h = e.target.closest("[data-open]");
+  if(h){
+    const id = h.dataset.open;
+    open.has(id) ? open.delete(id) : open.add(id);
+    render();
+  }
+});
+
+$("list").addEventListener("keydown", (e) => {
+  if(e.key !== "Enter" && e.key !== " ") return;
+  const h = e.target.closest("[data-open]");
+  if(!h) return;
+  e.preventDefault();
+  const id = h.dataset.open;
+  open.has(id) ? open.delete(id) : open.add(id);
+  render();
+});
+
+// Expanded cards survive the refresh because `open` is keyed by lead id.
+setInterval(() => { if(passcode) load(); }, 30000);
+</script>
+</body>
+</html>
