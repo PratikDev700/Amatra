@@ -52,8 +52,16 @@ button{font-family:inherit;cursor:pointer}
 header{background:var(--forest-dark);color:#fff;padding:18px 0}
 header .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .brand{font-family:Fraunces,Georgia,serif;font-size:21px;font-weight:700}
-.stamp{font-size:13px;color:#A9BFAF}
-.refresh{background:none;border:1px solid #3C5A46;color:#C6D6C9;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:600}
+.stamp{font-size:13px;color:#A9BFAF;transition:color .2s ease}
+.stamp.live{color:#fff}
+.refresh{
+  background:none;border:1px solid #3C5A46;color:#C6D6C9;border-radius:999px;
+  padding:5px 14px;font-size:13px;font-weight:600;min-width:86px;
+  transition:background .15s ease, color .15s ease, opacity .15s ease;
+}
+.refresh:hover{background:#25402F}
+.refresh:disabled{opacity:.55;cursor:default}
+.refresh:focus-visible{outline:2px solid #C6D6C9;outline-offset:2px}
 
 /* Filters */
 .filters{display:flex;gap:8px;padding:16px 0 4px;flex-wrap:wrap}
@@ -147,6 +155,7 @@ const API = "https://hodmhfavcttltzovarzk.supabase.co/functions/v1/hvac-board";
 let passcode = "";
 let leads = [];
 let filter = null;
+let busy = false;
 const open = new Set();
 
 const $ = (id) => document.getElementById(id);
@@ -183,21 +192,50 @@ function sortLeads(a, b){
   return new Date(b.created_at) - new Date(a.created_at);
 }
 
-async function load(){
+// Seconds are shown deliberately: without them a refresh inside the same
+// minute leaves the stamp identical and the button looks broken.
+function setStamp(){
+  const s = $("stamp");
+  s.textContent = "Updated " + new Date().toLocaleTimeString([], {
+    hour:"numeric", minute:"2-digit", second:"2-digit"
+  });
+  s.classList.add("live");
+  setTimeout(() => s.classList.remove("live"), 700);
+}
+
+async function load(manual){
+  if(busy) return false;
+  busy = true;
+  const btn = $("refresh");
+  if(manual){ btn.disabled = true; btn.textContent = "Refreshing"; }
+  const started = Date.now();
+
+  let ok = false;
   try{
     const r = await fetch(API, { headers: { "x-passcode": passcode } });
-    if(r.status === 401){ showGate("That passcode did not work."); return false; }
-    if(!r.ok) throw new Error("status " + r.status);
-    const data = await r.json();
-    leads = (data.leads || []).sort(sortLeads);
-    $("err").innerHTML = "";
-    $("stamp").textContent = "Updated " + new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
-    render();
-    return true;
+    if(r.status === 401){ showGate("That passcode did not work."); }
+    else if(!r.ok){ throw new Error("status " + r.status); }
+    else {
+      const data = await r.json();
+      leads = (data.leads || []).sort(sortLeads);
+      $("err").innerHTML = "";
+      setStamp();
+      render();
+      ok = true;
+    }
   }catch(e){
     $("err").innerHTML = '<div class="err">Could not reach the server. Showing the last leads loaded.</div>';
-    return false;
   }
+
+  // Hold the button state long enough to be seen on a fast connection.
+  const wait = manual ? Math.max(0, 450 - (Date.now() - started)) : 0;
+  setTimeout(() => {
+    busy = false;
+    btn.disabled = false;
+    btn.textContent = "Refresh";
+  }, wait);
+
+  return ok;
 }
 
 async function mark(id, status){
@@ -221,7 +259,7 @@ async function mark(id, status){
 }
 
 function counts(){
-  const c = { all: leads.length, new:0, called:0, booked:0, closed:0 };
+  const c = { new:0, called:0, booked:0, closed:0 };
   leads.forEach(l => { if(c[l.status] !== undefined) c[l.status]++; });
   return c;
 }
@@ -309,7 +347,7 @@ async function enter(){
   passcode = $("code").value.trim();
   if(!passcode){ $("gateErr").textContent = "Enter the passcode."; return; }
   $("gateErr").textContent = "";
-  const ok = await load();
+  const ok = await load(false);
   if(ok){
     $("gate").style.display = "none";
     $("app").classList.remove("hidden");
@@ -318,7 +356,7 @@ async function enter(){
 
 $("enter").addEventListener("click", enter);
 $("code").addEventListener("keydown", (e) => { if(e.key === "Enter") enter(); });
-$("refresh").addEventListener("click", load);
+$("refresh").addEventListener("click", () => load(true));
 
 $("filters").addEventListener("click", (e) => {
   const b = e.target.closest("[data-f]");
@@ -358,7 +396,7 @@ $("list").addEventListener("keydown", (e) => {
 });
 
 // Expanded cards survive the refresh because `open` is keyed by lead id.
-setInterval(() => { if(passcode) load(); }, 30000);
+setInterval(() => { if(passcode) load(false); }, 30000);
 </script>
 </body>
 </html>
