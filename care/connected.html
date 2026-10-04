@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Connecting Google · Amatra Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --forest: #2D5A3D; --deep: #162F22; --cream: #F5F1E8; --stone: #E7E0D2; --bark: #5B4A3A; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; font-family: Karla, system-ui, sans-serif; color: #1F2A23;
+         background: linear-gradient(160deg, #162F22 0%, #1E4A2E 55%, #2D5A3D 100%);
+         display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .card { background: var(--cream); border-radius: 28px; padding: 40px 32px; max-width: 440px; width: 100%; text-align: center;
+          box-shadow: 0 24px 60px rgba(0,0,0,.25); }
+  .brand { font-family: Fraunces, Georgia, serif; font-weight: 600; color: var(--forest); font-size: 20px; letter-spacing: .2px; margin-bottom: 26px; }
+  .mark { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+          background: var(--stone); }
+  .mark.ok { background: var(--forest); }
+  .mark.bad { background: #A4452C; }
+  .mark svg { width: 30px; height: 30px; }
+  .spinner { width: 28px; height: 28px; border: 3px solid rgba(45,90,61,.25); border-top-color: var(--forest); border-radius: 50%;
+             animation: spin .9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  h1 { font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: 28px; line-height: 1.2; margin: 0 0 12px; color: var(--deep); }
+  p { font-size: 17px; line-height: 1.55; margin: 0 0 12px; color: var(--bark); }
+  .email { font-weight: 600; color: var(--deep); }
+  .note { font-size: 15px; background: #fff; border-radius: 14px; padding: 12px 14px; margin-top: 16px; text-align: left; }
+  .back { margin-top: 22px; font-size: 15px; color: var(--forest); font-weight: 600; }
+</style>
+</head>
+<body>
+  <main class="card" aria-live="polite">
+    <div class="brand">Amatra Care</div>
+    <div id="mark" class="mark"><div class="spinner"></div></div>
+    <h1 id="title">Connecting Google…</h1>
+    <p id="message">This takes a moment.</p>
+    <div id="extra"></div>
+    <p class="back" id="back" hidden>You can close this window and return to Amatra Care.</p>
+  </main>
+
+<script>
+  var CALLBACK = 'https://ojjtssdjqhykwqjnzwjv.supabase.co/functions/v1/google-auth-callback';
+  var params = new URLSearchParams(window.location.search);
+  // Take the one-time code out of the address bar straight away.
+  if (window.history && window.history.replaceState) window.history.replaceState(null, '', window.location.pathname);
+
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="#F5F1E8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var CROSS = '<svg viewBox="0 0 24 24" fill="none" stroke="#F5F1E8" stroke-width="3" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17"/></svg>';
+
+  function show(ok, title, message, extraHtml) {
+    var mark = document.getElementById('mark');
+    mark.className = 'mark ' + (ok ? 'ok' : 'bad');
+    mark.innerHTML = ok ? CHECK : CROSS;
+    document.getElementById('title').textContent = title;
+    document.getElementById('message').textContent = message;
+    document.getElementById('extra').innerHTML = extraHtml || '';
+    document.getElementById('back').hidden = false;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  if (params.get('error')) {
+    show(false, 'Google was not connected', 'Nothing was changed. To try again, return to Amatra Care and tap Connect Google.');
+  } else if (!params.get('code') || !params.get('state')) {
+    show(false, 'This link is incomplete', 'Return to Amatra Care and tap Connect Google to start again.');
+  } else {
+    fetch(CALLBACK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: params.get('code'), state: params.get('state') })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !d.ok) {
+          show(false, 'Google was not connected', (d && d.message) || 'Something went wrong. Return to Amatra Care and try again.');
+          return;
+        }
+        var extra = '';
+        if (d.missing && d.missing.length) {
+          extra = '<p class="note">Amatra Care does not have permission to ' + escapeHtml(d.missing.join(' or ')) +
+            ', so those features will stay off. To turn them on, tap Connect Google again and tick every box.</p>';
+        }
+        show(true, 'Google is connected', '', extra);
+        document.getElementById('message').innerHTML = 'Amatra Care is now connected to <span class="email">' + escapeHtml(d.email) + '</span>.';
+      })
+      .catch(function () {
+        show(false, 'Google was not connected', 'The connection could not be finished. Check your internet connection, then return to Amatra Care and tap Connect Google again.');
+      });
+  }
+</script>
+</body>
+</html>
