@@ -293,33 +293,12 @@
   .close-line{font-size:clamp(46px,7.2vw,104px);line-height:.98}
   .close-line span{display:block}
   .close-line .second{color:var(--bark)}
-  .partner{margin-top:clamp(80px,10vw,140px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,96px);align-items:start}
-  .partner h2{font-size:clamp(34px,3.8vw,54px);line-height:1.05}
-  .partner .lede{margin-top:22px}
-  .partner .honest{margin-top:22px;font-size:16px;color:var(--bark);max-width:44ch}
-  .form{background:var(--paper);border-radius:28px;padding:clamp(24px,3.4vw,40px);box-shadow:0 1px 0 rgba(35,38,31,.05), 0 40px 70px -46px rgba(74,48,22,.55)}
-  .field{display:grid;gap:8px;margin-bottom:18px}
-  .field label{font-size:16px;font-weight:600}
-  .field label small{font-weight:400;color:var(--bark);font-size:15px}
-  .field input,.field textarea{width:100%;font:400 17px/1.4 var(--sans);color:var(--ink);background:var(--bone);border:1.5px solid transparent;border-radius:14px;padding:14px 16px;transition:border-color .2s, background-color .2s;-webkit-appearance:none;appearance:none}
-  .field textarea{min-height:120px;resize:vertical}
-  .field input::placeholder,.field textarea::placeholder{color:#8C7F70}
-  .field input:hover,.field textarea:hover{border-color:var(--line)}
-  .field input:focus,.field textarea:focus{outline:none;border-color:var(--forest);background:#fff}
-  .field input[aria-invalid="true"]{border-color:#A4473A}
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-  @media (max-width:560px){ .two{grid-template-columns:1fr} }
-  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-  .form .btn{width:100%;margin-top:6px}
-  .form .btn[disabled]{opacity:.65;cursor:progress}
-  .form-msg{margin-top:14px;font-size:15px;min-height:1.4em;color:#A4473A}
-  .form-fine{margin-top:6px;font-size:14px;color:var(--bark)}
-  .done{display:none;text-align:left}
-  .done h3{font-size:clamp(28px,2.8vw,36px);line-height:1.1}
-  .done p{margin-top:12px;color:var(--bark)}
-  .form.sent .form-body{display:none}
-  .form.sent .done{display:block}
-  @media (max-width:860px){ .partner{grid-template-columns:1fr} }
+  .invite{margin-top:clamp(80px,10vw,140px);max-width:760px}
+  .invite h2{font-size:clamp(36px,4.4vw,60px);line-height:1.04}
+  .invite p{margin-top:20px;font-size:clamp(19px,1.6vw,22px);line-height:1.5;color:var(--bark);max-width:44ch}
+  .invite .btn{margin-top:clamp(28px,3vw,36px)}
+  .hero-note{margin-top:14px;font-size:16px;color:var(--bark)}
+  .mid-cta{margin-top:clamp(40px,5vw,64px)}
 
   /* ---------- Footer ---------- */
   footer{border-top:1px solid var(--line);padding:48px 0 calc(48px + env(safe-area-inset-bottom))}
@@ -353,7 +332,7 @@
       <a href="#how">How it works</a>
       <a href="#philosophy">Our philosophy</a>
       <a href="#early-access">Early access</a>
-      <a class="btn btn-primary btn-sm" href="#early-access" data-cta="nav">Become an early partner</a>
+      <a class="btn btn-primary btn-sm" href="/talk/?from=nav" data-talk>Let’s talk · 20 min →</a>
     </nav>
   </div>
 </header>
@@ -367,9 +346,10 @@
         <h1 id="hero-title"><span>You do the care.</span><span class="second">We handle the work around it.</span></h1>
         <p class="hero-sub">Care doesn’t happen behind a desk. Your paperwork shouldn’t keep you at one.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#early-access" data-cta="hero">Become an early partner</a>
+          <a class="btn btn-primary" href="/talk/?from=hero" data-talk>Let’s talk for 20 minutes →</a>
           <a class="btn btn-quiet" href="#how">See how it works</a>
         </div>
+        <p class="hero-note">Show us how you work. See what we’re building.</p>
       </div>
 
       <div class="hero-phone" role="img" aria-label="The Amatra Care app, listening after a visit. The screen says: Tell Amatra what happened.">
@@ -493,6 +473,7 @@
           <li><b>Your updates come from you.</b><p>When you connect Google, approved family updates and invoices go out from your own Gmail address, so replies come straight back to you.</p></li>
         </ul>
         <p class="google-note">If you connect your Google account, approved family updates and invoices are sent from your own Gmail address, approved appointments are added to your Google Calendar, and emailed invoices are filed in your Google Drive under a folder for each client. Amatra Care can send email but cannot read your inbox, and it can only see the Drive files that it creates. You can disconnect Google at any time from the app’s settings. Read the <a href="/care/privacy.html">privacy policy</a>.</p>
+        <p class="google-note">Amatra Care is in early testing. During testing, we work with sample information rather than real client records.</p>
       </div>
     </div>
   </section>
@@ -566,6 +547,7 @@
           </div>
         </li>
       </ul>
+      <div class="mid-cta"><a class="btn btn-primary" href="/talk/?from=mid" data-talk>Let’s talk →</a></div>
     </div>
   </section>
 
@@ -587,48 +569,15 @@
     </div>
   </section>
 
-  <!-- 7. Close + early partners -->
+  <!-- 7. Close + Let's talk -->
   <section class="sec" id="early-access" aria-labelledby="partner-title">
     <div class="wrap">
       <p class="close-line display" aria-hidden="false"><span>More time with clients.</span><span class="second">Less time feeding software.</span></p>
 
-      <div class="partner">
-        <div>
-          <h2 id="partner-title">Built with care managers, not just for them.</h2>
-          <p class="lede">We are working closely with a small group of independent care managers to build Amatra around the way care actually happens. Early partners shape what we build next.</p>
-          <p class="honest">Amatra Care is in early testing. During testing, we work with sample information rather than real client records.</p>
-        </div>
-
-        <form class="form" id="partner-form" novalidate>
-          <div class="form-body">
-            <div class="two">
-              <div class="field">
-                <label for="f-name">Your name</label>
-                <input id="f-name" name="name" type="text" autocomplete="name" required>
-              </div>
-              <div class="field">
-                <label for="f-practice">Practice</label>
-                <input id="f-practice" name="practice" type="text" autocomplete="organization" required>
-              </div>
-            </div>
-            <div class="field">
-              <label for="f-email">Email</label>
-              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
-            </div>
-            <div class="field">
-              <label for="f-wish">What part of your work do you wish would just happen on its own? <small>Optional</small></label>
-              <textarea id="f-wish" name="wish" rows="4" placeholder="For example, writing up notes after a long day of visits."></textarea>
-            </div>
-            <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-            <button class="btn btn-primary" type="submit" id="f-submit">Request early access</button>
-            <p class="form-msg" id="f-msg" role="alert" aria-live="polite"></p>
-            <p class="form-fine">We will reply personally. We don’t send newsletters.</p>
-          </div>
-          <div class="done" tabindex="-1" id="f-done">
-            <h3>Thank you<span id="f-first"></span>.</h3>
-            <p>Your request is in. One of us will write to you personally at <strong id="f-addr"></strong> to find a time to talk.</p>
-          </div>
-        </form>
+      <div class="invite">
+        <h2 id="partner-title">Interested in what we’re building?</h2>
+        <p>We’d love to hear how you work today and show you what we’re building with care managers.</p>
+        <a class="btn btn-primary" href="/talk/?from=closer" data-talk>Let’s talk · 20 min →</a>
       </div>
     </div>
   </section>
@@ -650,10 +599,6 @@
 
 <script>
 (function(){
-  /* --- Early-partner form: saves to public.care_partners in the tend Supabase project --- */
-  var SUPABASE_URL = 'https://hodmhfavcttltzovarzk.supabase.co';
-  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvZG1oZmF2Y3R0bHR6b3ZhcnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNTA5ODEsImV4cCI6MjA5NzkyNjk4MX0.nJCyKOjx6u8GyTzXS2rJvGT7TKapEwDd1v88o7mJMjI';
-
   document.documentElement.classList.add('js');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -729,50 +674,13 @@
     window.addEventListener('resize', onScroll);
   }
 
-  /* Early-partner form */
-  var form = document.getElementById('partner-form');
-  var msg = document.getElementById('f-msg');
-  var btn = document.getElementById('f-submit');
-  var params = new URLSearchParams(location.search);
-  var source = 'care' + (params.get('s') ? ':' + params.get('s').slice(0, 24) : '');
-
-  function bad(el, text){ el.setAttribute('aria-invalid','true'); msg.textContent = text; el.focus(); return false; }
-  function finish(name, email){
-    var first = name.split(/\s+/)[0];
-    document.getElementById('f-first').textContent = first ? ', ' + first : '';
-    document.getElementById('f-addr').textContent = email;
-    form.classList.add('sent');
-    document.getElementById('f-done').focus();
+  /* Carry the campaign tag (?s=email) into every Let's talk link */
+  var camp = new URLSearchParams(location.search).get('s');
+  if (camp) {
+    document.querySelectorAll('[data-talk]').forEach(function(a){
+      a.href = a.getAttribute('href') + '&s=' + encodeURIComponent(camp.slice(0, 24));
+    });
   }
-
-  form.addEventListener('input', function(e){ e.target.removeAttribute('aria-invalid'); msg.textContent = ''; });
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if (form.website.value) return;
-    var name = form.name.value.trim(), practice = form.practice.value.trim(),
-        email = form.email.value.trim(), wish = form.wish.value.trim();
-    if (!name) return bad(form.name, 'Add your name so we know who to write to.');
-    if (!practice) return bad(form.practice, 'Add the name of your practice.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return bad(form.email, 'Check your email address. It should look like name@practice.com.');
-
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-      var body = 'Name: ' + name + '\nPractice: ' + practice + '\nEmail: ' + email + (wish ? '\n\nWhat I wish would happen on its own:\n' + wish : '');
-      location.href = 'mailto:support@amatra.app?subject=' + encodeURIComponent('Early partner request: ' + practice) + '&body=' + encodeURIComponent(body);
-      finish(name, email); return;
-    }
-
-    btn.disabled = true; btn.textContent = 'Sending…';
-    fetch(SUPABASE_URL + '/rest/v1/care_partners', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json', 'apikey':SUPABASE_ANON_KEY, 'Authorization':'Bearer ' + SUPABASE_ANON_KEY, 'Prefer':'return=minimal'},
-      body: JSON.stringify({name:name, practice:practice, email:email, wish:wish || null, source:source})
-    }).then(function(res){
-      if (res.ok || res.status === 409) { finish(name, email); return; }
-      throw new Error(res.status);
-    }).catch(function(){
-      msg.textContent = 'Your request didn’t go through. Try again, or email us at support@amatra.app.';
-    }).then(function(){ btn.disabled = false; btn.textContent = 'Request early access'; });
-  });
 })();
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "163791ab9b954c56a4d7b7a4ad61b9b2"}'></script>

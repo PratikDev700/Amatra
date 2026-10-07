@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Let's talk · Amatra Care</title>
+<meta name="description" content="20 minutes to learn how you work today, what's still taking too much time, and show you what we're building.">
+<meta name="theme-color" content="#F2EDE3">
+<link rel="canonical" href="https://amatra.app/talk/">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Amatra Care">
+<meta property="og:url" content="https://amatra.app/talk/">
+<meta property="og:title" content="Let's talk.">
+<meta property="og:description" content="20 minutes to learn how you work today, what's still taking too much time, and show you what we're building.">
+<meta property="og:image" content="https://amatra.app/care/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://amatra.app/care/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bone:#F2EDE3; --paper:#FBF8F2; --forest:#2D5A3D; --deep:#162F22;
+    --maple:#A8794C; --maple-soft:#EADBC5; --ink:#23261F; --bark:#5B4A3A;
+    --sage:#86AE93; --mint:#E3EDE5; --line:rgba(35,38,31,.13); --err:#A4473A;
+    --serif:"Fraunces", Georgia, "Times New Roman", serif;
+    --sans:"Karla", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --gutter:clamp(16px, 5vw, 64px);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;min-height:100vh;min-height:100svh;background:var(--bone);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+  a{color:inherit}
+  p{margin:0}
+  h1,h2,h3{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:-.022em;font-variation-settings:"opsz" 144}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--forest);outline-offset:3px;border-radius:8px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+
+  /* Header */
+  .top{height:72px;display:flex;align-items:center}
+  .top .wrap{display:flex;justify-content:space-between;align-items:center}
+  .mark{display:inline-flex;align-items:baseline;gap:8px;text-decoration:none;color:var(--ink)}
+  .mark-name{font-family:var(--serif);font-weight:500;font-size:25px;letter-spacing:-.02em;font-variation-settings:"opsz" 72}
+  .mark-name::after{content:"";display:inline-block;width:.24em;height:.24em;margin-left:.06em;border-radius:50%;background:var(--sage)}
+  .mark-sub{font-size:15px;font-weight:500;color:var(--bark)}
+  .back{font-size:15px;font-weight:500;color:var(--bark);text-decoration:none}
+  .back:hover{color:var(--ink);text-decoration:underline}
+
+  /* Layout */
+  main{flex:1;padding:clamp(24px,6vh,72px) 0 clamp(56px,8vw,96px)}
+  .grid > *{min-width:0}
+  .grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px);align-items:start}
+  .intro{position:sticky;top:40px}
+  .intro h1{font-size:clamp(56px,7.6vw,104px);line-height:.95}
+  .intro .sub{margin-top:clamp(18px,2.4vw,28px);font-size:clamp(19px,1.6vw,22px);line-height:1.5;color:var(--bark);max-width:30ch}
+  .facts{list-style:none;margin:clamp(24px,3vw,36px) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+  .facts li{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;background:var(--paper);font-size:15px;font-weight:500;color:var(--ink);box-shadow:0 1px 0 rgba(35,38,31,.04)}
+  .facts svg{width:16px;height:16px;flex:none}
+  @media (max-width:860px){
+    .grid{grid-template-columns:minmax(0,1fr)}
+    .intro{position:static}
+  }
+
+  /* Card */
+  .card{position:relative;background:var(--paper);border-radius:28px;padding:clamp(20px,3vw,36px);box-shadow:0 1px 0 rgba(35,38,31,.05), 0 40px 70px -46px rgba(74,48,22,.55);min-height:420px}
+  @media (max-width:560px){ .card{border-radius:24px;padding:20px 16px 22px} }
+  .step{animation:in .45s var(--ease) both}
+  @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .step[hidden]{display:none}
+  .step-title{font:500 15px/1.3 var(--sans);color:var(--bark)}
+  .tz{margin-top:6px;font-size:14px;color:var(--bark)}
+
+  /* Days */
+  .days{display:flex;gap:8px;margin:16px calc(-1 * clamp(20px,3vw,36px)) 0;padding:2px clamp(20px,3vw,36px) 8px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:clamp(20px,3vw,36px);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .days::-webkit-scrollbar{display:none}
+  @media (max-width:560px){ .days{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px;scroll-padding-inline:16px} }
+  .day{flex:none;scroll-snap-align:start;width:76px;height:88px;border:0;border-radius:18px;background:var(--bone);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;transition:background-color .2s var(--ease), color .2s var(--ease), transform .2s var(--ease)}
+  .day:hover{background:var(--mint)}
+  .day .dw{font-size:13px;font-weight:600;color:var(--bark);transition:color .2s}
+  .day .dn{font:500 28px/1 var(--serif);letter-spacing:-.02em;font-variation-settings:"opsz" 72}
+  .day .dm{font-size:12px;color:var(--bark);transition:color .2s}
+  .day[aria-pressed="true"]{background:var(--forest);color:var(--paper)}
+  .day[aria-pressed="true"] .dw,.day[aria-pressed="true"] .dm{color:#CFE0D3}
+
+  /* Times */
+  .date-head{margin-top:22px;font:500 22px/1.2 var(--serif);letter-spacing:-.015em}
+  .times{margin-top:14px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  @media (max-width:560px){ .times{grid-template-columns:repeat(3,minmax(0,1fr))} }
+  .time{height:52px;border:1.5px solid var(--line);border-radius:14px;background:#fff;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;cursor:pointer;transition:border-color .2s var(--ease), background-color .2s var(--ease), color .2s}
+  .time:hover{border-color:var(--forest);color:var(--forest)}
+  .time:active{transform:scale(.98)}
+  .skeleton .day,.skeleton .time{background:linear-gradient(90deg,#EFE9DF 0%,#F7F3EC 50%,#EFE9DF 100%);background-size:200% 100%;animation:shimmer 1.4s linear infinite;border-color:transparent;cursor:default;color:transparent}
+  @keyframes shimmer{to{background-position:-200% 0}}
+  .note{margin-top:20px;font-size:15px;color:var(--bark)}
+  .note a{color:var(--forest)}
+  .alert{margin-top:16px;padding:14px 16px;border-radius:14px;background:#F6E7E2;color:#6E2E25;font-size:15px}
+  .alert[hidden]{display:none}
+
+  /* Details */
+  .chosen{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:18px 20px;border-radius:18px;background:var(--mint)}
+  .chosen-when{font:500 clamp(21px,2vw,25px)/1.2 var(--serif);letter-spacing:-.015em}
+  .w-date,.w-time{display:block}
+  .w-time{color:var(--forest)}
+  .chosen-sub{margin-top:4px;font-size:15px;color:var(--bark)}
+  .linkbtn{border:0;background:none;padding:6px 0;font-size:15px;font-weight:600;color:var(--forest);text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+  .form{margin-top:22px}
+  .field{display:grid;gap:8px;margin-bottom:16px}
+  .field label{font-size:16px;font-weight:600;line-height:1.35}
+  .field label small{font-weight:400;color:var(--bark);font-size:15px}
+  .field input,.field textarea{width:100%;font:400 17px/1.4 var(--sans);color:var(--ink);background:var(--bone);border:1.5px solid transparent;border-radius:14px;padding:14px 16px;transition:border-color .2s, background-color .2s;-webkit-appearance:none;appearance:none}
+  .field textarea{min-height:110px;resize:vertical}
+  .field input::placeholder,.field textarea::placeholder{color:#8C7F70}
+  .field input:hover,.field textarea:hover{border-color:var(--line)}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--forest);background:#fff}
+  .field input[aria-invalid="true"]{border-color:var(--err)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+  @media (max-width:560px){ .two{grid-template-columns:1fr} }
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:0 24px;border:0;border-radius:999px;background:var(--forest);color:var(--paper);font:600 17px/1.2 var(--sans);text-decoration:none;cursor:pointer;box-shadow:0 1px 0 rgba(255,255,255,.12) inset, 0 12px 26px -14px rgba(22,47,34,.8);transition:background-color .25s var(--ease), transform .25s var(--ease)}
+  .btn:hover{background:var(--deep);transform:translateY(-1px)}
+  .btn[disabled]{opacity:.7;cursor:progress;transform:none}
+  .msg{margin-top:12px;font-size:15px;min-height:1.4em;color:var(--err)}
+  .fine{margin-top:4px;font-size:14px;color:var(--bark);text-align:center}
+
+  /* Booked */
+  .booked{text-align:left}
+  .seal{width:64px;height:64px;border-radius:50%;background:var(--forest);display:grid;place-items:center;animation:pop .6s var(--ease) both}
+  .seal svg{width:30px;height:30px}
+  .seal path{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .5s .25s var(--ease) forwards}
+  @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .booked h2{margin-top:22px;font-size:clamp(36px,4.2vw,52px);line-height:1.02}
+  .booked .when{margin-top:18px;font:500 clamp(21px,2vw,25px)/1.25 var(--serif);letter-spacing:-.015em}
+  .booked p{margin-top:12px;color:var(--bark);max-width:46ch}
+  .booked .actions{margin-top:26px;display:grid;gap:10px;max-width:380px}
+  .btn-quiet{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+  .btn-quiet:hover{background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink)}
+
+  footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom));font-size:14px;color:var(--bark)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+  footer a{text-decoration:none}
+  footer a:hover{text-decoration:underline;color:var(--ink)}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .seal path{stroke-dashoffset:0}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="/" aria-label="Amatra Care home"><span class="mark-name">Amatra</span><span class="mark-sub">Care</span></a>
+    <a class="back" href="/">Back to amatra.app</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap grid">
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">Let’s talk.</h1>
+      <p class="sub">20 minutes to learn how you work today, what’s still taking too much time, and show you what we’re building.</p>
+      <ul class="facts">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>20 minutes</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10.5l5-3v9l-5-3"/></svg>Google Meet</li>
+      </ul>
+    </section>
+
+    <section class="card" aria-live="polite">
+
+      <!-- Step 1: pick a time -->
+      <div class="step" id="step-pick">
+        <h2 class="step-title">Choose a time</h2>
+        <p class="tz" id="tz-note">Times are shown in your time zone.</p>
+        <div class="alert" id="pick-alert" role="alert" hidden></div>
+        <div id="picker">
+          <div class="days skeleton" aria-hidden="true">
+            <span class="day"></span><span class="day"></span><span class="day"></span><span class="day"></span><span class="day"></span>
+          </div>
+          <div class="times skeleton" aria-hidden="true" style="margin-top:58px">
+            <span class="time"></span><span class="time"></span><span class="time"></span><span class="time"></span><span class="time"></span><span class="time"></span><span class="time"></span><span class="time"></span>
+          </div>
+        </div>
+        <p class="note">None of these times work? Write to <a href="mailto:support@amatra.app?subject=Let%E2%80%99s%20talk">support@amatra.app</a> and we will find one.</p>
+        <noscript><p class="alert">Turn on JavaScript to see open times, or write to support@amatra.app.</p></noscript>
+      </div>
+
+      <!-- Step 2: details -->
+      <div class="step" id="step-details" hidden>
+        <div class="chosen">
+          <div>
+            <p class="chosen-when" id="chosen-when"></p>
+            <p class="chosen-sub">20 minutes on Google Meet</p>
+          </div>
+          <button class="linkbtn" type="button" id="change">Change</button>
+        </div>
+
+        <form class="form" id="form" novalidate>
+          <div class="two">
+            <div class="field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-practice">Practice <small>Optional</small></label>
+            <input id="f-practice" name="practice" type="text" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="f-wish">What’s the part of your work you wish would just happen automatically? <small>Optional</small></label>
+            <textarea id="f-wish" name="wish" rows="3" placeholder="For example, writing up notes after a long day of visits."></textarea>
+          </div>
+          <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <button class="btn" type="submit" id="confirm">Confirm</button>
+          <p class="msg" id="msg" role="alert"></p>
+          <p class="fine">You’ll get a calendar invite with the Google Meet link.</p>
+        </form>
+      </div>
+
+      <!-- Step 3: booked -->
+      <div class="step booked" id="step-booked" hidden tabindex="-1">
+        <div class="seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#FBF8F2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h2 id="booked-title">You’re booked.</h2>
+        <p class="when" id="booked-when"></p>
+        <p id="booked-body"></p>
+        <div class="actions">
+          <a class="btn" id="meet-link" href="#" target="_blank" rel="noopener" hidden>Open the Google Meet link</a>
+          <a class="btn btn-quiet" href="/">Back to amatra.app</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Amatra Care is made by Amatra.</span>
+    <span><a href="/care/privacy.html">Privacy policy</a> &nbsp; <a href="mailto:support@amatra.app">support@amatra.app</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var API = 'https://hodmhfavcttltzovarzk.supabase.co/functions/v1/talk';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvZG1oZmF2Y3R0bHR6b3ZhcnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNTA5ODEsImV4cCI6MjA5NzkyNjk4MX0.nJCyKOjx6u8GyTzXS2rJvGT7TKapEwDd1v88o7mJMjI';
+
+  var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'America/New_York';
+  var params = new URLSearchParams(location.search);
+  var source = ['talk', params.get('s'), params.get('from')].filter(Boolean).join(':').slice(0, 64);
+
+  var $ = function(id){ return document.getElementById(id); };
+  var stepPick = $('step-pick'), stepDetails = $('step-details'), stepBooked = $('step-booked');
+  var picker = $('picker'), pickAlert = $('pick-alert');
+  var chosen = null, slots = [];
+
+  var fmtDayKey = new Intl.DateTimeFormat('en-CA', {timeZone: tz, year:'numeric', month:'2-digit', day:'2-digit'});
+  var fmtWd = new Intl.DateTimeFormat('en-US', {timeZone: tz, weekday:'short'});
+  var fmtDn = new Intl.DateTimeFormat('en-US', {timeZone: tz, day:'numeric'});
+  var fmtMo = new Intl.DateTimeFormat('en-US', {timeZone: tz, month:'short'});
+  var fmtLong = new Intl.DateTimeFormat('en-US', {timeZone: tz, weekday:'long', month:'long', day:'numeric'});
+  var fmtTime = new Intl.DateTimeFormat('en-US', {timeZone: tz, hour:'numeric', minute:'2-digit'});
+  var fmtShortDay = new Intl.DateTimeFormat('en-US', {timeZone: tz, weekday:'long'});
+
+  function t(ms){ return fmtTime.format(new Date(ms)).replace(' AM',' am').replace(' PM',' pm'); }
+  function place(){ var city = tz.split('/').pop().replace(/_/g,' '); return city; }
+  $('tz-note').textContent = 'Times are shown in your time zone (' + place() + ').';
+
+  function show(step){
+    [stepPick, stepDetails, stepBooked].forEach(function(s){ s.hidden = s !== step; });
+  }
+
+  function load(message){
+    pickAlert.hidden = !message; pickAlert.textContent = message || '';
+    fetch(API, {headers:{Authorization:'Bearer ' + KEY, apikey: KEY}})
+      .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(data){ slots = (data.slots || []).map(function(s){ return Date.parse(s); }); render(); })
+      .catch(function(){
+        picker.innerHTML = '';
+        pickAlert.hidden = false;
+        pickAlert.textContent = 'Open times didn’t load. Refresh the page, or write to support@amatra.app and we will find a time.';
+      });
+  }
+
+  function render(selectedKey){
+    picker.innerHTML = '';
+    if (!slots.length){
+      var empty = document.createElement('p');
+      empty.className = 'date-head';
+      empty.textContent = 'Every time in the next two weeks is taken.';
+      picker.appendChild(empty);
+      return;
+    }
+    var groups = {}, order = [];
+    slots.forEach(function(ms){
+      var k = fmtDayKey.format(new Date(ms));
+      if (!groups[k]) { groups[k] = []; order.push(k); }
+      groups[k].push(ms);
+    });
+    var active = selectedKey && groups[selectedKey] ? selectedKey : order[0];
+
+    var days = document.createElement('div');
+    days.className = 'days'; days.setAttribute('role','group'); days.setAttribute('aria-label','Days with open times');
+    order.forEach(function(k){
+      var d = new Date(groups[k][0]);
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'day';
+      b.setAttribute('aria-pressed', String(k === active));
+      b.setAttribute('aria-label', fmtLong.format(d));
+      b.innerHTML = '<span class="dw"></span><span class="dn"></span><span class="dm"></span>';
+      b.children[0].textContent = fmtWd.format(d);
+      b.children[1].textContent = fmtDn.format(d);
+      b.children[2].textContent = fmtMo.format(d);
+      b.addEventListener('click', function(){ render(k); var nb = picker.querySelector('[aria-pressed="true"]'); if (nb) nb.focus(); });
+      days.appendChild(b);
+    });
+    picker.appendChild(days);
+
+    var head = document.createElement('p');
+    head.className = 'date-head';
+    head.textContent = fmtLong.format(new Date(groups[active][0]));
+    picker.appendChild(head);
+
+    var times = document.createElement('div');
+    times.className = 'times'; times.setAttribute('role','group'); times.setAttribute('aria-label','Open times on ' + head.textContent);
+    groups[active].forEach(function(ms){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'time'; b.textContent = t(ms);
+      b.addEventListener('click', function(){ choose(ms); });
+      times.appendChild(b);
+    });
+    picker.appendChild(times);
+
+    var sel = days.querySelector('[aria-pressed="true"]');
+    if (sel && sel.scrollIntoView && selectedKey === undefined) { /* keep first day in view */ }
+  }
+
+  function range(ms){
+    var a = t(ms), b = t(ms + 20 * 60000);
+    if (a.slice(-2) === b.slice(-2)) a = a.slice(0, -3);
+    return a + ' – ' + b;
+  }
+  function setWhen(el, ms){
+    el.textContent = '';
+    var d = document.createElement('span'); d.className = 'w-date'; d.textContent = fmtLong.format(new Date(ms));
+    var r = document.createElement('span'); r.className = 'w-time'; r.textContent = range(ms);
+    el.appendChild(d); el.appendChild(r);
+  }
+
+  function choose(ms){
+    chosen = ms;
+    setWhen($('chosen-when'), ms);
+    $('confirm').textContent = 'Confirm ' + fmtShortDay.format(new Date(ms)) + ' at ' + t(ms);
+    $('msg').textContent = '';
+    show(stepDetails);
+    var name = $('f-name');
+    if (window.matchMedia('(min-width: 561px)').matches) name.focus({preventScroll:true});
+    stepDetails.scrollIntoView({block:'nearest'});
+  }
+
+  $('change').addEventListener('click', function(){
+    var key = chosen ? fmtDayKey.format(new Date(chosen)) : undefined;
+    show(stepPick); render(key);
+  });
+
+  var form = $('form');
+  form.addEventListener('input', function(e){ e.target.removeAttribute('aria-invalid'); $('msg').textContent = ''; });
+
+  function bad(el, text){ el.setAttribute('aria-invalid','true'); $('msg').textContent = text; el.focus(); }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (form.website.value) return;
+    var name = form.name.value.trim(), email = form.email.value.trim();
+    if (!name) return bad(form.name, 'Add your name so we know who we’re meeting.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return bad(form.email, 'Check your email address. It should look like name@practice.com.');
+
+    var btn = $('confirm'), label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Booking…';
+    fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', Authorization:'Bearer ' + KEY, apikey: KEY},
+      body: JSON.stringify({
+        start: new Date(chosen).toISOString(), name: name, email: email,
+        practice: form.practice.value.trim(), wish: form.wish.value.trim(),
+        source: source, timeZone: tz, website: form.website.value
+      })
+    }).then(function(r){ return r.json().then(function(b){ return {status:r.status, body:b}; }); })
+      .then(function(res){
+        if (res.status === 200 && res.body.ok) return booked(name, email, res.body);
+        if (res.body.error === 'taken') { show(stepPick); load('That time was just taken. Here are the times still open.'); return; }
+        if (res.body.error === 'already_booked') {
+          var at = res.body.start ? ' on ' + fmtLong.format(new Date(res.body.start)) + ' at ' + t(Date.parse(res.body.start)) : '';
+          $('msg').textContent = 'You already have a call booked' + at + '. To change it, reply to the calendar invite.';
+          return;
+        }
+        if (res.body.error === 'email') return bad(form.email, 'Check your email address. It should look like name@practice.com.');
+        throw new Error(res.status);
+      })
+      .catch(function(){ $('msg').textContent = 'Your booking didn’t go through. Try again, or write to support@amatra.app.'; })
+      .then(function(){ btn.disabled = false; btn.textContent = label; });
+  });
+
+  function booked(name, email, body){
+    var first = name.split(/\s+/)[0];
+    $('booked-title').textContent = 'You’re booked, ' + first + '.';
+    setWhen($('booked-when'), Date.parse(body.start));
+    $('booked-body').textContent = 'A calendar invite with the Google Meet link is on its way to ' + email + '. You’ll be talking with Krishna Mudaliar, one of Amatra’s founders.';
+    var link = $('meet-link');
+    if (body.meet) { link.href = body.meet; link.hidden = false; }
+    show(stepBooked);
+    stepBooked.focus({preventScroll:true});
+    stepBooked.scrollIntoView({block:'nearest'});
+  }
+
+  load();
+})();
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "163791ab9b954c56a4d7b7a4ad61b9b2"}'></script>
+</body>
+</html>
